@@ -75,12 +75,18 @@ final class LogicTests: XCTestCase {
         c.set(Cfg.parse(#"{"profile":"gta6","builtins":[{"id":"gta6","name":"GTA VI","game":"gta6","areas":[{"id":"a","x":0.1}]}],"areas":[{"id":"a","x":0.1}]}"#))
         XCTAssertTrue(c.locked())
         XCTAssertEqual(c.profileGame(), "gta6")
-        c.areaList().first?["x"] = 0.5
-        XCTAssertEqual(Cfg.d(c.areaList().first, "x"), 0.5)
+        // (a built-in profile can't be changed: a copy of it can, and keeps its changes)
         c.copyProfile(c.activeProfile()!)
         XCTAssertFalse(c.locked())
         XCTAssertEqual(c.profiles().count, 1)
+        XCTAssertEqual(Cfg.d(c.areaList().first, "x"), 0.1)
+        c.areaList().first?["x"] = 0.5
+        c.touched("areas")
         XCTAssertEqual(Cfg.d(c.areaList().first, "x"), 0.5)
+        let saved = (c.profiles().first?["areas"] as? NSArray)?.firstObject as? NSDictionary
+        XCTAssertEqual(Cfg.d(saved, "x"), 0.5)
+        // the built-in one is as it was
+        XCTAssertEqual(Cfg.d((c.builtins().first?["areas"] as? NSArray)?.firstObject as? NSDictionary, "x"), 0.1)
     }
 
     func testFontsAreBundled() {
