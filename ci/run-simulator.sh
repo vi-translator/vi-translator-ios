@@ -49,6 +49,8 @@ for i in $(seq 1 60); do
   kill -0 "$TV" 2>/dev/null || break
   sleep 5
 done
+# (the demo picture is read for a while longer: the core's counters are logged every 5 s)
+sleep 40
 xcrun simctl io "$PHONE" screenshot "$OUT/iphone-play-demo.png" > /dev/null
 kill "$TV" 2>/dev/null
 wait "$TV"
