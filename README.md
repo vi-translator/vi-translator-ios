@@ -106,7 +106,8 @@ is linked), `-vitDemoText "…"` (reads a picture the app draws with that subtit
 
 See [docs/device-test-plan.md](docs/device-test-plan.md). Installing on a device needs the app
 signed: with a free Apple ID, Xcode can install it on your own device for 7 days; TestFlight and
-the App Store need the Apple Developer Program (99 USD a year).
+the App Store need the Apple Developer Program (99 USD a year): see
+[docs/app-store.md](docs/app-store.md) for the account, the API key and the TestFlight workflow.
 
 ## License
 

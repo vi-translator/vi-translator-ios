@@ -9,6 +9,8 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  # (the TestFlight workflow runs all of it first)
+  workflow_call:
 
 permissions:
   contents: read

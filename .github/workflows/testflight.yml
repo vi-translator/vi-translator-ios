@@ -1,0 +1,76 @@
+# A tag like v1.2.3 (or a run by hand): the whole build and its checks (build.yml), then the app
+# archived, signed for the App Store and uploaded to TestFlight. Signing is Xcode's own (it makes
+# the certificate and the profile with an App Store Connect API key), so no certificate is kept here.
+#
+# Needs the Apple Developer Program and these repository secrets (docs/app-store.md):
+#   APPLE_TEAM_ID        the team's 10-character ID (developer.apple.com › Membership details)
+#   ASC_KEY_ID           an App Store Connect API key's ID (Users and Access › Integrations, role App Manager)
+#   ASC_ISSUER_ID        the keys' Issuer ID (same page)
+#   ASC_KEY_P8_B64       the key's .p8 file, base64
+name: TestFlight
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  upload:
+    needs: build
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_P8_B64: ${{ secrets.ASC_KEY_P8_B64 }}
+    steps:
+      - name: The signing secrets are there
+        run: |
+          for s in APPLE_TEAM_ID ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8_B64; do
+            [ -n "${!s}" ] || { echo "::error::secret $s is missing: see docs/app-store.md"; exit 1; }
+          done
+
+      - uses: actions/checkout@v5
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "*-xcframework"
+          path: Frameworks
+          merge-multiple: true
+
+      - name: Xcode and the project
+        run: |
+          sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | sort -V | tail -n1)"
+          brew install xcodegen || true
+          xcodegen generate
+
+      - name: The version
+        id: v
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(grep MARKETING_VERSION project.yml | head -n1 | sed -E 's/.*"(.*)".*/\1/')"; fi
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          # (every upload needs a higher build number than the last)
+          echo "build=$((100 + GITHUB_RUN_NUMBER))" >> "$GITHUB_OUTPUT"
+
+      - name: Archive, sign and upload to TestFlight
+        run: |
+          KEY="$RUNNER_TEMP/AuthKey_$ASC_KEY_ID.p8"
+          echo "$ASC_KEY_P8_B64" | base64 --decode > "$KEY"
+          AUTH=(-allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID")
+          xcodebuild archive -project VITranslator.xcodeproj -scheme VITranslator -configuration Release \
+            -destination generic/platform=iOS -archivePath build/VITranslator.xcarchive "${AUTH[@]}" \
+            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGN_STYLE=Automatic \
+            MARKETING_VERSION="${{ steps.v.outputs.version }}" CURRENT_PROJECT_VERSION="${{ steps.v.outputs.build }}" \
+            > build-archive.log 2>&1 || { grep -E "error:|\*\* " build-archive.log | head -n 60; exit 1; }
+          sed "s/TEAM_ID/$APPLE_TEAM_ID/" ci/ExportOptions.plist > "$RUNNER_TEMP/ExportOptions.plist"
+          xcodebuild -exportArchive -archivePath build/VITranslator.xcarchive \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath build/export "${AUTH[@]}"
+          rm -f "$KEY"
+          echo "Uploaded ${{ steps.v.outputs.version }} (${{ steps.v.outputs.build }}) to App Store Connect: it shows in TestFlight after Apple's processing."
