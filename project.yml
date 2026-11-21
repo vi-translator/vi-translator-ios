@@ -1,0 +1,122 @@
+# The Xcode project, made by XcodeGen (brew install xcodegen; then `xcodegen`): one universal app
+# for iPhone and iPad, and its unit tests. The two libraries it links are built first by
+# native/build-core.sh (the shared core) and native/build-chiaki.sh (PS Remote Play).
+name: VITranslator
+options:
+  bundleIdPrefix: app.vitranslator
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+targets:
+  VITranslator:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+        excludes:
+          - "Resources/i18n"
+          - "Resources/i18n-phone"
+          - "Resources/i18n-ios"
+          - "Resources/fonts"
+          - "Info.plist"
+      - path: App/Resources/i18n
+        type: folder
+        buildPhase: resources
+      - path: App/Resources/i18n-phone
+        type: folder
+        buildPhase: resources
+      - path: App/Resources/i18n-ios
+        type: folder
+        buildPhase: resources
+      - path: App/Resources/fonts
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - framework: Frameworks/ViTranslatorCore.xcframework
+        embed: false
+      - framework: Frameworks/VitChiaki.xcframework
+        embed: false
+      - sdk: VideoToolbox.framework
+      - sdk: CoreMedia.framework
+      - sdk: CoreVideo.framework
+      - sdk: CoreImage.framework
+      - sdk: Vision.framework
+      - sdk: WebKit.framework
+      - sdk: ReplayKit.framework
+      - sdk: SystemConfiguration.framework
+      - sdk: Security.framework
+      - sdk: Network.framework
+      - sdk: Photos.framework
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: VI Translator
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIRequiresFullScreen: false
+        UIAppFonts:
+          - fonts/Tajawal-Regular.ttf
+          - fonts/Tajawal-Bold.ttf
+          - fonts/Tajawal-ExtraBold.ttf
+          - fonts/Cairo.ttf
+          - fonts/Changa.ttf
+          - fonts/Lalezar-Regular.ttf
+          - fonts/NotoSansArabic.ttf
+        NSLocalNetworkUsageDescription: VI Translator reads the game from your PS5 and sends the translations to your TV, both on your home network.
+        NSPhotoLibraryAddUsageDescription: VI Translator keeps the translated snapshots of the game in your photos.
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+        ITSAppUsesNonExemptEncryption: false
+        CFBundleLocalizations: [en, ar, hi, bn, ur, id, tr, vi, fa, fil, ms, sw, ta, te, mr, th, ko, ja, zh-Hans, zh-Hant, es, pt-BR, fr, de, it, ru, uk, pl, nl, ro, cs, el]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.vitranslator.phone
+        PRODUCT_NAME: VITranslator
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        OTHER_LDFLAGS: ["-lc++", "-lresolv", "-lz"]
+        SWIFT_OBJC_BRIDGING_HEADER: ""
+        INFOPLIST_KEY_UIStatusBarStyle: UIStatusBarStyleLightContent
+  VITranslatorTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests]
+    dependencies:
+      - target: VITranslator
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        BUNDLE_LOADER: $(TEST_HOST)
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/VITranslator.app/VITranslator
+schemes:
+  VITranslator:
+    build:
+      targets:
+        VITranslator: all
+        VITranslatorTests: [test]
+    test:
+      targets: [VITranslatorTests]
+    run:
+      config: Debug

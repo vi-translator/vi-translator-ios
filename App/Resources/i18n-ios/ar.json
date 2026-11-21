@@ -1,0 +1,11 @@
+{
+ "Keep VI Translator open on the screen while playing: iOS pauses apps in the background.": "أبقِ VI Translator مفتوحًا على الشاشة أثناء اللعب: نظام iOS يوقف التطبيقات في الخلفية.",
+ "Keep every snapshot in Photos": "احفظ كل لقطة في تطبيق الصور",
+ "PS Remote Play: the phone streams the PS5's picture to read it (no sound). Keep the phone on VI Translator while playing.": "التشغيل عن بُعد لـ PS: يستقبل الهاتف صورة PS5 ليقرأها (بلا صوت). أبقِ الهاتف على VI Translator أثناء اللعب.",
+ "Read {n} frames ({size})": "قُرئ {n} إطارًا ({size})",
+ "Sign in, then choose your Xbox. Close when done.": "سجّل الدخول ثم اختر جهاز Xbox، وأغلق عند الانتهاء.",
+ "The video can't be read: record the screen": "تعذّرت قراءة الفيديو: سجّل الشاشة",
+ "While translating, the app copies the player's picture to read it. If the copies come out black, the player offers to record the screen instead (iOS asks you to allow it).": "أثناء الترجمة ينسخ التطبيق صورة المشغّل ليقرأها. إن ظهرت النسخ سوداء، يعرض المشغّل تسجيل الشاشة بدلًا منها (ويطلب iOS إذنك).",
+ "iOS asks once to let VI Translator find devices on your local network: allow it (Settings › VI Translator › Local Network).": "يطلب iOS مرة واحدة السماح لـ VI Translator بالعثور على الأجهزة في شبكتك المحلية: اسمح بذلك (الإعدادات › VI Translator › الشبكة المحلية).",
+ "iOS paused the app in the background": "أوقف iOS التطبيق في الخلفية"
+}

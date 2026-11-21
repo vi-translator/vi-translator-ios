@@ -1,0 +1,10 @@
+# built by native/build-*.sh
+/Frameworks/
+/native/build/
+# made by XcodeGen from project.yml
+/VITranslator.xcodeproj/
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+.DS_Store
