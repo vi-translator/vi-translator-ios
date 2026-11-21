@@ -36,11 +36,14 @@ echo "== iPhone $PHONE, iPad $PAD"
 boot "$PHONE"
 
 echo "== the TV side: a stand-in TV, connected with its code, gets the lines the app reads"
-python3 ci/fake_tv.py --code 123456 --timeout 300 --want-lines 1 --out "$OUT/fake-tv.json" > "$OUT/fake-tv.log" 2>&1 &
+python3 ci/fake_tv.py --code 123456 --timeout 300 --want-lines 0 --out "$OUT/fake-tv.json" > "$OUT/fake-tv.log" 2>&1 &
 TV=$!
 sleep 2
+# (the TV's address as on a home network: the core connects TVs on the LAN, here the Mac's own)
+LAN="$(ipconfig getifaddr en0 || ipconfig getifaddr en1 || echo 127.0.0.1)"
+echo "TV at $LAN:8792"
 xcrun simctl launch "$PHONE" "$BID" -vitConsole ps5 -vitMode play -vitUiLang en \
-  -vitPairTv 127.0.0.1:8792 -vitPairCode 123456 -vitDemoText "Where were you last night?" > /dev/null
+  -vitPairTv "$LAN:8792" -vitPairCode 123456 -vitDemoText "Where were you last night?" > /dev/null
 # (the first run downloads the reviewed translations and loads Vision's model)
 for i in $(seq 1 60); do
   kill -0 "$TV" 2>/dev/null || break
@@ -62,6 +65,12 @@ shot "$PHONE" "iphone-play" 5 -vitMode play -vitConsole ps5
 shot "$PHONE" "iphone-ar-play" 6 -vitMode play -vitUiLang ar
 shot "$PHONE" "iphone-ar-setup-source" 5 -vitMode setup -vitTab source -vitConsole ps5 -vitPs5Steps YES
 xcrun simctl spawn "$PHONE" log show --last 15m --style compact --predicate 'process == "VITranslator"' > "$OUT/iphone.log" 2>/dev/null || true
+echo "== what the core made of the demo picture"
+grep "VIT-CI" "$OUT/iphone.log" | cut -c1-400 | tail -n 8
+# the subtitle was read with Vision and handled by the core: its memory saw it (a hit or a miss)
+READ_OK=1
+grep "VIT-CI read=" "$OUT/iphone.log" | grep -qE '"(hits|misses)":[1-9]' && READ_OK=0
+echo "demo subtitle read by the core: $([ $READ_OK -eq 0 ] && echo yes || echo NO)"
 xcrun simctl shutdown "$PHONE" 2>/dev/null || true
 
 if [ -n "$PAD" ]; then
@@ -72,4 +81,4 @@ if [ -n "$PAD" ]; then
   shot "$PAD" "ipad-ar-play" 6 -vitMode play -vitUiLang ar
   xcrun simctl shutdown "$PAD" 2>/dev/null || true
 fi
-exit "$TV_RESULT"
+[ "$TV_RESULT" -eq 0 ] && [ "$READ_OK" -eq 0 ]
