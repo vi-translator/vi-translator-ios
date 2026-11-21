@@ -26,7 +26,8 @@ git -C "$CHIAKI" submodule update --init --depth 1 \
 # nanopb's generator, with Python's protobuf (in its own environment: the system's Python is managed)
 if [ ! -x "$BUILD/venv/bin/python3" ]; then
   python3 -m venv "$BUILD/venv"
-  "$BUILD/venv/bin/pip" install --quiet "protobuf>=4.25,<7"
+  # (as new as the protoc Homebrew gives: its generated code refuses an older Python runtime)
+  "$BUILD/venv/bin/pip" install --quiet --upgrade "protobuf>=4.25"
 fi
 PY="$BUILD/venv/bin/python3"
 export PATH="$BUILD/venv/bin:$PATH"

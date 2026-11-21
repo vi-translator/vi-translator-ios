@@ -223,6 +223,7 @@ struct AreasPanel: View {
             changed()
         }
         let two: (Double) -> String = { String(format: "%.2f", $0) }
+        Group {
         Field(label: L("Text size (px at 1080p; scales with the game window)")) {
             KSlider(range: 10...96, step: 1, value: Cfg.d(s, "font_size", 26), format: { "\(Int($0)) px" }) { set("font_size", Int($0)) }
         }
@@ -231,12 +232,15 @@ struct AreasPanel: View {
         Field(label: L("Text colour")) { ColorPick(value: Cfg.s(s, "text_color", "#ffffff")) { set("text_color", $0) } }
         Check(label: L("Colour highlighted words like the game does"), on: Cfg.b(s, "keep_colors", true)) { set("keep_colors", $0) }
         Field(label: L("Box colour")) { ColorPick(value: Cfg.s(s, "bg_color", "#000000")) { set("bg_color", $0) } }
+        }
+        Group {
         Field(label: L("Box opacity")) { KSlider(range: 0...1, step: 0.05, value: Cfg.d(s, "bg_opacity", 0.65), format: two) { set("bg_opacity", ($0 * 100).rounded() / 100) } }
         Field(label: L("Box padding")) { KSlider(range: 0...30, step: 1, value: Cfg.d(s, "padding", 10), format: { String(Int($0)) }) { set("padding", Int($0)) } }
         Field(label: L("Box corner roundness")) { KSlider(range: 0...30, step: 1, value: Cfg.d(s, "radius", 10), format: { String(Int($0)) }) { set("radius", Int($0)) } }
         Field(label: L("Text outline colour")) { ColorPick(value: Cfg.s(s, "outline_color", "#000000")) { set("outline_color", $0) } }
         Field(label: L("Text outline width")) { KSlider(range: 0...6, step: 0.5, value: Cfg.d(s, "outline_width", 0), format: two) { set("outline_width", $0) } }
         Check(label: L("Text shadow"), on: Cfg.b(s, "shadow")) { set("shadow", $0) }
+        }
         if Cfg.has(a, "style") {
             KButton(L("Reset to defaults")) {
                 a["style"] = NSNull()

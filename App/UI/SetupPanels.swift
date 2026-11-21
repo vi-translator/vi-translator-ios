@@ -26,6 +26,7 @@ struct ShowPanel: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
+          Group {
             H3(L("Show on a TV"))
             Muted(L("The translations over the game on a Google TV, Android TV, LG or Samsung TV, with the VI Translator app. Open the app on the TV, then connect it here with the code it shows."))
             KButton(L("Connect a TV"), icon: Icon.tv, primary: true) { findTvs() }.padding(.top, 12)
@@ -67,7 +68,8 @@ struct ShowPanel: View {
                     .padding(.top, 8)
                 }
             }
-
+          }
+          Group {
             H3(L("Live translations on other devices"))
             Check(label: L("Share on my home network"), on: m.cfg.bool("lan_page")) {
                 m.cfg.put("lan_page", $0)
@@ -79,13 +81,15 @@ struct ShowPanel: View {
             }
             Check(label: L("Allow changes from that page"), on: m.cfg.bool("lan_control")) { m.cfg.put("lan_control", $0) }
             Muted(L("Lets the page switch the overlays and the live translations, and show or hide read areas and game pages."), small: true)
-
+          }
+          Group {
             H3(L("Preview"))
             Check(label: L("Show frames per second (fps) on the preview"), on: m.cfg.bool("fps_badge")) { m.cfg.put("fps_badge", $0) }
             Field(label: L("Where it shows")) {
                 Select(options: [("top-left", L("Top left")), ("top-right", L("Top right")), ("bottom-left", L("Bottom left")), ("bottom-right", L("Bottom right"))],
                        value: m.cfg.str("fps_corner", "top-right")) { m.cfg.put("fps_corner", $0) }
             }
+          }
         }
         .onAppear {
             listTvs()
@@ -281,10 +285,13 @@ struct SnapshotPanel: View {
         default: help = L("Each piece of text is translated on its own, the translation memory first, so the game's words match the subtitles.")
         }
         return VStack(alignment: .leading, spacing: 0) {
+          Group {
             H3(L("Snapshot"))
             Muted(L("Translates all the text on the game's picture at once and shows it over the picture, like a translated photo: menus, the map, the phone, a car's stats."))
             KButton(L("Translate the whole picture"), icon: Icon.camera, primary: true) { take() }.padding(.top, 12)
             if let s = status { Callout(s.0, s.1 ? k.err : nil).padding(.top, 8) }
+          }
+          Group {
             H3(L("Snapshot service"))
             Field(label: L("Service"), help: help) {
                 Select(options: opts, value: svc) { cfg.put("snap_service", $0) }
@@ -302,6 +309,8 @@ struct SnapshotPanel: View {
                 ]
                 Field(label: L("Model")) { Select(options: models, value: cfg.str("snap_gemini_model", models[0].0)) { cfg.put("snap_gemini_model", $0) } }
             }
+          }
+          Group {
             Field(label: L("Behind the translation")) {
                 Select(options: [("blur", L("The picture, blurred")), ("solid", L("A solid colour"))], value: cfg.str("snap_style") == "solid" ? "solid" : "blur") { cfg.put("snap_style", $0) }
             }
@@ -309,6 +318,7 @@ struct SnapshotPanel: View {
             Check(label: L("Allow snapshots from the home-network page"), on: cfg.bool("snap_lan", true)) { cfg.put("snap_lan", $0) }
             Muted(L("Phones and tablets showing the live translations get a snapshot button too."), small: true)
             Muted(L("Text a game page marks as private (other players' names) is never read or sent: it's covered in the picture."), small: true).padding(.top, 10)
+          }
         }
         .sheet(item: $snap) { s in SnapView(snap: s).environment(\.kit, k) }
     }
@@ -382,11 +392,12 @@ struct TranslatorPanel: View {
                 }
             }
             Muted(L("Keys are saved only on this phone, in the app's settings."), small: true).padding(.top, 10)
-
+          Group {
             H3(L("Translation memory"))
             Muted(L("Remembers every translated line and reuses it instantly the next time it appears — no translator call, and no waiting for the line to settle."), small: true)
             Callout(memory.isEmpty ? "…" : memory).padding(.top, 8)
             KButton(L("Clear memory"), danger: true, full: false) { askClear = true }.padding(.top, 10)
+          }
         }
         .onAppear(perform: stats)
         .onReceive(timer) { _ in stats() }
