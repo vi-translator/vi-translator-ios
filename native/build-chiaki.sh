@@ -42,15 +42,18 @@ openssl() {
   [ -f "$BUILD/openssl-$OPENSSL_VERSION.tar.gz" ] || curl -fsSL -o "$BUILD/openssl-$OPENSSL_VERSION.tar.gz" \
     "https://github.com/openssl/openssl/releases/download/openssl-$OPENSSL_VERSION/openssl-$OPENSSL_VERSION.tar.gz"
   tar -xzf "$BUILD/openssl-$OPENSSL_VERSION.tar.gz" -C "$src" --strip-components 1
-  local target flags
+  local target flags cflags
   if [ "$sdk" = iphoneos ]; then
     target=ios64-xcrun
     flags="-mios-version-min=$MIN_IOS"
+    cflags=""
   else
+    # (Configure would take "-arch arm64"'s arm64 for a second target: the simulator's arm64 goes in CFLAGS)
     target=iossimulator-xcrun
-    flags="-arch arm64 -mios-simulator-version-min=$MIN_IOS"
+    flags=""
+    cflags="-O2 -arch arm64 -mios-simulator-version-min=$MIN_IOS"
   fi
-  (cd "$src" && ./Configure "$target" no-shared no-tests no-engine no-async --prefix="$prefix" --openssldir="$prefix/ssl" $flags \
+  (cd "$src" && CFLAGS="$cflags" ./Configure "$target" no-shared no-tests no-engine no-async --prefix="$prefix" --openssldir="$prefix/ssl" $flags \
     && make -j"$(sysctl -n hw.ncpu)" build_libs > /dev/null && make install_dev > /dev/null)
 }
 
