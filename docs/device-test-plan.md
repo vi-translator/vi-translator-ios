@@ -64,6 +64,9 @@ Needs: the PS5 on the same network, Remote Play on (Settings › System › Remo
       the background)" while away, then translating starts again by itself.
 - [ ] Lock button pressed while translating: same as above on unlocking. (iOS can't keep the stream
       with the screen off; the screen doesn't dim by itself while translating.)
+- [ ] Reading speed: Show on › Preview › fps badge shows "n read · ms". In CI's Simulator (no Neural
+      Engine) one pass takes ~7 s; on an iPhone it should be well under a second. If it stays slow,
+      say so: Vision's faster mode can be used instead.
 - [ ] 30 minutes of play: the phone's warmth and battery use (plugged in or not), the frames read
       (Show on › Preview › fps badge shows "n read · ms").
 - [ ] An account with a login passcode on the PS5: the app asks for it.
