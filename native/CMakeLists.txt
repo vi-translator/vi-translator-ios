@@ -46,3 +46,9 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../third-party/chiaki-ng chiaki-ng)
 add_library(vitchiaki STATIC shim/vitchiaki.c)
 target_include_directories(vitchiaki PUBLIC shim)
 target_link_libraries(vitchiaki chiaki-lib)
+
+# Remote Play over the internet (holepunch.c, not used by the app) waits on its sockets with
+# libevent, except on Android, where it uses plain select(): that way on iOS too (only this file;
+# it has nothing else for Android), so libevent isn't needed.
+set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../third-party/chiaki-ng/lib/src/remote/holepunch.c
+        TARGET_DIRECTORY chiaki-lib PROPERTIES COMPILE_DEFINITIONS "__ANDROID__=1")
