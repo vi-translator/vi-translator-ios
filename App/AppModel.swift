@@ -313,7 +313,18 @@ final class AppModel: ObservableObject {
             (text as NSString).draw(in: r, withAttributes: fill)
         }
         guard let cg = img.cgImage else { return }
-        demo = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { _ in r.offer(ImageFrame(image: cg)) }
+        var n = 0
+        let core = self.core
+        demo = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
+            r.offer(ImageFrame(image: cg))
+            n += 1
+            // (for CI: what the core made of it, every 5 s)
+            if n % 20 == 0, let core {
+                self?.io.async {
+                    NSLog("VIT-CI read=%d memory=%@ perf=%@ status=%@", r.read, core.engine.memoryStatsJson(), core.engine.perfJson(), self?.coreStatus ?? "")
+                }
+            }
+        }
     }
 
     private func end(_ s: LiveState, _ d: String?) {

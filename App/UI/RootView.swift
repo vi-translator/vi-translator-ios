@@ -112,8 +112,9 @@ struct RootView: View {
         } label: {
             HStack(spacing: 6) {
                 Image(systemName: icon).font(.system(size: 13, weight: .bold))
-                Text(label).font(k.font(k.base, .bold))
+                Text(label).font(k.font(k.base, .bold)).lineLimit(1)
             }
+            .fixedSize()
             .foregroundColor(on ? .white : k.muted)
             .padding(.horizontal, 16).frame(minHeight: 40)
             .background(Capsule().fill(on ? AnyShapeStyle(Kit.sunset) : AnyShapeStyle(Color.clear)))
