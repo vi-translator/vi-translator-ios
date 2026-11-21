@@ -21,7 +21,6 @@ enum Snaps {
     private static let rtlLangs: Set<String> = ["ar", "ur", "fa"]
 
     /** Translate the last frame read; [done] gets the snapshot or an error (on the main thread). */
-    @MainActor
     static func take(_ m: AppModel, done: @escaping (Result<SnapResult, Error>) -> Void) {
         guard let frame = m.reader?.last, let core = m.core else {
             done(.failure(CoreFailure(L("No picture yet"))))

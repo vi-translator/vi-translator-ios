@@ -1,6 +1,7 @@
-# Every push and pull request: the native libraries (the shared core and chiaki-ng, cached by
-# their sources), the unit tests in the iOS Simulator, the app for iPhones (unsigned), and the app
-# run in the Simulator as an iPhone and an iPad (screenshots, and a stand-in TV it must feed).
+# Every push and pull request: the native libraries (the shared core and chiaki-ng, side by side,
+# cached by their sources), then the unit tests in the iOS Simulator, the app for iPhones
+# (unsigned), and the app run in the Simulator as an iPhone and an iPad (screenshots, and a
+# stand-in TV it must feed).
 name: Build
 
 on:
@@ -12,36 +13,22 @@ on:
 permissions:
   contents: read
 
+env:
+  IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+
 jobs:
-  build:
+  core:
     runs-on: macos-15
-    timeout-minutes: 120
-    env:
-      IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v5
-        with:
-          submodules: true
-
-      - name: Xcode
-        run: |
-          sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | sort -V | tail -n1)"
-          xcodebuild -version
-          xcrun simctl list runtimes | grep -i ios
-
-      - name: Tools
-        run: |
-          brew install xcodegen ninja protobuf || true
-          rustup toolchain install stable --profile minimal
-          rustup default stable
-          rustup target add aarch64-apple-ios aarch64-apple-ios-sim
 
       - name: The shared core's commit
         id: core
         run: echo "ref=$(grep -v '^#' core.ref | grep -v '^$' | tail -n1)" >> "$GITHUB_OUTPUT"
 
       - name: The shared core (cached by its commit)
-        id: core-cache
+        id: cache
         uses: actions/cache@v4
         with:
           path: |
@@ -50,8 +37,12 @@ jobs:
           key: core-ios-${{ steps.core.outputs.ref }}-${{ hashFiles('native/build-core.sh') }}
 
       - name: Build the shared core
-        if: steps.core-cache.outputs.cache-hit != 'true'
-        run: native/build-core.sh
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustup target add aarch64-apple-ios aarch64-apple-ios-sim
+          native/build-core.sh
 
       - name: The core's Swift bindings in the repository match its library
         run: |
@@ -59,20 +50,70 @@ jobs:
           git diff --exit-code -- App/Core/Generated/ || {
             echo "::error::App/Core/Generated/ViTranslatorCore.swift differs from the core's at core.ref: commit the copied file"; exit 1; }
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: core-xcframework
+          path: Frameworks
+          retention-days: 3
+
+  chiaki:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+
       - name: The chiaki-ng commit
         id: chiaki
         run: echo "sha=$(git -C third-party/chiaki-ng rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: PS Remote Play (cached by its sources)
-        id: chiaki-cache
+        id: cache
         uses: actions/cache@v4
         with:
           path: Frameworks/VitChiaki.xcframework
           key: chiaki-ios-${{ steps.chiaki.outputs.sha }}-${{ hashFiles('native/CMakeLists.txt', 'native/build-chiaki.sh', 'native/shim/**', 'native/cmake/**') }}
 
       - name: Build PS Remote Play
-        if: steps.chiaki-cache.outputs.cache-hit != 'true'
-        run: native/build-chiaki.sh
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          brew install ninja protobuf || true
+          native/build-chiaki.sh
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: chiaki-logs
+          path: native/build/*.log
+          if-no-files-found: ignore
+          retention-days: 3
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chiaki-xcframework
+          path: Frameworks
+          retention-days: 3
+
+  app:
+    needs: [core, chiaki]
+    runs-on: macos-15
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "*-xcframework"
+          path: Frameworks
+          merge-multiple: true
+
+      - name: Xcode
+        run: |
+          sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | sort -V | tail -n1)"
+          xcodebuild -version
+          ls Frameworks
+          brew install xcodegen || true
 
       - name: The Xcode project
         run: xcodegen generate
@@ -81,28 +122,29 @@ jobs:
         run: |
           SIM=$(python3 ci/pick-sim.py iPhone)
           echo "simulator: $SIM"
-          set -o pipefail
+          mkdir -p build
           xcodebuild test -project VITranslator.xcodeproj -scheme VITranslator \
             -destination "platform=iOS Simulator,id=$SIM" -derivedDataPath build/dd \
-            -resultBundlePath build/tests.xcresult CODE_SIGNING_ALLOWED=NO | tee build/test.log | grep -E "error:|warning: unre|Test Case|Executed|\*\*" || true
-          grep -q "\*\* TEST SUCCEEDED \*\*" build/test.log
+            -resultBundlePath build/tests.xcresult CODE_SIGNING_ALLOWED=NO > build/test.log 2>&1
+          STATUS=$?
+          grep -E "error:|Test Case .*(passed|failed)|Executed|\*\* " build/test.log | head -n 200
+          exit $STATUS
 
       - name: The app for iPhones and iPads (unsigned)
         run: |
-          set -o pipefail
           xcodebuild build -project VITranslator.xcodeproj -scheme VITranslator -configuration Release \
             -destination generic/platform=iOS -derivedDataPath build/dd-device \
-            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO | grep -E "error:|\*\*" || true
-          test -d build/dd-device/Build/Products/Release-iphoneos/VITranslator.app
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO > build/device.log 2>&1
+          STATUS=$?
+          grep -E "error:|\*\* " build/device.log | head -n 100
+          [ $STATUS -eq 0 ] || exit $STATUS
           mkdir -p build/ipa/Payload
           cp -R build/dd-device/Build/Products/Release-iphoneos/VITranslator.app build/ipa/Payload/
           (cd build/ipa && zip -qry ../VITranslator-unsigned.ipa Payload)
           ls -la build/VITranslator-unsigned.ipa
 
       - name: Run in the Simulator (iPhone and iPad), with a stand-in TV
-        run: |
-          chmod +x ci/run-simulator.sh
-          ci/run-simulator.sh build/dd/Build/Products/Debug-iphonesimulator/VITranslator.app build/sim
+        run: ci/run-simulator.sh build/dd/Build/Products/Debug-iphonesimulator/VITranslator.app build/sim
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -110,7 +152,7 @@ jobs:
           name: simulator
           path: |
             build/sim
-            build/test.log
+            build/*.log
           if-no-files-found: ignore
 
       - uses: actions/upload-artifact@v4

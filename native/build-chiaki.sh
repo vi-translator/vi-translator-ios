@@ -85,11 +85,13 @@ for SDK in $PLATFORMS; do
 done
 
 # the headers Swift sees: the C layer only (no chiaki header)
+# (in a folder named after the module: the app links two static XCFrameworks, whose headers Xcode
+# copies into one folder; a module.modulemap at the top of each would be copied over the other)
 INC="$BUILD/include"
 rm -rf "$INC"
-mkdir -p "$INC"
-cp "$NATIVE/shim/vitchiaki.h" "$INC/"
-cat > "$INC/module.modulemap" <<'EOF'
+mkdir -p "$INC/VitChiaki"
+cp "$NATIVE/shim/vitchiaki.h" "$INC/VitChiaki/"
+cat > "$INC/VitChiaki/module.modulemap" <<'EOF'
 module VitChiaki {
     header "vitchiaki.h"
     export *

@@ -1,4 +1,5 @@
 import CoreImage
+import CoreMedia
 import ReplayKit
 import SwiftUI
 import WebKit
@@ -119,7 +120,6 @@ struct XboxPlayerView: View {
 }
 
 /** The copies of the player's picture, to the reader. */
-@MainActor
 final class XboxCapture: ObservableObject {
     weak var web: WKWebView?
     weak var model: AppModel?

@@ -33,11 +33,12 @@ export CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$ROOT/native/build/core-target}"
   && cargo run -p vi-translator-ffi --release --features bindgen --bin uniffi-bindgen -- \
        generate --library "$CARGO_TARGET_DIR/release/libvi_translator_ffi.dylib" --language swift --out-dir "$ROOT/native/build/core-swift")
 
+# (in a folder named after the module: see build-chiaki.sh)
 INC="$ROOT/native/build/core-include"
 rm -rf "$INC"
-mkdir -p "$INC"
-cp "$ROOT/native/build/core-swift/vi_translator_ffiFFI.h" "$INC/"
-cp "$ROOT/native/build/core-swift/vi_translator_ffiFFI.modulemap" "$INC/module.modulemap"
+mkdir -p "$INC/vi_translator_ffiFFI"
+cp "$ROOT/native/build/core-swift/vi_translator_ffiFFI.h" "$INC/vi_translator_ffiFFI/"
+cp "$ROOT/native/build/core-swift/vi_translator_ffiFFI.modulemap" "$INC/vi_translator_ffiFFI/module.modulemap"
 mkdir -p "$ROOT/Frameworks"
 rm -rf "$ROOT/Frameworks/ViTranslatorCore.xcframework"
 xcodebuild -create-xcframework \

@@ -40,7 +40,7 @@ final class CoreHost: @unchecked Sendable {
     }
 
     /** The languages it translates into (quick). */
-    lazy var languages: [Language] = ViTranslatorCore.languages()
+    lazy var languages: [Language] = VITranslator.languages()
 
     func language(_ code: String) -> Language? { languages.first { $0.code == code } }
 

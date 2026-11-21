@@ -23,7 +23,6 @@ final class PictureFeed: ObservableObject {
  * translating, the phone stays on VI Translator (the screen doesn't lock), and when it comes back
  * from the background translating starts again by itself.
  */
-@MainActor
 final class AppModel: ObservableObject {
     static let shared = AppModel()
 
