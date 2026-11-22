@@ -1,0 +1,20 @@
+VI Translator zobrazuje titulky hry přeložené do tvého jazyka, živě přes hru na tvé televizi, jen s tvým telefonem: bez PC a bez záznamové karty.
+
+Telefon se přes domácí síť připojí k tvé konzoli PS5 nebo Xbox pomocí Remote Play, čte titulky a úkoly hry a překládá je. Překlady putují do aplikace VI Translator na tvé televizi, která je vykreslí přes hru, přesně tam, kam patří. Televize dál ukazuje vlastní obraz konzole v plné kvalitě a hraješ s ovladačem jako obvykle.
+
+• PS5: jednou ji propoj se svým účtem PSN a PINem, který konzole ukáže
+• Xbox: přihlas se v aplikaci do přehrávače Remote Play od společnosti Microsoft
+• Spáruje se s aplikací pro televizi pomocí 6místného kódu: bez účtu
+• Živé překlady i na telefonu a v prohlížeči na jakémkoli zařízení v domácí síti
+• Aplikace mluví 33 jazyky
+
+Co potřebuješ:
+• iPhone nebo iPad (iOS 16 nebo novější)
+• Konzoli PS5 nebo Xbox a televizi s aplikací VI Translator pro TV (Android TV a Google TV, LG nebo Samsung), vše ve stejné domácí síti
+• Pro PS5 druhý účet PSN: Remote Play ho přihlásí na konzoli
+
+Překlady: řádky, které zná překladová paměť, jsou zdarma; pro ostatní použij vlastní klíč pro DeepL, Google, Microsoft Azure, LibreTranslate, Claude nebo ChatGPT. Telefon čte titulky psané latinkou, například anglické. Návod krok za krokem: vitranslator.app
+
+Soukromí: aplikace neposílá vývojáři nic o tobě ani o tom, co hraješ. Řádky k překladu jdou jen do překladové služby, kterou si vybereš, a překlady jen do tvé vlastní televize.
+
+VI Translator je neoficiální fanouškovský projekt, který není spojen se společnostmi Sony Interactive Entertainment a Microsoft ani s žádným vydavatelem her, ani jimi podporován. PlayStation, PS5 a Xbox jsou ochranné známky příslušných vlastníků.

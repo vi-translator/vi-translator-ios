@@ -1,0 +1,20 @@
+VI Translator affiche les sous-titres d'un jeu traduits dans ta langue, en direct, par-dessus le jeu sur ta TV, avec ton téléphone seulement : sans PC ni carte d'acquisition.
+
+Le téléphone se connecte à ta PS5 ou ta Xbox via ton réseau domestique avec Remote Play, lit les sous-titres et les objectifs du jeu, et les traduit. Les traductions sont envoyées à l'appli VI Translator sur ta TV, qui les affiche par-dessus le jeu, exactement là où elles doivent être. La TV continue d'afficher l'image de la console elle-même en pleine qualité, et tu joues avec ta manette comme d'habitude.
+
+• PS5 : associe-la une seule fois à ton compte PSN avec le code PIN affiché par la console
+• Xbox : connecte-toi au lecteur Remote Play de Microsoft dans l'appli
+• Se jumelle à l'appli TV avec un code à 6 chiffres : aucun compte
+• Les traductions en direct aussi sur le téléphone, et dans un navigateur sur n'importe quel appareil de ton réseau domestique
+• L'appli parle 33 langues
+
+Ce qu'il te faut :
+• Un iPhone ou un iPad (iOS 16 ou version ultérieure)
+• Une PS5 ou une Xbox, et une TV avec l'appli TV VI Translator (Android TV et Google TV, LG ou Samsung), le tout sur le même réseau domestique
+• Pour la PS5, un second compte PSN : Remote Play le connecte sur la console
+
+Traductions : les lignes que la mémoire de traduction connaît déjà sont gratuites ; pour les autres, utilise ta propre clé DeepL, Google, Microsoft Azure, LibreTranslate, Claude ou ChatGPT. Le téléphone lit les sous-titres écrits en alphabet latin, comme l'anglais. Guide d'installation pas à pas : vitranslator.app
+
+Confidentialité : l'appli n'envoie rien au développeur sur toi ni sur ce à quoi tu joues. Les lignes à traduire vont uniquement au service de traduction que tu choisis, et les traductions uniquement à ta propre TV.
+
+VI Translator est un projet de fan non officiel, qui n'est affilié ni à Sony Interactive Entertainment, ni à Microsoft, ni à aucun éditeur de jeux, et n'est approuvé par aucun d'eux. PlayStation, PS5 et Xbox sont des marques de leurs propriétaires respectifs.

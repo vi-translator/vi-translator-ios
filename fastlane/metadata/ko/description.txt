@@ -1,0 +1,20 @@
+VI Translator는 게임 자막을 사용자의 언어로 번역해 TV에 나오는 게임 화면 위에 실시간으로 표시합니다. 휴대폰만 있으면 됩니다: PC도 캡처보드도 필요 없습니다.
+
+휴대폰이 홈 네트워크에서 Remote Play로 PS5 또는 Xbox에 연결해 게임의 자막과 목표를 읽고 번역합니다. 번역은 TV의 VI Translator 앱으로 전송되고, TV 앱이 게임 화면의 원래 자리에 번역을 띄웁니다. TV에는 콘솔 화면이 원래 화질 그대로 계속 나오고, 평소처럼 컨트롤러로 플레이합니다.
+
+• PS5: PSN 계정과 콘솔에 표시되는 PIN으로 한 번만 연결
+• Xbox: 앱 안에서 Microsoft의 Remote Play 플레이어에 로그인
+• 6자리 코드로 TV 앱과 페어링: 계정 필요 없음
+• 실시간 번역을 휴대폰에서도, 홈 네트워크의 모든 기기의 브라우저에서도 확인
+• 앱에서 33개 언어 지원
+
+준비물:
+• iPhone 또는 iPad(iOS 16 이상)
+• PS5 또는 Xbox, 그리고 VI Translator TV 앱이 설치된 TV (Android TV 및 Google TV, LG 또는 Samsung), 모두 같은 홈 네트워크에 연결
+• PS5의 경우 두 번째 PSN 계정: Remote Play가 이 계정으로 콘솔에 로그인합니다
+
+번역: 번역 메모리에 있는 문장은 무료이며, 나머지는 DeepL, Google, Microsoft Azure, LibreTranslate, Claude 또는 ChatGPT의 본인 키를 사용합니다. 휴대폰은 영어처럼 라틴 문자로 된 자막을 읽습니다. 단계별 설정 방법: vitranslator.app
+
+개인정보 보호: 앱은 사용자나 플레이하는 게임에 관한 어떤 정보도 개발자에게 보내지 않습니다. 번역할 문장은 사용자가 선택한 번역 서비스로만, 번역은 사용자의 TV로만 전송됩니다.
+
+VI Translator는 비공식 팬 프로젝트로, Sony Interactive Entertainment, Microsoft 또는 어떤 게임 퍼블리셔와도 제휴 관계가 없으며 보증을 받지 않았습니다. PlayStation, PS5 및 Xbox는 각 소유자의 상표입니다.

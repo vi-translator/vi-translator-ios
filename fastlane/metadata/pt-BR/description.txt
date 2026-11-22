@@ -1,0 +1,20 @@
+O VI Translator mostra as legendas de um jogo traduzidas para o seu idioma, ao vivo, sobre o jogo na sua TV, só com o seu celular: sem PC e sem placa de captura.
+
+O celular se conecta ao seu PS5 ou Xbox pela sua rede doméstica com o Remote Play, lê as legendas e os objetivos do jogo e os traduz. As traduções vão para o app VI Translator na sua TV, que as exibe sobre o jogo, no lugar certo. A TV continua mostrando a imagem do próprio console com qualidade total, e você joga com o seu controle como sempre.
+
+• PS5: vincule uma única vez com a sua conta PSN e o PIN que o console mostra
+• Xbox: entre no player do Remote Play da Microsoft dentro do app
+• Pareamento com o app da TV por um código de 6 dígitos: sem conta
+• As traduções ao vivo também no celular e em qualquer dispositivo da sua rede doméstica, num navegador
+• O app fala 33 idiomas
+
+O que você precisa:
+• Um iPhone ou iPad (iOS 16 ou posterior)
+• Um PS5 ou Xbox e uma TV com o app VI Translator para TV (Android TV e Google TV, LG ou Samsung), todos na mesma rede doméstica
+• Para o PS5, uma segunda conta PSN: o Remote Play a conecta no console
+
+Traduções: as falas que a memória de tradução já conhece são grátis; para as outras, use a sua própria chave da DeepL, Google, Microsoft Azure, LibreTranslate, Claude ou ChatGPT. O celular lê legendas escritas no alfabeto latino, como as em inglês. Configuração passo a passo: vitranslator.app
+
+Privacidade: o app não envia nada sobre você ou sobre o que você joga ao desenvolvedor. As falas a traduzir vão apenas para o serviço de tradução que você escolher, e as traduções apenas para a sua própria TV.
+
+O VI Translator é um projeto não oficial feito por fãs, sem afiliação nem endosso da Sony Interactive Entertainment, da Microsoft ou de nenhuma publicadora de jogos. PlayStation, PS5 e Xbox são marcas comerciais de seus respectivos proprietários.

@@ -1,0 +1,20 @@
+VI Translator 會將遊戲字幕即時翻譯成你的語言，直接顯示在電視上的遊戲畫面之上，只需要一支手機：不需要 PC，也不需要擷取卡。
+
+手機透過家用網路以 Remote Play 連線到你的 PS5 或 Xbox，讀取遊戲字幕和任務目標並翻譯。譯文會傳送到電視上的 VI Translator 應用程式，由它顯示在遊戲畫面上原本字幕所在的位置。電視依然以原始畫質顯示主機本身的畫面，你照常用控制器遊玩。
+
+• PS5：使用你的 PSN 帳號和主機顯示的 PIN 碼連結一次即可
+• Xbox：在應用程式內登入 Microsoft 的 Remote Play 播放器
+• 透過 6 位數代碼與電視應用程式配對：不需要帳號
+• 即時譯文也能在手機上查看，或在家用網路中任何裝置的瀏覽器中查看
+• 應用程式支援 33 種語言
+
+你需要：
+• iPhone 或 iPad（iOS 16 或以上版本）
+• PS5 或 Xbox，以及安裝了 VI Translator 電視應用程式的電視（Android TV 和 Google TV、LG 或 Samsung），且全部位於同一個家用網路
+• 使用 PS5 時，需要第二個 PSN 帳號：Remote Play 會用它在主機上登入
+
+翻譯：翻譯記憶中已有的台詞免費；其他台詞請使用你自己的 DeepL、Google、Microsoft Azure、LibreTranslate、Claude 或 ChatGPT 金鑰。手機可讀取以拉丁字母書寫的字幕，例如英文。詳細設定步驟：vitranslator.app
+
+隱私權：本應用程式不會向開發者傳送任何關於你或你所玩遊戲的資訊。待翻譯的台詞只會傳送到你選擇的翻譯服務，譯文只會傳送到你自己的電視。
+
+VI Translator 是非官方粉絲專案，與 Sony Interactive Entertainment、Microsoft 及任何遊戲發行商均無關聯，也未獲其認可。PlayStation、PS5 和 Xbox 是其各自所有者的商標。

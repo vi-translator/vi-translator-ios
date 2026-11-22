@@ -1,0 +1,20 @@
+VI Translator muestra los subtítulos de un juego traducidos a tu idioma, en vivo, sobre el juego en tu TV, solo con tu celular: sin PC y sin capturadora.
+
+El celular se conecta a tu PS5 o Xbox por la red de tu casa con Remote Play, lee los subtítulos y los objetivos del juego, y los traduce. Las traducciones van a la app VI Translator de tu TV, que las dibuja sobre el juego, justo donde van. La TV sigue mostrando la imagen de la propia consola con calidad completa, y juegas con tu control como siempre.
+
+• PS5: vincúlala una sola vez con tu cuenta de PSN y el PIN que muestra la consola
+• Xbox: inicia sesión en el reproductor de Remote Play de Microsoft dentro de la app
+• Se vincula con la app de la TV con un código de 6 dígitos: sin cuenta
+• Las traducciones en vivo también en el celular, y en cualquier dispositivo de la red de tu casa desde un navegador
+• La app habla 33 idiomas
+
+Qué necesitas:
+• Un iPhone o iPad (iOS 16 o posterior)
+• Una PS5 o Xbox, y una TV con la app VI Translator para TV (Android TV y Google TV, LG o Samsung), todo en la misma red de tu casa
+• Para la PS5, una segunda cuenta de PSN: Remote Play inicia sesión con ella en la consola
+
+Traducciones: las líneas que ya conoce la memoria de traducción son gratis; para las demás, usa tu propia clave de DeepL, Google, Microsoft Azure, LibreTranslate, Claude o ChatGPT. El celular lee subtítulos escritos en alfabeto latino, como el inglés. Guía de configuración paso a paso: vitranslator.app
+
+Privacidad: la app no le envía al desarrollador nada sobre ti ni sobre lo que juegas. Las líneas por traducir van solo al servicio de traducción que elijas, y las traducciones solo a tu propia TV.
+
+VI Translator es un proyecto no oficial hecho por fans, sin afiliación ni respaldo de Sony Interactive Entertainment, Microsoft ni ningún editor de videojuegos. PlayStation, PS5 y Xbox son marcas comerciales de sus respectivos propietarios.

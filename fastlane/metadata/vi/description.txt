@@ -1,0 +1,20 @@
+VI Translator hiển thị phụ đề game đã được dịch sang ngôn ngữ của bạn, theo thời gian thực, ngay trên game trên TV của bạn, chỉ với điện thoại: không cần PC, không cần capture card.
+
+Điện thoại kết nối với PS5 hoặc Xbox của bạn qua mạng gia đình bằng Remote Play, đọc phụ đề và nhiệm vụ của game, rồi dịch. Bản dịch được gửi đến ứng dụng VI Translator trên TV, và ứng dụng này hiển thị chúng trên game, đúng vị trí của chúng. TV vẫn hiển thị hình ảnh gốc của máy chơi game với chất lượng đầy đủ, và bạn chơi bằng tay cầm như bình thường.
+
+• PS5: liên kết một lần bằng tài khoản PSN của bạn và mã PIN hiện trên máy chơi game
+• Xbox: đăng nhập vào trình phát Remote Play của Microsoft ngay trong ứng dụng
+• Ghép nối với ứng dụng TV bằng mã 6 chữ số: không cần tài khoản
+• Xem bản dịch trực tiếp cả trên điện thoại, và trên mọi thiết bị trong mạng gia đình qua trình duyệt
+• Ứng dụng hỗ trợ 33 ngôn ngữ
+
+Bạn cần có:
+• iPhone hoặc iPad (iOS 16 trở lên)
+• PS5 hoặc Xbox, và TV có ứng dụng VI Translator cho TV (Android TV và Google TV, LG hoặc Samsung), tất cả cùng mạng gia đình
+• Với PS5, một tài khoản PSN thứ hai: Remote Play dùng tài khoản này để đăng nhập trên máy chơi game
+
+Bản dịch: các dòng đã có trong bộ nhớ dịch được dịch miễn phí; với các dòng khác, hãy dùng khóa của riêng bạn cho DeepL, Google, Microsoft Azure, LibreTranslate, Claude hoặc ChatGPT. Điện thoại đọc phụ đề viết bằng chữ Latinh, như tiếng Anh. Hướng dẫn cài đặt từng bước: vitranslator.app
+
+Quyền riêng tư: ứng dụng không gửi bất cứ thông tin nào về bạn hay về game bạn chơi cho nhà phát triển. Các dòng cần dịch chỉ được gửi đến dịch vụ dịch bạn chọn, và bản dịch chỉ được gửi đến TV của chính bạn.
+
+VI Translator là dự án không chính thức do người hâm mộ thực hiện, không liên kết với hay được bảo trợ bởi Sony Interactive Entertainment, Microsoft hay bất kỳ nhà phát hành game nào. PlayStation, PS5 và Xbox là nhãn hiệu của các chủ sở hữu tương ứng.

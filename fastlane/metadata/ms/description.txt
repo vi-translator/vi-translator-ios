@@ -1,0 +1,20 @@
+VI Translator memaparkan sari kata permainan yang diterjemah ke bahasa anda, secara langsung, di atas permainan pada TV anda, dengan hanya telefon anda: tanpa PC dan tanpa capture card.
+
+Telefon menyambung ke PS5 atau Xbox anda melalui rangkaian rumah anda dengan Remote Play, membaca sari kata dan objektif permainan, dan menterjemahkannya. Terjemahan dihantar ke apl VI Translator pada TV anda, yang memaparkannya di atas permainan, tepat di tempatnya. TV terus memaparkan gambar konsol itu sendiri dalam kualiti penuh, dan anda bermain dengan pengawal seperti biasa.
+
+• PS5: pautkannya sekali dengan akaun PSN anda dan PIN yang dipaparkan oleh konsol
+• Xbox: log masuk ke pemain Remote Play Microsoft dalam apl
+• Berpasangan dengan apl TV menggunakan kod 6 digit: tanpa akaun
+• Terjemahan langsung pada telefon juga, dan pada mana-mana peranti dalam rangkaian rumah anda melalui pelayar
+• Apl ini tersedia dalam 33 bahasa
+
+Apa yang anda perlukan:
+• iPhone atau iPad (iOS 16 atau lebih baharu)
+• PS5 atau Xbox, dan TV dengan apl TV VI Translator (Android TV dan Google TV, LG atau Samsung), semuanya pada rangkaian rumah yang sama
+• Untuk PS5, akaun PSN kedua: Remote Play menggunakannya untuk log masuk pada konsol
+
+Terjemahan: baris yang diketahui oleh memori terjemahan adalah percuma; untuk yang lain, gunakan kunci anda sendiri untuk DeepL, Google, Microsoft Azure, LibreTranslate, Claude atau ChatGPT. Telefon membaca sari kata yang ditulis dalam abjad Latin, seperti bahasa Inggeris. Panduan persediaan langkah demi langkah: vitranslator.app
+
+Privasi: apl ini tidak menghantar apa-apa tentang anda atau apa yang anda mainkan kepada pembangun. Baris untuk diterjemah hanya dihantar ke perkhidmatan terjemahan yang anda pilih, dan terjemahan hanya ke TV anda sendiri.
+
+VI Translator ialah projek peminat tidak rasmi, tidak bergabung dengan atau disokong oleh Sony Interactive Entertainment, Microsoft atau mana-mana penerbit permainan. PlayStation, PS5 dan Xbox ialah tanda dagangan pemilik masing-masing.

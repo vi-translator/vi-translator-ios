@@ -1,0 +1,20 @@
+VI Translator, oyun altyazılarını kendi diline çevrilmiş olarak, canlı ve TV'ndeki oyunun üzerinde gösterir; üstelik yalnızca telefonunla: PC ve yakalama kartı gerekmez.
+
+Telefon, ev ağın üzerinden Remote Play ile PS5'ine veya Xbox'ına bağlanır, oyunun altyazılarını ve görevlerini okuyup çevirir. Çeviriler TV'ndeki VI Translator uygulamasına gider; bu uygulama da onları oyunun üzerinde, olmaları gereken yerde gösterir. TV, konsolun kendi görüntüsünü tam kalitede göstermeye devam eder ve sen her zamanki gibi oyun kumandanla oynarsın.
+
+• PS5: PSN hesabın ve konsolun gösterdiği PIN ile bir kez bağla
+• Xbox: uygulamadaki Microsoft Remote Play oynatıcısında oturum aç
+• TV uygulamasıyla 6 haneli bir kodla eşleşir: hesap gerekmez
+• Canlı çeviriler telefonda da, ev ağındaki herhangi bir cihazın tarayıcısında da görünür
+• Uygulama 33 dilde kullanılabilir
+
+Gerekenler:
+• Bir iPhone veya iPad (iOS 16 ya da daha yeni)
+• Bir PS5 veya Xbox ve VI Translator TV uygulaması yüklü bir TV (Android TV ve Google TV, LG veya Samsung); hepsi aynı ev ağında
+• PS5 için ikinci bir PSN hesabı: Remote Play konsolda bu hesapla oturum açar
+
+Çeviriler: çeviri belleğinin bildiği satırlar ücretsizdir; diğerleri için DeepL, Google, Microsoft Azure, LibreTranslate, Claude veya ChatGPT için kendi anahtarını kullan. Telefon, İngilizce gibi Latin alfabesiyle yazılmış altyazıları okur. Adım adım kurulum: vitranslator.app
+
+Gizlilik: Uygulama, seninle ya da oynadıklarınla ilgili hiçbir şeyi geliştiriciye göndermez. Çevrilecek satırlar yalnızca seçtiğin çeviri hizmetine, çeviriler de yalnızca kendi TV'ne gider.
+
+VI Translator resmi olmayan bir hayran projesidir; Sony Interactive Entertainment, Microsoft veya herhangi bir oyun yayıncısıyla bağlantılı değildir ve hiçbiri tarafından desteklenmemektedir. PlayStation, PS5 ve Xbox, ilgili sahiplerinin ticari markalarıdır.

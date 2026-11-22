@@ -1,0 +1,72 @@
+# By hand (Actions › App Store page › Run workflow): the App Store page's texts (30 languages,
+# fastlane/metadata, from tools/store_texts.py) and its screenshots (made here in the Simulator,
+# iPhone 6.9" and iPad 13") uploaded to App Store Connect with fastlane deliver, for the version
+# being prepared. Nothing is submitted for review: that stays a click in App Store Connect.
+# Uses the same secrets as the TestFlight workflow (docs/app-store.md).
+name: App Store page
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "The App Store version the texts and screenshots are for"
+        default: "1.0.0"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  page:
+    needs: build
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_P8_B64: ${{ secrets.ASC_KEY_P8_B64 }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "*-xcframework"
+          path: Frameworks
+          merge-multiple: true
+
+      - name: Xcode, the project and fastlane
+        run: |
+          sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | sort -V | tail -n1)"
+          brew install xcodegen fastlane || true
+          xcodegen generate
+
+      - name: The app for the Simulator
+        run: |
+          xcodebuild build -project VITranslator.xcodeproj -scheme VITranslator -configuration Debug \
+            -destination "generic/platform=iOS Simulator" -derivedDataPath build/dd CODE_SIGNING_ALLOWED=NO > build-sim.log 2>&1 \
+            || { grep -E "error:|\*\* " build-sim.log | head -n 40; exit 1; }
+
+      - name: Screenshots (iPhone 6.9" and iPad 13")
+        run: ci/store-screenshots.sh build/dd/Build/Products/Debug-iphonesimulator/VITranslator.app
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-store-screenshots
+          path: fastlane/screenshots
+
+      - name: Upload the texts and screenshots to App Store Connect
+        run: |
+          python3 - <<'PY'
+          import base64, json, os
+          key = base64.b64decode(os.environ["ASC_KEY_P8_B64"]).decode()
+          json.dump({"key_id": os.environ["ASC_KEY_ID"], "issuer_id": os.environ["ASC_ISSUER_ID"], "key": key, "in_house": False},
+                    open(os.path.join(os.environ["RUNNER_TEMP"], "asc.json"), "w"))
+          PY
+          fastlane deliver --api_key_path "$RUNNER_TEMP/asc.json" --platform ios \
+            --app_identifier app.vitranslator.phone --app_version "${{ inputs.version }}" \
+            --metadata_path fastlane/metadata --screenshots_path fastlane/screenshots \
+            --skip_binary_upload true --submit_for_review false --automatic_release false \
+            --overwrite_screenshots true --run_precheck_before_submit false --force true
+          rm -f "$RUNNER_TEMP/asc.json"

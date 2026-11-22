@@ -1,0 +1,20 @@
+VI Translator wyświetla napisy z gry przetłumaczone na Twój język – na żywo, na obrazie gry na Twoim telewizorze, tylko z pomocą telefonu: bez PC i bez karty przechwytującej.
+
+Telefon łączy się z Twoją PS5 lub Xbox przez sieć domową za pomocą Remote Play, odczytuje napisy i cele z gry, a następnie je tłumaczy. Tłumaczenia trafiają do aplikacji VI Translator na telewizorze, która wyświetla je na obrazie gry – dokładnie tam, gdzie ich miejsce. Telewizor nadal pokazuje obraz prosto z konsoli w pełnej jakości, a Ty grasz jak zwykle na kontrolerze.
+
+• PS5: połącz ją jeden raz za pomocą konta PSN i kodu PIN wyświetlanego przez konsolę
+• Xbox: zaloguj się w odtwarzaczu Remote Play firmy Microsoft w aplikacji
+• Parowanie z aplikacją na telewizor za pomocą 6-cyfrowego kodu: bez zakładania konta
+• Tłumaczenia na żywo także na telefonie oraz w przeglądarce na dowolnym urządzeniu w sieci domowej
+• Aplikacja mówi w 33 językach
+
+Czego potrzebujesz:
+• iPhone lub iPad (iOS 16 lub nowszy)
+• PS5 lub Xbox oraz telewizora z aplikacją VI Translator na telewizor (Android TV i Google TV, LG lub Samsung) – wszystko w tej samej sieci domowej
+• W przypadku PS5 drugiego konta PSN: Remote Play loguje je na konsoli
+
+Tłumaczenia: wiersze znane pamięci tłumaczeń są za darmo; dla pozostałych użyj własnego klucza do DeepL, Google, Microsoft Azure, LibreTranslate, Claude lub ChatGPT. Telefon odczytuje napisy zapisane alfabetem łacińskim, np. po angielsku. Konfiguracja krok po kroku: vitranslator.app
+
+Prywatność: aplikacja nie wysyła twórcy żadnych informacji o Tobie ani o tym, w co grasz. Wiersze do przetłumaczenia trafiają tylko do wybranej przez Ciebie usługi tłumaczeniowej, a tłumaczenia tylko do Twojego własnego telewizora.
+
+VI Translator to nieoficjalny projekt fanowski, niepowiązany z Sony Interactive Entertainment, Microsoft ani żadnym wydawcą gier ani przez nich niewspierany. PlayStation, PS5 i Xbox są znakami towarowymi ich odpowiednich właścicieli.
