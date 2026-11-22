@@ -13,6 +13,8 @@ enum LiveState: Equatable {
 final class PictureFeed: ObservableObject {
     @Published var image: UIImage?
     @Published var stats = ""
+    /** the game's sound on the phone (screen-off option), for the Play tab */
+    @Published var sound = ""
 }
 
 /**
@@ -180,6 +182,14 @@ final class AppModel: ObservableObject {
         } else if !picture.stats.isEmpty {
             picture.stats = ""
         }
+        let s: String
+        if let snd = stream?.sound, state == .reading {
+            s = !snd.running ? L("Game sound on the phone: not playing (iOS refused it)")
+                : snd.received > 0 ? L("Game sound on the phone: playing") : L("Game sound on the phone: no sound from the PS5 yet")
+        } else {
+            s = ""
+        }
+        if picture.sound != s { picture.sound = s }
     }
 
     // ---- the status line (the header's pill)
@@ -397,10 +407,24 @@ final class AppModel: ObservableObject {
             cfg.flush()
             guard state.running, source == .ps5, !away else { return }
             if Prefs.screenOff, let st = stream {
-                // (the game's sound keeps the app running: the picture is read on the CPU while away)
+                // (the game's sound keeps the app running: the picture is read on the CPU while away.
+                // If the sound doesn't play after all, iOS would pause the app: then as without the option)
                 awayPlaying = true
                 VisionRecognizer.cpuOnly = true
                 st.background(true)
+                bgTask = UIApplication.shared.beginBackgroundTask(withName: "ps5-sound") { [weak self] in self?.endBackgroundTask() }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+                    guard let self, self.awayPlaying else { return }
+                    if self.stream?.sound?.running == true {
+                        self.endBackgroundTask()
+                    } else {
+                        NSLog("the game's sound isn't playing: the stream stops while away")
+                        self.awayPlaying = false
+                        VisionRecognizer.cpuOnly = false
+                        self.away = true
+                        self.awayTooLong()
+                    }
+                }
                 return
             }
             away = true

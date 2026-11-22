@@ -18,5 +18,8 @@
  "Translation · {name}": "الترجمة · {name}",
  "The blue box is where its translation goes: drag it too.": "المربع الأزرق مكان ظهور ترجمتها: يمكن سحبه أيضًا.",
  "PS5 picture in the app (frames per second)": "صورة PS5 في التطبيق (إطار في الثانية)",
- "Only what the app shows: the reading and the TVs don't change. 30 is the stream's own; fewer saves battery.": "لما يعرضه التطبيق فقط: لا تتغير القراءة ولا الشاشات. 30 هو معدل البث نفسه، والأقل يوفّر البطارية."
+ "Only what the app shows: the reading and the TVs don't change. 30 is the stream's own; fewer saves battery.": "لما يعرضه التطبيق فقط: لا تتغير القراءة ولا الشاشات. 30 هو معدل البث نفسه، والأقل يوفّر البطارية.",
+ "Game sound on the phone: not playing (iOS refused it)": "صوت اللعبة على الهاتف: لا يعمل (رفضه iOS)",
+ "Game sound on the phone: playing": "صوت اللعبة على الهاتف: يعمل",
+ "Game sound on the phone: no sound from the PS5 yet": "صوت اللعبة على الهاتف: لم يصل صوت من PS5 بعد"
 }

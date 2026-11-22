@@ -79,6 +79,7 @@ struct PlayPanel: View {
             .buttonStyle(.plain)
             .accessibilityIdentifier("start")
             Muted(startNote, small: true).padding(.top, 6)
+            SoundLine(feed: m.picture)
         }
     }
 
@@ -264,6 +265,15 @@ struct Stage: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label)
+    }
+}
+
+/** The game's sound on the phone, while the screen-off option plays it. */
+struct SoundLine: View {
+    @ObservedObject var feed: PictureFeed
+
+    var body: some View {
+        if !feed.sound.isEmpty { Muted(feed.sound, small: true).padding(.top, 4) }
     }
 }
 

@@ -124,7 +124,7 @@ final class PsStream {
         box.handle = h
         if sound {
             let a = GameAudio(volume: Float(Prefs.phoneVolume))
-            a.activate()
+            a.start()
             box.audio = a
             vit_ps_session_set_audio(h) { pcm, frames, channels, rate, user in
                 guard let user, let pcm else { return }
@@ -155,6 +155,11 @@ final class PsStream {
     func background(_ away: Bool) {
         box.cpu = away
         refresh()
+    }
+
+    /** The game's sound on the phone (screen-off option): whether its player runs, and the sound frames received. Nil without it. */
+    var sound: (running: Bool, received: Int)? {
+        box.audio.map { ($0.running, $0.received) }
     }
 
     /** the game's sound's volume, 0 to 1 */
