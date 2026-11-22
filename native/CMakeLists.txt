@@ -52,3 +52,7 @@ target_link_libraries(vitchiaki chiaki-lib)
 # it has nothing else for Android), so libevent isn't needed.
 set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../third-party/chiaki-ng/lib/src/remote/holepunch.c
         TARGET_DIRECTORY chiaki-lib PROPERTIES COMPILE_DEFINITIONS "__ANDROID__=1")
+
+# The game's sound (Opus) and the CPU H.264 decoder (FFmpeg's), both built by build-chiaki.sh:
+# the shim decodes with them; their libraries go into the one static library with chiaki's.
+target_include_directories(vitchiaki PRIVATE ${VIT_OPUS_DIR}/include ${VIT_FFMPEG_DIR}/include)

@@ -57,10 +57,52 @@ openssl() {
     && make -j"$(sysctl -n hw.ncpu)" build_libs > /dev/null && make install_dev > /dev/null)
 }
 
+# ---- Opus (the game's sound, for "Keep translating with the screen off"), once per platform
+OPUS_VERSION=1.5.2
+opus() {
+  local sdk="$1" prefix="$BUILD/opus-$1"
+  [ -f "$prefix/lib/libopus.a" ] && return
+  [ -d "$BUILD/opus-src" ] || { curl -fsSL "https://github.com/xiph/opus/releases/download/v$OPUS_VERSION/opus-$OPUS_VERSION.tar.gz" | tar -xz -C "$BUILD" && mv "$BUILD/opus-$OPUS_VERSION" "$BUILD/opus-src"; }
+  cmake -S "$BUILD/opus-src" -B "$BUILD/opus-build-$sdk" -G Ninja \
+    -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT="$sdk" -DCMAKE_OSX_ARCHITECTURES=arm64 \
+    -DCMAKE_OSX_DEPLOYMENT_TARGET="$MIN_IOS" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$prefix" \
+    -DOPUS_BUILD_PROGRAMS=OFF -DOPUS_BUILD_TESTING=OFF -DBUILD_TESTING=OFF -DOPUS_BUILD_SHARED_LIBRARY=OFF > /dev/null
+  cmake --build "$BUILD/opus-build-$sdk" --target install > /dev/null
+}
+
+# ---- FFmpeg's H.264 decoder only (the PS5's picture read on the CPU while the app is in the
+#      background, where iOS keeps the hardware decoder from apps), once per platform
+FFMPEG_VERSION=7.1
+ffmpeg() {
+  local sdk="$1" prefix="$BUILD/ffmpeg-$1"
+  [ -f "$prefix/lib/libavcodec.a" ] && return
+  [ -f "$BUILD/ffmpeg-$FFMPEG_VERSION.tar.xz" ] || curl -fsSL -o "$BUILD/ffmpeg-$FFMPEG_VERSION.tar.xz" "https://ffmpeg.org/releases/ffmpeg-$FFMPEG_VERSION.tar.xz"
+  local src="$BUILD/ffmpeg-src-$sdk"
+  rm -rf "$src"
+  mkdir -p "$src"
+  tar -xJf "$BUILD/ffmpeg-$FFMPEG_VERSION.tar.xz" -C "$src" --strip-components 1
+  local min
+  if [ "$sdk" = iphoneos ]; then min="-mios-version-min=$MIN_IOS"; else min="-mios-simulator-version-min=$MIN_IOS"; fi
+  (cd "$src" && ./configure --prefix="$prefix" --enable-cross-compile --target-os=darwin --arch=arm64 \
+      --cc="xcrun -sdk $sdk clang" --sysroot="$(xcrun --sdk "$sdk" --show-sdk-path)" \
+      --extra-cflags="-arch arm64 $min" --extra-ldflags="-arch arm64 $min" \
+      --disable-everything --enable-decoder=h264 --enable-parser=h264 \
+      --disable-programs --disable-doc --disable-network --disable-avdevice --disable-avformat \
+      --disable-swresample --disable-swscale --disable-avfilter --disable-iconv --disable-zlib --disable-bzlib \
+      --disable-lzma --disable-securetransport --disable-videotoolbox --disable-audiotoolbox --disable-debug \
+      --enable-static --disable-shared > "$BUILD/ffmpeg-$sdk.log" 2>&1 \
+    || { tail -n 40 "$BUILD/ffmpeg-$sdk.log"; tail -n 40 "$src/ffbuild/config.log"; exit 1; }
+   make -j"$(sysctl -n hw.ncpu)" > /dev/null && make install > /dev/null)
+}
+
 for SDK in $PLATFORMS; do
   echo "== OpenSSL $OPENSSL_VERSION for $SDK"
   openssl "$SDK"
   OSSL="$BUILD/openssl-$SDK"
+  echo "== Opus $OPUS_VERSION for $SDK"
+  opus "$SDK"
+  echo "== FFmpeg $FFMPEG_VERSION (H.264 decoder) for $SDK"
+  ffmpeg "$SDK"
 
   echo "== chiaki-ng for $SDK"
   cmake -S "$NATIVE" -B "$BUILD/$SDK" -G Ninja \
@@ -76,13 +118,15 @@ for SDK in $PLATFORMS; do
     -DOPENSSL_CRYPTO_LIBRARY="$OSSL/lib/libcrypto.a" \
     -DOPENSSL_SSL_LIBRARY="$OSSL/lib/libssl.a" \
     -DCMAKE_FIND_ROOT_PATH="$OSSL" \
+    -DVIT_OPUS_DIR="$BUILD/opus-$SDK" -DVIT_FFMPEG_DIR="$BUILD/ffmpeg-$SDK" \
     > "$BUILD/cmake-$SDK.log" || { tail -n 80 "$BUILD/cmake-$SDK.log"; exit 1; }
   cmake --build "$BUILD/$SDK" --target vitchiaki
 
   # one static library: every library built here, and OpenSSL's
   LIBS=()
   while IFS= read -r a; do LIBS+=("$a"); done < <(find "$BUILD/$SDK" -name '*.a' -not -path '*/CMakeFiles/*' | sort)
-  LIBS+=("$OSSL/lib/libssl.a" "$OSSL/lib/libcrypto.a")
+  LIBS+=("$OSSL/lib/libssl.a" "$OSSL/lib/libcrypto.a" "$BUILD/opus-$SDK/lib/libopus.a"
+         "$BUILD/ffmpeg-$SDK/lib/libavcodec.a" "$BUILD/ffmpeg-$SDK/lib/libavutil.a")
   printf '   %s\n' "${LIBS[@]}"
   mkdir -p "$BUILD/lib-$SDK"
   libtool -static -no_warning_for_no_symbols -o "$BUILD/lib-$SDK/libVitChiaki.a" "${LIBS[@]}"

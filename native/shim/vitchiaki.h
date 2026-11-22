@@ -57,7 +57,33 @@ void vit_ps_session_request_idr(VitPsSession *s);
 /** the stream's picture size (from its profile) */
 void vit_ps_session_video_size(VitPsSession *s, int *width, int *height);
 
+/**
+ * The game's sound, decoded (16-bit PCM, interleaved [channels], [rate] Hz), on chiaki's thread; for
+ * "Keep translating with the screen off" (iOS keeps an app running while it plays sound). Set it
+ * before vit_ps_session_start; NULL: the sound is dropped unread, as before.
+ */
+typedef void (*VitPsAudioCb)(const int16_t *pcm, size_t frames, int channels, int rate, void *user);
+void vit_ps_session_set_audio(VitPsSession *s, VitPsAudioCb on_audio);
+
 bool vit_ps_quit_reason_is_error(int reason);
+
+// ---- H.264 on the CPU (FFmpeg's decoder): the picture while the app is in the background, where
+//      iOS keeps the hardware decoder from apps. Not thread-safe: one stream's frames, in order.
+
+typedef struct VitSwDecoder VitSwDecoder;
+
+VitSwDecoder *vit_sw_decoder_new(void);
+void vit_sw_decoder_free(VitSwDecoder *d);
+/** One frame (Annex B, as chiaki gives it). True when it was decoded (a picture is ready). */
+bool vit_sw_decode(VitSwDecoder *d, const uint8_t *buf, size_t size);
+/** The last picture's size (0 without one). */
+void vit_sw_frame_size(VitSwDecoder *d, int *width, int *height);
+/**
+ * The last picture as RGBA (width x height x 4, top row first) into [out]: BT.709 limited range to
+ * full, then, with [stretch_levels], the studio levels stretched once more (16–235 to 0–255), as the
+ * GPU path does for the PS5's picture. False without a picture or when [out_size] is too small.
+ */
+bool vit_sw_frame_rgba(VitSwDecoder *d, uint8_t *out, size_t out_size, bool stretch_levels);
 const char *vit_ps_quit_reason_string(int reason);
 
 // ---- finding the consoles

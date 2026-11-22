@@ -11,6 +11,10 @@
 #include <chiaki/regist.h>
 #include <chiaki/session.h>
 
+#include <opus/opus.h>
+#include <libavcodec/avcodec.h>
+#include <libavutil/frame.h>
+
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <pthread.h>
@@ -82,7 +86,64 @@ struct VitPsSession
 	void *user;
 	int width;
 	int height;
+	// the game's sound
+	VitPsAudioCb on_audio;
+	OpusDecoder *opus;
+	int channels;
+	int rate;
+	int16_t *pcm;
+	size_t pcm_frames;
 };
+
+static void session_audio_header_cb(ChiakiAudioHeader *header, void *user)
+{
+	VitPsSession *s = user;
+	if(s->opus)
+	{
+		opus_decoder_destroy(s->opus);
+		s->opus = NULL;
+	}
+	int err = 0;
+	s->channels = header->channels ? header->channels : 2;
+	s->rate = header->rate ? (int)header->rate : 48000;
+	s->opus = opus_decoder_create(s->rate, s->channels, &err);
+	if(err != OPUS_OK)
+	{
+		CHIAKI_LOGE(&s->log, "Opus decoder: %s", opus_strerror(err));
+		s->opus = NULL;
+		return;
+	}
+	// (the largest Opus frame: 120 ms)
+	s->pcm_frames = (size_t)s->rate * 120 / 1000;
+	free(s->pcm);
+	s->pcm = malloc(s->pcm_frames * s->channels * sizeof(int16_t));
+}
+
+static void session_audio_frame_cb(uint8_t *buf, size_t buf_size, void *user)
+{
+	VitPsSession *s = user;
+	if(!s->opus || !s->pcm || !s->on_audio)
+		return;
+	int n = opus_decode(s->opus, buf, (opus_int32)buf_size, s->pcm, (int)s->pcm_frames, 0);
+	if(n > 0)
+		s->on_audio(s->pcm, (size_t)n, s->channels, s->rate, s->user);
+}
+
+void vit_ps_session_set_audio(VitPsSession *s, VitPsAudioCb on_audio)
+{
+	if(!s)
+		return;
+	s->on_audio = on_audio;
+	ChiakiAudioSink sink;
+	memset(&sink, 0, sizeof(sink));
+	if(on_audio)
+	{
+		sink.user = s;
+		sink.header_cb = session_audio_header_cb;
+		sink.frame_cb = session_audio_frame_cb;
+	}
+	chiaki_session_set_audio_sink(&s->session, &sink);
+}
 
 static void session_event_cb(ChiakiEvent *event, void *user)
 {
@@ -171,6 +232,9 @@ void vit_ps_session_free(VitPsSession *s)
 	if(!s)
 		return;
 	chiaki_session_fini(&s->session);
+	if(s->opus)
+		opus_decoder_destroy(s->opus);
+	free(s->pcm);
 	free(s);
 }
 
@@ -402,4 +466,126 @@ void vit_ps_regist_free(VitPsRegist *r)
 	chiaki_regist_fini(&r->regist);
 	free(r->host);
 	free(r);
+}
+
+// ---- H.264 on the CPU (FFmpeg)
+
+struct VitSwDecoder
+{
+	AVCodecContext *ctx;
+	AVPacket *packet;
+	AVFrame *frame;
+	bool has_frame;
+};
+
+VitSwDecoder *vit_sw_decoder_new(void)
+{
+	const AVCodec *codec = avcodec_find_decoder(AV_CODEC_ID_H264);
+	if(!codec)
+		return NULL;
+	VitSwDecoder *d = calloc(1, sizeof(VitSwDecoder));
+	if(!d)
+		return NULL;
+	d->ctx = avcodec_alloc_context3(codec);
+	d->packet = av_packet_alloc();
+	d->frame = av_frame_alloc();
+	if(!d->ctx || !d->packet || !d->frame)
+	{
+		vit_sw_decoder_free(d);
+		return NULL;
+	}
+	// (low delay: a frame out for each frame in, as chiaki gives whole frames)
+	d->ctx->flags |= AV_CODEC_FLAG_LOW_DELAY;
+	d->ctx->thread_count = 2;
+	if(avcodec_open2(d->ctx, codec, NULL) < 0)
+	{
+		vit_sw_decoder_free(d);
+		return NULL;
+	}
+	return d;
+}
+
+void vit_sw_decoder_free(VitSwDecoder *d)
+{
+	if(!d)
+		return;
+	if(d->ctx)
+		avcodec_free_context(&d->ctx);
+	if(d->packet)
+		av_packet_free(&d->packet);
+	if(d->frame)
+		av_frame_free(&d->frame);
+	free(d);
+}
+
+bool vit_sw_decode(VitSwDecoder *d, const uint8_t *buf, size_t size)
+{
+	if(!d || !buf || !size)
+		return false;
+	d->packet->data = (uint8_t *)buf;
+	d->packet->size = (int)size;
+	if(avcodec_send_packet(d->ctx, d->packet) < 0)
+		return false;
+	bool got = false;
+	while(avcodec_receive_frame(d->ctx, d->frame) == 0)
+		got = true;
+	if(got)
+		d->has_frame = true;
+	return got;
+}
+
+void vit_sw_frame_size(VitSwDecoder *d, int *width, int *height)
+{
+	*width = d && d->has_frame ? d->frame->width : 0;
+	*height = d && d->has_frame ? d->frame->height : 0;
+}
+
+static inline uint8_t clamp8(int v)
+{
+	return v < 0 ? 0 : v > 255 ? 255 : (uint8_t)v;
+}
+
+bool vit_sw_frame_rgba(VitSwDecoder *d, uint8_t *out, size_t out_size, bool stretch_levels)
+{
+	if(!d || !d->has_frame)
+		return false;
+	AVFrame *f = d->frame;
+	if(f->format != AV_PIX_FMT_YUV420P && f->format != AV_PIX_FMT_YUVJ420P)
+		return false;
+	int w = f->width, h = f->height;
+	if(out_size < (size_t)w * h * 4)
+		return false;
+	// BT.709, limited range to full, in fixed point (x1024); with the studio levels stretched once
+	// more, every factor is 255/219 bigger and 16 x 255/219 is taken off (as the Android app's YuvSnapshot)
+	int ky, off, kr, kgu, kgv, kb;
+	if(stretch_levels)
+	{
+		ky = 1388; off = -19076; kr = 2138; kgu = 254; kgv = 636; kb = 2519;
+	}
+	else
+	{
+		ky = 1192; off = 0; kr = 1836; kgu = 218; kgv = 546; kb = 2163;
+	}
+	for(int row = 0; row < h; row++)
+	{
+		const uint8_t *yl = f->data[0] + (size_t)row * f->linesize[0];
+		const uint8_t *ul = f->data[1] + (size_t)(row >> 1) * f->linesize[1];
+		const uint8_t *vl = f->data[2] + (size_t)(row >> 1) * f->linesize[2];
+		uint8_t *o = out + (size_t)row * w * 4;
+		for(int col = 0; col < w; col++)
+		{
+			int yy = yl[col] - 16;
+			if(yy < 0)
+				yy = 0;
+			int uu = ul[col >> 1] - 128;
+			int vv = vl[col >> 1] - 128;
+			int c = ky * yy + off;
+			o[0] = clamp8((c + kr * vv) >> 10);
+			o[1] = clamp8((c - kgu * uu - kgv * vv) >> 10);
+			o[2] = clamp8((c + kb * uu) >> 10);
+			o[3] = 255;
+			o += 4;
+		}
+	}
+	return true;
 }
