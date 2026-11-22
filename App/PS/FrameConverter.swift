@@ -41,6 +41,8 @@ final class FrameConverter: @unchecked Sendable {
 
     /** The picture as RGBA bytes (width x height x 4, top row first). */
     func rgba(_ buffer: CVPixelBuffer) throws -> (Data, Int, Int) {
+        // (never in the background: iOS keeps the GPU from apps there)
+        guard Gpu.allowed else { throw CoreFailure("in the background: no GPU") }
         let w = CVPixelBufferGetWidth(buffer)
         let h = CVPixelBufferGetHeight(buffer)
         // (an untagged buffer: the PS5's HD stream is BT.709)

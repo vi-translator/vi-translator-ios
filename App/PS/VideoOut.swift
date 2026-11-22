@@ -19,6 +19,7 @@ final class VideoOut: @unchecked Sendable {
     private let queue = DispatchQueue(label: "preview", qos: .userInitiated)
     private let lock = NSLock()
     private var busy = false
+    private var busySince: TimeInterval = 0
     private var lastShown: TimeInterval = 0
     private let context: CIContext = {
         let opts: [CIContextOption: Any] = [.workingColorSpace: NSNull(), .outputColorSpace: NSNull(), .cacheIntermediates: false]
@@ -33,11 +34,14 @@ final class VideoOut: @unchecked Sendable {
     func show(_ buffer: CVPixelBuffer) {
         let now = ProcessInfo.processInfo.systemUptime
         lock.lock()
-        guard onImage != nil, !busy, now - lastShown >= 1.0 / Double(max(Prefs.previewFps, 1)) - 0.004 else {
+        // (a draw that never finished, in the background: given up after 2 s)
+        if busy && now - busySince > 2 { busy = false }
+        guard Gpu.allowed, onImage != nil, !busy, now - lastShown >= 1.0 / Double(max(Prefs.previewFps, 1)) - 0.004 else {
             lock.unlock()
             return
         }
         busy = true
+        busySince = now
         lastShown = now
         lock.unlock()
         queue.async { [self] in

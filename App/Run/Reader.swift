@@ -27,9 +27,12 @@ protocol Snapshot {
  */
 final class Reader: @unchecked Sendable {
     private let core: CoreHost
-    private let worker = DispatchQueue(label: "reader", qos: .userInitiated)
+    private var worker = DispatchQueue(label: "reader", qos: .userInitiated)
     private let lock = NSLock()
     private var busy = false
+    private var busySince: TimeInterval = 0
+    /** bumped when a reading that never finished is given up (its end is then ignored) */
+    private var generation = 0
     private var nextAt: TimeInterval = 0
 
     /** For the screen: frames seen, frames read, and how long the last reading took. */
@@ -60,21 +63,32 @@ final class Reader: @unchecked Sendable {
         lock.lock()
         offered += 1
         let now = ProcessInfo.processInfo.systemUptime
+        if busy && now - busySince > 8 {
+            // (a reading that never finished, e.g. GPU work caught by the app going to the background:
+            // given up, and the next one goes to a fresh queue)
+            NSLog("Reader: a reading took over 8 s: given up")
+            generation += 1
+            worker = DispatchQueue(label: "reader", qos: .userInitiated)
+            busy = false
+        }
         if paused || now < nextAt || busy {
             lock.unlock()
             return false
         }
         busy = true
+        busySince = now
+        let gen = generation
+        let queue = worker
         lock.unlock()
         let snap: Snapshot
         do {
             snap = try frame.snapshot()
         } catch {
             NSLog("Reader: copy failed: \(error)")
-            setBusy(false)
+            done(gen)
             return false
         }
-        worker.async { [self] in
+        queue.async { [self] in
             let start = ProcessInfo.processInfo.systemUptime
             do {
                 let rgba = try snap.rgba()
@@ -93,20 +107,24 @@ final class Reader: @unchecked Sendable {
                 nextAt = ProcessInfo.processInfo.systemUptime + 1
                 lock.unlock()
             }
-            setBusy(false)
+            done(gen)
         }
         return true
     }
 
-    private func setBusy(_ b: Bool) {
+    /** A reading ended (unless it was given up already). */
+    private func done(_ gen: Int) {
         lock.lock()
-        busy = b
+        if gen == generation { busy = false }
         lock.unlock()
     }
 
     /** The picture stopped (the stream ended). */
     func noPicture() {
-        worker.async { [core] in core.noPicture() }
+        lock.lock()
+        let queue = worker
+        lock.unlock()
+        queue.async { [core] in core.noPicture() }
     }
 
     func close() {

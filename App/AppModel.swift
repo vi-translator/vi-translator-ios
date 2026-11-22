@@ -68,6 +68,7 @@ final class AppModel: ObservableObject {
 
     private init() {
         CoreHost.device = UIDevice.current.name
+        Gpu.watch()
         var err: String?
         var c: CoreHost?
         do {
