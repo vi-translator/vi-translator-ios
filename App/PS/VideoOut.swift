@@ -5,8 +5,8 @@ import Metal
 import UIKit
 
 /**
- * The PS5's picture in the app's preview, smoother than the reading's ~4 frames a second: up to 15
- * decoded frames a second (GPU buffers) are drawn small by Core Image on the GPU, with the same
+ * The PS5's picture in the app's preview, smoother than the reading's ~4 frames a second: up to 10,
+ * 15 or 30 decoded frames a second (Show on › Preview; the stream itself has 30) (GPU buffers) are drawn small by Core Image on the GPU, with the same
  * studio-levels stretch as the reading, and shown. A frame that comes while the last is still being
  * drawn is skipped, so the decoder never waits.
  */
@@ -33,7 +33,7 @@ final class VideoOut: @unchecked Sendable {
     func show(_ buffer: CVPixelBuffer) {
         let now = ProcessInfo.processInfo.systemUptime
         lock.lock()
-        guard onImage != nil, !busy, now - lastShown >= 1.0 / 15 else {
+        guard onImage != nil, !busy, now - lastShown >= 1.0 / Double(max(Prefs.previewFps, 1)) - 0.004 else {
             lock.unlock()
             return
         }

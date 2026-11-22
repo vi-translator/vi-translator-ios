@@ -84,6 +84,12 @@ struct ShowPanel: View {
           }
           Group {
             H3(L("Preview"))
+            Field(label: L("PS5 picture in the app (frames per second)"), help: L("Only what the app shows: the reading and the TVs don't change. 30 is the stream's own; fewer saves battery.")) {
+                Select(options: [("10", "10"), ("15", "15"), ("30", "30")], value: String(Prefs.previewFps)) {
+                    Prefs.previewFps = Int($0) ?? 15
+                    m.rev += 1
+                }
+            }
             Check(label: L("Show frames per second (fps) on the preview"), on: m.cfg.bool("fps_badge")) { m.cfg.put("fps_badge", $0) }
             Field(label: L("Where it shows")) {
                 Select(options: [("top-left", L("Top left")), ("top-right", L("Top right")), ("bottom-left", L("Bottom left")), ("bottom-right", L("Bottom right"))],

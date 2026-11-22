@@ -69,6 +69,12 @@ enum Prefs {
         set { d.set(newValue, forKey: "phone_volume") }
     }
 
+    /** the PS5 picture's frames a second in the app's preview: 10, 15 (the default) or 30 (the stream's own) */
+    static var previewFps: Int {
+        get { d.object(forKey: "preview_fps") as? Int ?? 15 }
+        set { d.set(newValue, forKey: "preview_fps") }
+    }
+
     /** the PS5 stream's resolution: 720 (the default) or 1080 */
     static var psResolution: Int {
         get { d.object(forKey: "ps_resolution") as? Int ?? 720 }

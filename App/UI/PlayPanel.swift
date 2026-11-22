@@ -272,15 +272,28 @@ struct FullPicture: View {
     @EnvironmentObject var m: AppModel
     @ObservedObject var feed: PictureFeed
     @Environment(\.dismiss) var dismiss
+    @State private var overlayUrl: URL?
 
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            PreviewRepresentable(image: feed.image, lines: m.lines, drawText: true, showAreas: false, rev: m.rev)
-                .aspectRatio(16 / 9, contentMode: .fit)
+            ZStack {
+                // (the translations drawn by the core's TV page, as on the small picture and the TVs:
+                // each goes when the game's English goes)
+                PreviewRepresentable(image: feed.image, lines: m.lines, drawText: false, showAreas: false, rev: m.rev)
+                if let u = overlayUrl { TvPageView(url: u).allowsHitTesting(false) }
+            }
+            .aspectRatio(16 / 9, contentMode: .fit)
         }
         .onTapGesture { dismiss() }
         .statusBarHidden()
+        .onAppear {
+            guard overlayUrl == nil, let core = m.core else { return }
+            m.io.async {
+                let u = core.engine.localViewerUrl().flatMap(URL.init(string:))
+                DispatchQueue.main.async { overlayUrl = u }
+            }
+        }
     }
 }
 
