@@ -55,6 +55,7 @@ targets:
       - sdk: Security.framework
       - sdk: Network.framework
       - sdk: Photos.framework
+      - sdk: AVFoundation.framework
     info:
       path: App/Info.plist
       properties:
@@ -87,6 +88,7 @@ targets:
           - fonts/Lalezar-Regular.ttf
           - fonts/NotoSansArabic.ttf
         NSLocalNetworkUsageDescription: VI Translator reads the game from your PS5 and sends the translations to your TV, both on your home network.
+        NSCameraUsageDescription: VI Translator reads the game's picture from your capture card.
         NSPhotoLibraryAddUsageDescription: VI Translator keeps the translated snapshots of the game in your photos.
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true

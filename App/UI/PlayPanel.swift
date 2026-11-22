@@ -87,6 +87,7 @@ struct PlayPanel: View {
         switch Prefs.console {
         case "xbox": return L("Xbox: Microsoft's Remote Play player opens; keep the phone's screen on while playing.")
         case "ps5": return L("Keep VI Translator open on the screen while playing: iOS pauses apps in the background.")
+        case "capture": return L("Keep VI Translator open on the screen while playing: iPadOS stops the capture card for apps in the background.")
         default: return L("Choose your console in Source first.")
         }
     }
@@ -100,6 +101,7 @@ struct PlayPanel: View {
         switch console {
         case "ps5": source = ps.map { "PlayStation 5 · \($0.nickname.isEmpty ? $0.host : $0.nickname)" } ?? L("PlayStation 5 (not linked yet)")
         case "xbox": source = "Xbox"
+        case "capture": source = L("Capture card") + (CaptureCard.chosen().map { " · \($0.name)" } ?? "")
         default: source = L("Not chosen yet")
         }
         let sourceNote = console == "ps5" && !Ps5.available ? L("PS Remote Play isn't in this build of the app.") : (m.state == .reading ? L("Reading the game") : "")

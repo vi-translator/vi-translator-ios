@@ -52,7 +52,7 @@ final class AppModel: ObservableObject {
     @Published var source: Source?
 
     /** (demo: a picture drawn by the app, for the simulator and CI: -vitDemoText) */
-    enum Source { case ps5, xbox, demo }
+    enum Source { case ps5, xbox, capture, demo }
     enum XboxMode: Identifiable {
         case play, setup
         var id: Int { self == .play ? 0 : 1 }
@@ -60,6 +60,7 @@ final class AppModel: ObservableObject {
 
     private(set) var reader: Reader?
     private var stream: PsStream?
+    private var card: CaptureCard?
     private var resumeOnActive = false
     private var tick: Timer?
     private var savedClear: DispatchWorkItem?
@@ -220,6 +221,7 @@ final class AppModel: ObservableObject {
         switch Prefs.console {
         case "ps5": begin(.ps5)
         case "xbox": xbox = .play
+        case "capture": begin(.capture)
         default: go("source")
         }
     }
@@ -275,6 +277,7 @@ final class AppModel: ObservableObject {
                 switch s {
                 case .ps5: startPs(r)
                 case .xbox: set(.reading, nil)
+                case .capture: startCapture(r)
                 case .demo: startDemo(r)
                 }
             }
@@ -315,6 +318,21 @@ final class AppModel: ObservableObject {
         st.onLoginPin = { [weak self] incorrect in self?.askPin = incorrect }
         stream = st
         st.start(height: Prefs.psResolution, sound: Prefs.screenOff)
+    }
+
+    /** The capture card (an iPad with USB-C): read as soon as it gives frames. */
+    private func startCapture(_ r: Reader) {
+        let c = CaptureCard(reader: r)
+        c.onState = { [weak self] s, d in
+            guard let self, self.card === c else { return }
+            switch s {
+            case .reading: self.set(.reading, nil)
+            case .ended: self.end(.ended, d)
+            case .failed: self.end(.failed, d)
+            }
+        }
+        card = c
+        c.start()
     }
 
     func setPhoneVolume(_ v: Double) {
@@ -369,6 +387,8 @@ final class AppModel: ObservableObject {
         demo = nil
         stream?.stop()
         stream = nil
+        card?.stop()
+        card = nil
         reader?.close()
         reader = nil
         source = nil
@@ -379,8 +399,8 @@ final class AppModel: ObservableObject {
     /** The preview gets frames while it is switched on. */
     func wirePreview() {
         guard let r = reader else { return }
-        // (the PS5's picture goes to the preview straight from the decoder: VideoOut)
-        if Prefs.preview && source != .ps5 {
+        // (the PS5's and the capture card's pictures go to the preview straight from their frames: VideoOut)
+        if Prefs.preview && source != .ps5 && source != .capture {
             let feed = picture
             r.preview = { img in DispatchQueue.main.async { feed.image = img } }
         } else {

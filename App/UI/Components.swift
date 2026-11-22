@@ -317,6 +317,7 @@ struct IconTile: View {
 enum Icon {
     static let source = "gamecontroller"
     static let tv = "tv"
+    static let capture = "cable.connector"
     static let show = "tv.and.mediabox"
     static let snapshot = "camera.viewfinder"
     static let translator = "character.bubble"

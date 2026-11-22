@@ -88,6 +88,27 @@ power mode, and your Microsoft account.
       screen recording prompt; frames are then read again. Note whether this was needed.
 - [ ] Sign out of Microsoft works.
 
+## 4b. Capture card (an iPad with USB-C, iPadOS 17 or newer)
+
+Needs a UVC (plug-and-play) capture card with HDMI out; a USB-A card through a USB-C adapter or
+hub. On the PS5: Settings › System › HDMI › Enable HDCP off. On an iPhone, Source shows only the
+line "Capture cards work on an iPad with USB-C (iPadOS 17 or newer)."
+
+- [ ] Source shows *Capture card*; choosing it lists the card by name (plug it in and out: the list
+      follows). With two cards, the chosen one is kept.
+- [ ] Play › Start translating: iPadOS asks for the camera once; after allowing, *Translating*, the
+      preview shows the game (colours as on the TV, not washed out or too dark), the bar counts
+      frames read.
+- [ ] The console's log line `capture card <name>: 1920x1080 30 fps` (Xcode's console or
+      Console.app): note the card and the format it chose.
+- [ ] Text in the game is read and the TV shows the translations; the GTA VI pause menu is
+      recognised (its colour checks are tuned on the HDMI picture).
+- [ ] Unplug the card while translating: "Stopped (The capture card was unplugged.)". Plug it back,
+      Start: it works again.
+- [ ] To the Home screen and back: the reading pauses and goes on by itself.
+- [ ] Camera access denied (Settings › VI Translator › Camera off): Start says so, Source offers
+      *Open Settings*.
+
 ## 5. The rest
 
 - [ ] Translator: language list, a service with your own key (e.g. DeepL), memory numbers update.

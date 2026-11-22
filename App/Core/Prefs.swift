@@ -75,6 +75,12 @@ enum Prefs {
         set { d.set(newValue, forKey: "preview_fps") }
     }
 
+    /** the capture card chosen in Source (its unique ID; none: the first connected) */
+    static var captureCard: String {
+        get { d.string(forKey: "capture_card") ?? "" }
+        set { d.set(newValue, forKey: "capture_card") }
+    }
+
     /** the PS5 stream's resolution: 720 (the default) or 1080 */
     static var psResolution: Int {
         get { d.object(forKey: "ps_resolution") as? Int ?? 720 }

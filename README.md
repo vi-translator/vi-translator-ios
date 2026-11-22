@@ -25,6 +25,11 @@ columns).
 - **Xbox:** Microsoft's own Remote Play web player (`play.xbox.com/remoteplay`) inside the app; its
   picture is copied about 4 times a second (or, if those copies come out black, the app records its
   own screen with ReplayKit, which iOS asks you to allow).
+- **Capture card (iPad only):** a USB capture card (UVC, plug-and-play) with the console's HDMI in
+  it, plugged into an iPad with USB-C on iPadOS 17 or newer; the only Apple devices that let apps
+  use such cards (iPhones don't, even with USB-C). 1080p when the card has it, at 30 frames a
+  second; its frames go through the GPU into RGBA like the PS5's. The TV shows the game through the
+  card's HDMI out.
 - **Reading:** Apple's Vision text recognition, on the phone.
 - **Translating and the TVs:** VI Translator's shared core (the `vi-translator-core` Rust crate),
   which also serves the TV page on the home network, so the TV apps connect to the phone just as
@@ -39,6 +44,9 @@ columns).
      *Link Device*.
    - *Xbox:* turn on remote features on the Xbox. *Start translating* opens Microsoft's player; sign
      in there with your Microsoft account and connect to your console.
+   - *Capture card (iPad with USB-C):* the console's HDMI into the card, the card's HDMI out into
+     the TV, its USB into the iPad. On the PS5, turn off HDCP (Settings › System › HDMI). Choose
+     *Capture card* in Source; iPadOS asks once to let the app use it (as a camera).
 2. **TV:** open VI Translator on the TV: it shows a 6-digit code. In the app, *Connect a TV*, pick
    it, type the code, *Connect*.
 3. **Game and language**, then **Start translating**.

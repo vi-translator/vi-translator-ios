@@ -96,6 +96,9 @@ Notes for App Review:
 > Background audio: with Setup › Source › "Keep translating with the screen off" (off by default),
 > the app plays the game's own sound, received from the console with the picture, so translating
 > goes on with the screen locked; the sound is the user's game audio.
+> Capture card (iPad with USB-C only): the camera permission is asked for to read a USB capture
+> card's picture (the console's HDMI), which iPadOS treats as an external camera; the app never uses
+> the iPad's own cameras.
 > No account with the developer is needed. The app is an unofficial, open-source project (AGPL-3.0),
 > not affiliated with Sony or Microsoft.
 

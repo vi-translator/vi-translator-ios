@@ -1,9 +1,11 @@
+import AVFoundation
 import SwiftUI
 
 /**
  * Source: where the picture comes from, as in the Android app. The desktop picks a window, a capture
  * card or OBS; the phone reads the console itself: a PS5 (PS Remote Play, set up once: sign in to PSN
- * for the account ID, find it, the PIN it shows) or an Xbox (Microsoft's web player). Then Timing.
+ * for the account ID, find it, the PIN it shows) or an Xbox (Microsoft's web player); an iPad with
+ * USB-C also reads a capture card (CaptureCard). Then Timing.
  */
 struct SourcePanel: View {
     @EnvironmentObject var m: AppModel
@@ -11,6 +13,9 @@ struct SourcePanel: View {
     @State private var console = Prefs.console
     @State private var xboxSigned: Bool?
     @State private var askSignOut = false
+    @State private var cards: [CaptureCard.Card] = []
+    @State private var cardId = Prefs.captureCard
+    @State private var camera = AVCaptureDevice.authorizationStatus(for: .video)
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -20,8 +25,15 @@ struct SourcePanel: View {
                 .padding(.top, 10)
             consoleChoice("xbox", "Xbox", L("Microsoft's Remote Play player, in the app. Keep the phone's screen on while playing."))
                 .padding(.top, 8)
+            if CaptureCard.supported {
+                consoleChoice("capture", L("Capture card"), L("A USB capture card in the iPad's USB-C port, with the console's HDMI in it. Use a card with HDMI out (pass-through) so the TV keeps showing the game."))
+                    .padding(.top, 8)
+            } else {
+                Muted(L("Capture cards work on an iPad with USB-C (iPadOS 17 or newer)."), small: true).padding(.top, 8)
+            }
             if console == "ps5" { Ps5LinkView() }
             if console == "xbox" { xboxSetup }
+            if console == "capture" && CaptureCard.supported { captureSetup }
             H3(L("Timing"))
             TimingForm()
         }
@@ -36,7 +48,7 @@ struct SourcePanel: View {
         } label: {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 10) {
-                    Image(systemName: id == "ps5" ? Icon.source : Icon.tv).foregroundColor(on ? k.accentUi : k.muted)
+                    Image(systemName: id == "ps5" ? Icon.source : id == "capture" ? Icon.capture : Icon.tv).foregroundColor(on ? k.accentUi : k.muted)
                     Text(name).font(k.font(k.base + 0.5, .bold)).foregroundColor(k.text)
                     Spacer()
                     Image(systemName: Icon.check).foregroundColor(on ? k.accentUi : .clear)
@@ -49,6 +61,60 @@ struct SourcePanel: View {
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("console-\(id)")
+    }
+
+    /**
+     * The capture card: the cards connected now (followed as they are plugged in and out), which one
+     * is read, and the camera permission iPadOS asks for once (a capture card is an external camera
+     * to it).
+     */
+    private var captureSetup: some View {
+        let chosen = cards.first { $0.id == cardId } ?? cards.first
+        return VStack(alignment: .leading, spacing: 4) {
+            if cards.isEmpty {
+                Callout(L("No capture card found: plug it into the iPad's USB-C port.")).padding(.top, 12)
+            } else {
+                LabelText(L("Capture card")).padding(.top, 14)
+                ForEach(cards, id: \.id) { c in
+                    Button {
+                        Prefs.captureCard = c.id
+                        cardId = c.id
+                        m.rev += 1
+                    } label: {
+                        HStack {
+                            Text(c.name).font(k.font(k.base)).foregroundColor(k.text)
+                            Spacer()
+                            Image(systemName: Icon.check).foregroundColor(c == chosen ? k.accentUi : .clear)
+                        }
+                        .padding(.vertical, 8)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            if camera == .denied || camera == .restricted {
+                Callout(CaptureCard.noPermission).padding(.top, 12)
+                KButton(L("Open Settings"), icon: Icon.setup) {
+                    if let u = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(u) }
+                }.padding(.top, 8)
+            }
+            LabelText(L("Connecting it")).padding(.top, 14)
+            Muted("1. " + L("The console's HDMI into the card's HDMI in; the card's HDMI out into the TV."))
+            Muted("2. " + L("The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card."))
+            Muted("3. " + L("Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera)."))
+            Callout(L("On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.")).padding(.top, 12)
+        }
+        .onAppear(perform: refreshCards)
+        .onReceive(NotificationCenter.default.publisher(for: AVCaptureDevice.wasConnectedNotification)) { _ in refreshCards() }
+        .onReceive(NotificationCenter.default.publisher(for: AVCaptureDevice.wasDisconnectedNotification)) { _ in refreshCards() }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in refreshCards() }
+    }
+
+    private func refreshCards() {
+        // (the notifications come on any thread)
+        DispatchQueue.main.async {
+            cards = CaptureCard.cards()
+            camera = AVCaptureDevice.authorizationStatus(for: .video)
+        }
     }
 
     /**

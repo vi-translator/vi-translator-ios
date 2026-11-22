@@ -30,8 +30,8 @@ final class VideoOut: @unchecked Sendable {
     /** the preview's width in pixels */
     static let width: CGFloat = 960
 
-    /** A decoded frame (on the decoder's thread). */
-    func show(_ buffer: CVPixelBuffer) {
+    /** A decoded frame (on the decoder's thread). [stretch]: the PS5's studio levels (not a capture card's HDMI picture). */
+    func show(_ buffer: CVPixelBuffer, stretch: Bool = true) {
         let now = ProcessInfo.processInfo.systemUptime
         lock.lock()
         // (a draw that never finished, in the background: given up after 2 s)
@@ -56,14 +56,14 @@ final class VideoOut: @unchecked Sendable {
             var image = CIImage(cvPixelBuffer: buffer, options: [.colorSpace: NSNull()])
             let s = min(1, Self.width / image.extent.width)
             image = image.transformed(by: CGAffineTransform(scaleX: s, y: s))
-            let g = CGFloat(FrameConverter.gain), b = CGFloat(FrameConverter.bias)
-            image = image.applyingFilter("CIColorMatrix", parameters: [
+            let g = CGFloat(stretch ? FrameConverter.gain : 1), b = CGFloat(stretch ? FrameConverter.bias : 0)
+            if stretch { image = image.applyingFilter("CIColorMatrix", parameters: [
                 "inputRVector": CIVector(x: g, y: 0, z: 0, w: 0),
                 "inputGVector": CIVector(x: 0, y: g, z: 0, w: 0),
                 "inputBVector": CIVector(x: 0, y: 0, z: g, w: 0),
                 "inputAVector": CIVector(x: 0, y: 0, z: 0, w: 1),
                 "inputBiasVector": CIVector(x: b, y: b, z: b, w: 0),
-            ]).applyingFilter("CIColorClamp")
+            ]).applyingFilter("CIColorClamp") }
             guard let cg = context.createCGImage(image, from: image.extent.integral, format: .RGBA8,
                                                  colorSpace: CGColorSpaceCreateDeviceRGB()) else { return }
             let ui = UIImage(cgImage: cg)
