@@ -65,12 +65,16 @@ jobs:
           echo "$ASC_KEY_P8_B64" | base64 --decode > "$KEY"
           AUTH=(-allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID")
           xcodebuild archive -project VITranslator.xcodeproj -scheme VITranslator -configuration Release \
-            -destination generic/platform=iOS -archivePath build/VITranslator.xcarchive "${AUTH[@]}" \
-            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGN_STYLE=Automatic \
+            -destination generic/platform=iOS -archivePath build/VITranslator.xcarchive \
+            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
             MARKETING_VERSION="${{ steps.v.outputs.version }}" CURRENT_PROJECT_VERSION="${{ steps.v.outputs.build }}" \
             > build-archive.log 2>&1 || { grep -E "error:|\*\* " build-archive.log | head -n 60; exit 1; }
+          # (archived unsigned above: Xcode's automatic signing would first sign it for development, which
+          # needs a registered device; the export signs it for the App Store, which needs none)
           sed "s/TEAM_ID/$APPLE_TEAM_ID/" ci/ExportOptions.plist > "$RUNNER_TEMP/ExportOptions.plist"
           xcodebuild -exportArchive -archivePath build/VITranslator.xcarchive \
-            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath build/export "${AUTH[@]}"
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath build/export "${AUTH[@]}" \
+            > build-export.log 2>&1 || { grep -iE "error|\*\* " build-export.log | head -n 60; exit 1; }
+          tail -n 5 build-export.log
           rm -f "$KEY"
           echo "Uploaded ${{ steps.v.outputs.version }} (${{ steps.v.outputs.build }}) to App Store Connect: it shows in TestFlight after Apple's processing."
