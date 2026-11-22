@@ -45,7 +45,7 @@ jobs:
       - name: The app for the Simulator
         run: |
           xcodebuild build -project VITranslator.xcodeproj -scheme VITranslator -configuration Debug \
-            -destination "generic/platform=iOS Simulator" -derivedDataPath build/dd CODE_SIGNING_ALLOWED=NO > build-sim.log 2>&1 \
+            -destination "generic/platform=iOS Simulator" -derivedDataPath build/dd ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > build-sim.log 2>&1 \
             || { grep -E "error:|\*\* " build-sim.log | head -n 40; exit 1; }
 
       - name: Screenshots (iPhone 6.9" and iPad 13")
