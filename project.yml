@@ -76,6 +76,8 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
         UIRequiresFullScreen: false
+        # (Keep translating with the screen off: the app plays the game's sound, iOS keeps it running)
+        UIBackgroundModes: [audio]
         UIAppFonts:
           - fonts/Tajawal-Regular.ttf
           - fonts/Tajawal-Bold.ttf

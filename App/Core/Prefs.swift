@@ -54,6 +54,21 @@ enum Prefs {
         set { d.set(newValue, forKey: "live_rotation") }
     }
 
+    /**
+     * Keep translating with the screen off (PS5): the game's sound plays on the phone, so iOS keeps
+     * the app running in the background. Off by default.
+     */
+    static var screenOff: Bool {
+        get { d.object(forKey: "screen_off") as? Bool ?? false }
+        set { d.set(newValue, forKey: "screen_off") }
+    }
+
+    /** the game's sound's volume on the phone then, 0 to 1 */
+    static var phoneVolume: Double {
+        get { d.object(forKey: "phone_volume") as? Double ?? 0.3 }
+        set { d.set(newValue, forKey: "phone_volume") }
+    }
+
     /** the PS5 stream's resolution: 720 (the default) or 1080 */
     static var psResolution: Int {
         get { d.object(forKey: "ps_resolution") as? Int ?? 720 }

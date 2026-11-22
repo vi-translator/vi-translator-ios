@@ -8,6 +8,9 @@ import Vision
  * The words come back with the line they are in (top to bottom), in pixels of the crop.
  */
 final class VisionRecognizer: TextRecognizer, @unchecked Sendable {
+    /** on the CPU only: the app is in the background, where iOS keeps the GPU and the Neural Engine from apps */
+    static var cpuOnly = false
+
     /** .accurate reads the game's small, styled text far better than .fast */
     var level: VNRequestTextRecognitionLevel = .accurate
 
@@ -19,6 +22,7 @@ final class VisionRecognizer: TextRecognizer, @unchecked Sendable {
         request.recognitionLanguages = ["en-US"]
         // (the game's words are read as they are: names, slang and numbers aren't "corrected")
         request.usesLanguageCorrection = false
+        if Self.cpuOnly { request.usesCPUOnly = true }
         if #available(iOS 16.0, *) {
             request.revision = VNRecognizeTextRequestRevision3
             request.automaticallyDetectsLanguage = false

@@ -11,5 +11,8 @@
  "Share the picture as read": "مشاركة الصورة كما قُرئت",
  "The last frame of the game exactly as the app reads it (PNG): send it with a problem report, for example a page that isn't translated.": "آخر إطار من اللعبة كما يقرؤه التطبيق تمامًا (PNG): أرسله مع بلاغ المشكلة، مثل صفحة لا تُترجم.",
  "Smaller text": "تصغير النص",
- "Show the English": "إظهار النص الإنجليزي"
+ "Show the English": "إظهار النص الإنجليزي",
+ "Keep translating with the screen off": "متابعة الترجمة والشاشة مطفأة",
+ "The game's sound plays on the phone as well, so iOS lets the app go on with the screen locked or in another app. Uses more battery: keep the phone charging. Takes effect at the next Start translating.": "يُشغَّل صوت اللعبة على الهاتف أيضًا، فيسمح iOS للتطبيق بالاستمرار والشاشة مقفلة أو أثناء استخدام تطبيق آخر. يستهلك بطارية أكثر: أبقِ الهاتف على الشاحن. يسري عند الضغط على «ابدأ الترجمة» في المرة القادمة.",
+ "The game's sound on the phone": "صوت اللعبة على الهاتف"
 }

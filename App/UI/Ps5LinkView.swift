@@ -30,6 +30,8 @@ struct Ps5LinkView: View {
     @State private var toast: String?
     @State private var askUnlink = false
     @State private var resolution = Prefs.psResolution
+    @State private var screenOff = Prefs.screenOff
+    @State private var phoneVolume = Prefs.phoneVolume
 
     /** (the simulator and CI: the steps shown even with a PS5 linked) */
     private var showSteps: Bool { UserDefaults.standard.bool(forKey: "vitPs5Steps") }
@@ -316,6 +318,20 @@ struct Ps5LinkView: View {
                 Select(options: [("1080", "1080p"), ("720", "720p")], value: String(resolution)) { v in
                     resolution = Int(v) ?? 720
                     Prefs.psResolution = resolution
+                }
+            }
+            Check(label: L("Keep translating with the screen off"), on: screenOff) {
+                screenOff = $0
+                Prefs.screenOff = $0
+            }
+            .padding(.top, 8)
+            Muted(L("The game's sound plays on the phone as well, so iOS lets the app go on with the screen locked or in another app. Uses more battery: keep the phone charging. Takes effect at the next Start translating."), small: true)
+            if screenOff {
+                Field(label: L("The game's sound on the phone")) {
+                    KSlider(range: 0...1, step: 0.05, value: phoneVolume, format: { "\(Int(($0 * 100).rounded()))%" }) { v in
+                        phoneVolume = v
+                        m.setPhoneVolume(v)
+                    }
                 }
             }
         }

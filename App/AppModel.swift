@@ -304,7 +304,12 @@ final class AppModel: ObservableObject {
         }
         st.onLoginPin = { [weak self] incorrect in self?.askPin = incorrect }
         stream = st
-        st.start(height: Prefs.psResolution)
+        st.start(height: Prefs.psResolution, sound: Prefs.screenOff)
+    }
+
+    func setPhoneVolume(_ v: Double) {
+        Prefs.phoneVolume = v
+        stream?.setVolume(v)
     }
 
     func pin(_ p: String) {
@@ -392,6 +397,13 @@ final class AppModel: ObservableObject {
         case .background:
             cfg.flush()
             guard state.running, source == .ps5, !away else { return }
+            if Prefs.screenOff, let st = stream {
+                // (the game's sound keeps the app running: the picture is read on the CPU while away)
+                awayPlaying = true
+                VisionRecognizer.cpuOnly = true
+                st.background(true)
+                return
+            }
             away = true
             reader?.paused = true
             bgTask = UIApplication.shared.beginBackgroundTask(withName: "ps5-stream") { [weak self] in self?.awayTooLong() }
@@ -400,6 +412,11 @@ final class AppModel: ObservableObject {
                 Task { @MainActor in self?.awayTooLong() }
             }
         case .active:
+            if awayPlaying {
+                awayPlaying = false
+                VisionRecognizer.cpuOnly = false
+                stream?.background(false)
+            }
             if away {
                 away = false
                 awayTimer?.invalidate()
@@ -422,6 +439,8 @@ final class AppModel: ObservableObject {
     /** how long the stream is kept while the app is away (iOS allows about 30 s) */
     static let awayGrace: TimeInterval = 25
     private var away = false
+    /** away with the screen-off option: the stream and the reading go on, on the CPU */
+    private var awayPlaying = false
     private var awayTimer: Timer?
     private var bgTask: UIBackgroundTaskIdentifier = .invalid
     /** reconnections left after coming back (the PS5 may still hold the last session for a moment) */
