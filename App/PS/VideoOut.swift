@@ -1,110 +1,74 @@
-import AVFoundation
-import CoreMedia
+import CoreImage
 import CoreVideo
-import SwiftUI
+import Foundation
+import Metal
 import UIKit
 
 /**
- * The PS5's picture in the app's preview, smooth: each decoded frame (a GPU buffer) goes straight
- * to the screen's display layers (AVSampleBufferDisplayLayer), up to 30 a second, with no copy. The
- * reading itself still takes about 4 frames a second (Reader); this is only what the user sees.
+ * The PS5's picture in the app's preview, smoother than the reading's ~4 frames a second: up to 15
+ * decoded frames a second (GPU buffers) are drawn small by Core Image on the GPU, with the same
+ * studio-levels stretch as the reading, and shown. A frame that comes while the last is still being
+ * drawn is skipped, so the decoder never waits.
  */
 final class VideoOut: @unchecked Sendable {
     static let shared = VideoOut()
 
+    /** told on the main thread with each picture (nil: the stream stopped) */
+    var onImage: ((UIImage?) -> Void)?
+
+    private let queue = DispatchQueue(label: "preview", qos: .userInitiated)
     private let lock = NSLock()
-    private let layers = NSHashTable<AVSampleBufferDisplayLayer>.weakObjects()
-    private var format: CMVideoFormatDescription?
+    private var busy = false
     private var lastShown: TimeInterval = 0
+    private let context: CIContext = {
+        let opts: [CIContextOption: Any] = [.workingColorSpace: NSNull(), .outputColorSpace: NSNull(), .cacheIntermediates: false]
+        if let d = MTLCreateSystemDefaultDevice() { return CIContext(mtlDevice: d, options: opts) }
+        return CIContext(options: opts)
+    }()
 
-    /** told on the main thread when the first picture of a stream is shown (and when it stops) */
-    var showing: ((Bool) -> Void)?
-    private var isShowing = false
-
-    func add(_ layer: AVSampleBufferDisplayLayer) {
-        lock.lock()
-        layers.add(layer)
-        lock.unlock()
-    }
-
-    func remove(_ layer: AVSampleBufferDisplayLayer) {
-        lock.lock()
-        layers.remove(layer)
-        lock.unlock()
-    }
+    /** the preview's width in pixels */
+    static let width: CGFloat = 960
 
     /** A decoded frame (on the decoder's thread). */
     func show(_ buffer: CVPixelBuffer) {
         let now = ProcessInfo.processInfo.systemUptime
         lock.lock()
-        let targets = layers.allObjects
-        guard !targets.isEmpty, now - lastShown >= 1.0 / 31 else {
+        guard onImage != nil, !busy, now - lastShown >= 1.0 / 15 else {
             lock.unlock()
             return
         }
+        busy = true
         lastShown = now
-        if format == nil || !CMVideoFormatDescriptionMatchesImageBuffer(format!, imageBuffer: buffer) {
-            var f: CMVideoFormatDescription?
-            CMVideoFormatDescriptionCreateForImageBuffer(allocator: nil, imageBuffer: buffer, formatDescriptionOut: &f)
-            format = f
-        }
-        let fmt = format
         lock.unlock()
-        guard let fmt else { return }
-        var timing = CMSampleTimingInfo(duration: .invalid, presentationTimeStamp: .zero, decodeTimeStamp: .invalid)
-        var sample: CMSampleBuffer?
-        guard CMSampleBufferCreateReadyWithImageBuffer(allocator: nil, imageBuffer: buffer, formatDescription: fmt,
-                                                       sampleTiming: &timing, sampleBufferOut: &sample) == noErr, let sample else { return }
-        // (shown at once, whatever its time)
-        if let atts = CMSampleBufferGetSampleAttachmentsArray(sample, createIfNecessary: true), CFArrayGetCount(atts) > 0 {
-            let d = unsafeBitCast(CFArrayGetValueAtIndex(atts, 0), to: CFMutableDictionary.self)
-            CFDictionarySetValue(d, Unmanaged.passUnretained(kCMSampleAttachmentKey_DisplayImmediately).toOpaque(),
-                                 Unmanaged.passUnretained(kCFBooleanTrue).toOpaque())
-        }
-        for l in targets {
-            if l.status == .failed { l.flush() }
-            l.enqueue(sample)
-        }
-        if !isShowing {
-            isShowing = true
-            DispatchQueue.main.async { [weak self] in self?.showing?(true) }
-        }
-    }
-
-    /** The stream ended: the layers are cleared. */
-    func stop() {
-        lock.lock()
-        let targets = layers.allObjects
-        format = nil
-        lock.unlock()
-        DispatchQueue.main.async { [weak self] in
-            for l in targets { l.flushAndRemoveImage() }
-            if self?.isShowing == true {
-                self?.isShowing = false
-                self?.showing?(false)
+        queue.async { [self] in
+            defer {
+                lock.lock()
+                busy = false
+                lock.unlock()
             }
+            if CVBufferCopyAttachment(buffer, kCVImageBufferYCbCrMatrixKey, nil) == nil {
+                CVBufferSetAttachment(buffer, kCVImageBufferYCbCrMatrixKey, kCVImageBufferYCbCrMatrix_ITU_R_709_2, .shouldPropagate)
+            }
+            var image = CIImage(cvPixelBuffer: buffer, options: [.colorSpace: NSNull()])
+            let s = min(1, Self.width / image.extent.width)
+            image = image.transformed(by: CGAffineTransform(scaleX: s, y: s))
+            let g = CGFloat(FrameConverter.gain), b = CGFloat(FrameConverter.bias)
+            image = image.applyingFilter("CIColorMatrix", parameters: [
+                "inputRVector": CIVector(x: g, y: 0, z: 0, w: 0),
+                "inputGVector": CIVector(x: 0, y: g, z: 0, w: 0),
+                "inputBVector": CIVector(x: 0, y: 0, z: g, w: 0),
+                "inputAVector": CIVector(x: 0, y: 0, z: 0, w: 1),
+                "inputBiasVector": CIVector(x: b, y: b, z: b, w: 0),
+            ]).applyingFilter("CIColorClamp")
+            guard let cg = context.createCGImage(image, from: image.extent.integral, format: .RGBA8,
+                                                 colorSpace: CGColorSpaceCreateDeviceRGB()) else { return }
+            let ui = UIImage(cgImage: cg)
+            DispatchQueue.main.async { [weak self] in self?.onImage?(ui) }
         }
     }
-}
 
-/** A view showing the PS5's picture (VideoOut), fitted 16:9. */
-struct VideoView: UIViewRepresentable {
-    final class LayerView: UIView {
-        override class var layerClass: AnyClass { AVSampleBufferDisplayLayer.self }
-        var display: AVSampleBufferDisplayLayer { layer as! AVSampleBufferDisplayLayer }
-    }
-
-    func makeUIView(context: Context) -> LayerView {
-        let v = LayerView()
-        v.backgroundColor = .black
-        v.display.videoGravity = .resizeAspect
-        VideoOut.shared.add(v.display)
-        return v
-    }
-
-    func updateUIView(_ uiView: LayerView, context: Context) {}
-
-    static func dismantleUIView(_ uiView: LayerView, coordinator: ()) {
-        VideoOut.shared.remove(uiView.display)
+    /** The stream ended. */
+    func stop() {
+        DispatchQueue.main.async { [weak self] in self?.onImage?(nil) }
     }
 }

@@ -14,5 +14,7 @@
  "Show the English": "إظهار النص الإنجليزي",
  "Keep translating with the screen off": "متابعة الترجمة والشاشة مطفأة",
  "The game's sound plays on the phone as well, so iOS lets the app go on with the screen locked or in another app. Uses more battery: keep the phone charging. Takes effect at the next Start translating.": "يُشغَّل صوت اللعبة على الهاتف أيضًا، فيسمح iOS للتطبيق بالاستمرار والشاشة مقفلة أو أثناء استخدام تطبيق آخر. يستهلك بطارية أكثر: أبقِ الهاتف على الشاحن. يسري عند الضغط على «ابدأ الترجمة» في المرة القادمة.",
- "The game's sound on the phone": "صوت اللعبة على الهاتف"
+ "The game's sound on the phone": "صوت اللعبة على الهاتف",
+ "Translation · {name}": "الترجمة · {name}",
+ "The blue box is where its translation goes: drag it too.": "المربع الأزرق مكان ظهور ترجمتها: يمكن سحبه أيضًا."
 }

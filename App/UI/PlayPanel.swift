@@ -200,10 +200,7 @@ struct Stage: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            if feed.video && Prefs.preview {
-                VideoView().aspectRatio(16 / 9, contentMode: .fit)
-            }
-            PreviewRepresentable(image: feed.video ? nil : feed.image, lines: m.lines, drawText: overlayUrl == nil, rev: m.rev, clear: feed.video && Prefs.preview)
+            PreviewRepresentable(image: feed.image, lines: m.lines, drawText: overlayUrl == nil, showAreas: false, rev: m.rev)
                 .aspectRatio(16 / 9, contentMode: .fit)
             if let u = overlayUrl {
                 TvPageView(url: u).allowsHitTesting(false)
@@ -248,7 +245,7 @@ struct Stage: View {
             .padding(20)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(k.stage)
-        } else if feed.image == nil && !feed.video {
+        } else if feed.image == nil {
             VStack(spacing: 4) {
                 Text(L("No picture yet")).font(k.font(k.base + 1, .bold)).foregroundColor(.white)
                 Text(m.state.running ? L("Waiting for the console's picture…") : L("Press Start translating: the picture shows here once the console is connected."))
@@ -279,11 +276,8 @@ struct FullPicture: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            ZStack {
-                if feed.video { VideoView() }
-                PreviewRepresentable(image: feed.video ? nil : feed.image, lines: m.lines, drawText: true, rev: m.rev, clear: feed.video)
-            }
-            .aspectRatio(16 / 9, contentMode: .fit)
+            PreviewRepresentable(image: feed.image, lines: m.lines, drawText: true, showAreas: false, rev: m.rev)
+                .aspectRatio(16 / 9, contentMode: .fit)
         }
         .onTapGesture { dismiss() }
         .statusBarHidden()

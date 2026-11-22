@@ -85,7 +85,7 @@ struct AreasPanel: View {
             H3(L("Read areas"))
             Muted(L("Each area is read separately. Position and size are a percentage of the window, so they stay right if the window is resized."))
             // the picture with the areas: drag a box to move it, its corner to resize
-            PreviewRepresentable(image: m.picture.image, lines: [], drawText: false, sample: showSample ? sample : nil, selected: sel,
+            PreviewRepresentable(image: m.picture.image, lines: [], drawText: false, sample: showSample ? sample : nil, selected: sel, showAreas: true,
                                  editable: !locked, rev: m.rev,
                                  moved: { _ in cfg.touched("areas") },
                                  tapped: { selected = $0 })
@@ -93,7 +93,7 @@ struct AreasPanel: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(RoundedRectangle(cornerRadius: 12).stroke(k.line, lineWidth: 1))
                 .padding(.top, 12)
-            if !locked { Muted(L("Drag a box to move it, drag its corners to resize."), small: true).padding(.top, 6) }
+            if !locked { Muted(L("Drag a box to move it, drag its corners to resize.") + " " + L("The blue box is where its translation goes: drag it too."), small: true).padding(.top, 6) }
             Check(label: L("Show sample text"), on: showSample) { showSample = $0 }
             ForEach(cfg.areaList().map { (Cfg.s($0, "id"), $0) }, id: \.0) { item in
                 areaCard(item.1, selected: item.0 == sel, locked: locked)

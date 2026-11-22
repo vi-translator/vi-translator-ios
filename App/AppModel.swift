@@ -12,8 +12,6 @@ enum LiveState: Equatable {
 /** The live picture and its numbers, apart from the rest (it changes a few times a second). */
 final class PictureFeed: ObservableObject {
     @Published var image: UIImage?
-    /** the PS5's picture is shown by VideoOut (smooth), not as images */
-    @Published var video = false
     @Published var stats = ""
 }
 
@@ -86,7 +84,8 @@ final class AppModel: ObservableObject {
         cfg.changed = { [weak self] in self?.rev += 1 }
         cfg.saved = { [weak self] ok in self?.showSaved(ok) }
         let feed = picture
-        VideoOut.shared.showing = { feed.video = $0 }
+        // (the PS5's picture: VideoOut, up to 15 a second, while the preview is on)
+        VideoOut.shared.onImage = { img in if Prefs.preview || img == nil { feed.image = img } }
         c?.linesChanged = { [weak self] in
             DispatchQueue.main.async { self?.refreshLines() }
         }
