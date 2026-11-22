@@ -290,6 +290,11 @@ struct SnapshotPanel: View {
             Muted(L("Translates all the text on the game's picture at once and shows it over the picture, like a translated photo: menus, the map, the phone, a car's stats."))
             KButton(L("Translate the whole picture"), icon: Icon.camera, primary: true) { take() }.padding(.top, 12)
             if let s = status { Callout(s.0, s.1 ? k.err : nil).padding(.top, 8) }
+            KButton(L("Share the picture as read"), icon: "square.and.arrow.up") {
+                if let u = Snaps.lastFrame(m) { sharing = ShareItem(url: u) } else { status = (L("No picture yet"), true) }
+            }
+            .padding(.top, 8)
+            Muted(L("The last frame of the game exactly as the app reads it (PNG): send it with a problem report, for example a page that isn't translated."), small: true)
           }
           Group {
             H3(L("Snapshot service"))
@@ -321,7 +326,10 @@ struct SnapshotPanel: View {
           }
         }
         .sheet(item: $snap) { s in SnapView(snap: s).environment(\.kit, k) }
+        .sheet(item: $sharing) { s in ShareSheet(items: [s.url]) }
     }
+
+    @State private var sharing: ShareItem?
 
     private func take() {
         status = (L("Translating the whole picture…"), false)

@@ -13,6 +13,8 @@ struct PlayPanel: View {
     /** lines older than this were cleared from the list (clear) */
     @State private var clearedAt: UInt64 = 0
     @State private var full = false
+    /** the live translations full screen */
+    @State private var liveFull = false
     @State private var snap: SnapResult?
     @State private var snapError: String?
 
@@ -42,6 +44,9 @@ struct PlayPanel: View {
                 }
             }
             .padding(.horizontal, 16).padding(.top, 14).padding(.bottom, 40)
+        }
+        .fullScreenCover(isPresented: $liveFull) {
+            LiveFull(clearedAt: clearedAt).environmentObject(m).environment(\.kit, k)
         }
         .fullScreenCover(isPresented: $full) {
             FullPicture(feed: m.picture).environmentObject(m).environment(\.kit, k)
@@ -140,6 +145,12 @@ struct PlayPanel: View {
                 if !m.cfg.bool("live_translations", true) { Badge(L("Paused")) }
                 Spacer()
                 KLink(L("clear")) { clearedAt = m.lines.last?.id ?? 0 }
+                Button { liveFull = true } label: {
+                    Image(systemName: Icon.fullscreen).font(.system(size: 15, weight: .semibold)).foregroundColor(k.text)
+                        .frame(width: 40, height: 40).background(Circle().fill(k.panel2))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L("Live translations full screen"))
             }
             if ls.isEmpty {
                 Muted(L("Translations appear here as the game shows text."), small: true)
@@ -189,7 +200,10 @@ struct Stage: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            PreviewRepresentable(image: feed.image, lines: m.lines, drawText: overlayUrl == nil, rev: m.rev)
+            if feed.video && Prefs.preview {
+                VideoView().aspectRatio(16 / 9, contentMode: .fit)
+            }
+            PreviewRepresentable(image: feed.video ? nil : feed.image, lines: m.lines, drawText: overlayUrl == nil, rev: m.rev, clear: feed.video && Prefs.preview)
                 .aspectRatio(16 / 9, contentMode: .fit)
             if let u = overlayUrl {
                 TvPageView(url: u).allowsHitTesting(false)
@@ -234,7 +248,7 @@ struct Stage: View {
             .padding(20)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(k.stage)
-        } else if feed.image == nil {
+        } else if feed.image == nil && !feed.video {
             VStack(spacing: 4) {
                 Text(L("No picture yet")).font(k.font(k.base + 1, .bold)).foregroundColor(.white)
                 Text(m.state.running ? L("Waiting for the console's picture…") : L("Press Start translating: the picture shows here once the console is connected."))
@@ -265,8 +279,11 @@ struct FullPicture: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            PreviewRepresentable(image: feed.image, lines: m.lines, drawText: true, rev: m.rev)
-                .aspectRatio(16 / 9, contentMode: .fit)
+            ZStack {
+                if feed.video { VideoView() }
+                PreviewRepresentable(image: feed.video ? nil : feed.image, lines: m.lines, drawText: true, rev: m.rev, clear: feed.video)
+            }
+            .aspectRatio(16 / 9, contentMode: .fit)
         }
         .onTapGesture { dismiss() }
         .statusBarHidden()

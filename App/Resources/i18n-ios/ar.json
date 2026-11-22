@@ -7,5 +7,9 @@
  "The video can't be read: record the screen": "تعذّرت قراءة الفيديو: سجّل الشاشة",
  "While translating, the app copies the player's picture to read it. If the copies come out black, the player offers to record the screen instead (iOS asks you to allow it).": "أثناء الترجمة ينسخ التطبيق صورة المشغّل ليقرأها. إن ظهرت النسخ سوداء، يعرض المشغّل تسجيل الشاشة بدلًا منها (ويطلب iOS إذنك).",
  "iOS asks once to let VI Translator find devices on your local network: allow it (Settings › VI Translator › Local Network).": "يطلب iOS مرة واحدة السماح لـ VI Translator بالعثور على الأجهزة في شبكتك المحلية: اسمح بذلك (الإعدادات › VI Translator › الشبكة المحلية).",
- "iOS paused the app in the background": "أوقف iOS التطبيق في الخلفية"
+ "iOS paused the app in the background": "أوقف iOS التطبيق في الخلفية",
+ "Share the picture as read": "مشاركة الصورة كما قُرئت",
+ "The last frame of the game exactly as the app reads it (PNG): send it with a problem report, for example a page that isn't translated.": "آخر إطار من اللعبة كما يقرؤه التطبيق تمامًا (PNG): أرسله مع بلاغ المشكلة، مثل صفحة لا تُترجم.",
+ "Smaller text": "تصغير النص",
+ "Show the English": "إظهار النص الإنجليزي"
 }

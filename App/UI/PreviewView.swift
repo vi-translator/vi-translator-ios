@@ -10,6 +10,14 @@ import UIKit
 final class PreviewView: UIView {
     var cfg: Cfg?
     var picture: UIImage? { didSet { setNeedsDisplay() } }
+    /** drawn over the video (VideoView): no background of its own */
+    var clear = false {
+        didSet {
+            isOpaque = !clear
+            backgroundColor = clear ? .clear : .black
+            setNeedsDisplay()
+        }
+    }
     /** the latest translation of each area (area id -> text) */
     var shown: [String: String] = [:] { didSet { setNeedsDisplay() } }
     /** the sample text shown in every area when there is no translation (Show sample text) */
@@ -34,9 +42,11 @@ final class PreviewView: UIView {
 
     override func draw(_ rect: CGRect) {
         guard let c = UIGraphicsGetCurrentContext() else { return }
-        UIColor(red: 7 / 255, green: 5 / 255, blue: 11 / 255, alpha: 1).setFill()
-        c.fill(bounds)
-        picture?.draw(in: bounds)
+        if !clear {
+            UIColor(red: 7 / 255, green: 5 / 255, blue: 11 / 255, alpha: 1).setFill()
+            c.fill(bounds)
+            picture?.draw(in: bounds)
+        }
         guard let cfg else { return }
         let style = cfg.style()
         for a in cfg.areaList() {
@@ -198,6 +208,8 @@ struct PreviewRepresentable: UIViewRepresentable {
     var rev = 0
     var moved: ((NSMutableDictionary) -> Void)?
     var tapped: ((String) -> Void)?
+    /** over the video (VideoView) */
+    var clear = false
 
     func makeUIView(context: Context) -> PreviewView {
         let v = PreviewView()
@@ -218,6 +230,7 @@ struct PreviewRepresentable: UIViewRepresentable {
         v.rtl = m.core?.language(m.cfg.str("target_lang", "ar"))?.rtl ?? true
         v.moved = moved
         v.tapped = tapped
+        if v.clear != clear { v.clear = clear }
         v.setNeedsDisplay()
     }
 }

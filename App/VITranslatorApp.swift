@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct VITranslatorApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @StateObject private var model = AppModel.shared
     @Environment(\.scenePhase) private var phase
 

@@ -12,6 +12,8 @@ enum LiveState: Equatable {
 /** The live picture and its numbers, apart from the rest (it changes a few times a second). */
 final class PictureFeed: ObservableObject {
     @Published var image: UIImage?
+    /** the PS5's picture is shown by VideoOut (smooth), not as images */
+    @Published var video = false
     @Published var stats = ""
 }
 
@@ -83,6 +85,8 @@ final class AppModel: ObservableObject {
         uiLang = I18n.code
         cfg.changed = { [weak self] in self?.rev += 1 }
         cfg.saved = { [weak self] ok in self?.showSaved(ok) }
+        let feed = picture
+        VideoOut.shared.showing = { feed.video = $0 }
         c?.linesChanged = { [weak self] in
             DispatchQueue.main.async { self?.refreshLines() }
         }
@@ -212,6 +216,7 @@ final class AppModel: ObservableObject {
 
     func stop() {
         resumeOnActive = false
+        retriesLeft = 0
         end(.idle, nil)
         if xbox == .play { xbox = nil }
     }
@@ -276,8 +281,25 @@ final class AppModel: ObservableObject {
             guard let self, self.stream === st else { return }
             switch s {
             case .connecting: self.set(.connecting, nil)
-            case .streaming: self.set(.reading, nil)
-            case .ended, .failed: self.end(s == .failed ? .failed : .ended, d)
+            case .streaming:
+                self.retriesLeft = 0
+                self.set(.reading, nil)
+            case .ended, .failed:
+                if self.away {
+                    // (ended while away: started again on return)
+                    self.resumeOnActive = true
+                    self.end(.ended, L("iOS paused the app in the background"))
+                } else if self.retriesLeft > 0 {
+                    // (just back: the PS5 may still hold the last session; again in a moment)
+                    self.retriesLeft -= 1
+                    self.end(.connecting, nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                        guard let self, self.state == .connecting, self.source == nil else { return }
+                        self.begin(.ps5)
+                    }
+                } else {
+                    self.end(s == .failed ? .failed : .ended, d)
+                }
             }
         }
         st.onLoginPin = { [weak self] incorrect in self?.askPin = incorrect }
@@ -342,7 +364,8 @@ final class AppModel: ObservableObject {
     /** The preview gets frames while it is switched on. */
     func wirePreview() {
         guard let r = reader else { return }
-        if Prefs.preview {
+        // (the PS5's picture goes to the preview straight from the decoder: VideoOut)
+        if Prefs.preview && source != .ps5 {
             let feed = picture
             r.preview = { img in DispatchQueue.main.async { feed.image = img } }
         } else {
@@ -358,22 +381,66 @@ final class AppModel: ObservableObject {
 
     // ---- the app on and off the screen
 
+    /**
+     * The app left the screen (the notification shade, the lock button, another app). iOS lets it run
+     * about 30 s more: the PS5's stream is kept that long, so a short trip away doesn't end it (the
+     * picture comes back with the next key frame). Away longer, the stream is stopped cleanly (so the
+     * PS5 lets it go) before iOS pauses the app, and it starts again on return.
+     */
     func scene(_ phase: ScenePhase) {
         switch phase {
         case .background:
             cfg.flush()
-            if state.running && source == .ps5 {
-                // (iOS pauses the app now: the stream would end anyway; it starts again on return)
-                resumeOnActive = true
-                end(.ended, L("iOS paused the app in the background"))
+            guard state.running, source == .ps5, !away else { return }
+            away = true
+            reader?.paused = true
+            bgTask = UIApplication.shared.beginBackgroundTask(withName: "ps5-stream") { [weak self] in self?.awayTooLong() }
+            awayTimer?.invalidate()
+            awayTimer = Timer.scheduledTimer(withTimeInterval: Self.awayGrace, repeats: false) { [weak self] _ in
+                Task { @MainActor in self?.awayTooLong() }
             }
         case .active:
+            if away {
+                away = false
+                awayTimer?.invalidate()
+                awayTimer = nil
+                endBackgroundTask()
+                reader?.paused = false
+                // (the decoder may have been dropped by iOS while away: the next key frame makes it again)
+                stream?.refresh()
+            }
             if resumeOnActive {
                 resumeOnActive = false
+                retriesLeft = 4
                 begin(.ps5)
             }
         default:
             break
+        }
+    }
+
+    /** how long the stream is kept while the app is away (iOS allows about 30 s) */
+    static let awayGrace: TimeInterval = 25
+    private var away = false
+    private var awayTimer: Timer?
+    private var bgTask: UIBackgroundTaskIdentifier = .invalid
+    /** reconnections left after coming back (the PS5 may still hold the last session for a moment) */
+    private var retriesLeft = 0
+
+    private func awayTooLong() {
+        awayTimer?.invalidate()
+        awayTimer = nil
+        if away && source == .ps5 && state.running {
+            resumeOnActive = true
+            end(.ended, L("iOS paused the app in the background"))
+        }
+        endBackgroundTask()
+    }
+
+    private func endBackgroundTask() {
+        if bgTask != .invalid {
+            UIApplication.shared.endBackgroundTask(bgTask)
+            bgTask = .invalid
         }
     }
 

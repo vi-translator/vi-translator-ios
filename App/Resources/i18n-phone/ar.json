@@ -125,5 +125,10 @@
  "VI Translator closed unexpectedly last time": "أُغلق VI Translator بشكل غير متوقع في المرة السابقة",
  "Copy the details and send them to the developer, so the problem can be fixed.": "انسخ التفاصيل وأرسلها إلى المطوّر ليُصلَح الخلل.",
  "Copy the details": "انسخ التفاصيل",
- "Not now": "ليس الآن"
+ "Not now": "ليس الآن",
+ "Live translations full screen": "الترجمات المباشرة بملء الشاشة",
+ "Larger text": "تكبير النص",
+ "Portrait": "عمودي",
+ "Landscape": "أفقي",
+ "Auto-rotate": "تدوير تلقائي"
 }

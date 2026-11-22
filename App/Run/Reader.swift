@@ -41,6 +41,9 @@ final class Reader: @unchecked Sendable {
     /** The last frame read, whole (RGBA, width, height): what a snapshot translates. */
     private(set) var last: (Data, Int, Int)?
 
+    /** While the app is away from the screen: frames aren't read (iOS keeps the GPU from apps in the background). */
+    var paused = false
+
     /** The screen's preview, while it shows one: gets a small copy of each frame read (on the reading thread). */
     var preview: ((UIImage) -> Void)?
 
@@ -57,7 +60,7 @@ final class Reader: @unchecked Sendable {
         lock.lock()
         offered += 1
         let now = ProcessInfo.processInfo.systemUptime
-        if now < nextAt || busy {
+        if paused || now < nextAt || busy {
             lock.unlock()
             return false
         }

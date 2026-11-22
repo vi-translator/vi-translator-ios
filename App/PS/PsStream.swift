@@ -29,7 +29,18 @@ final class PsStream {
     private final class Box {
         let decoder: H264Decoder
         weak var stream: PsStream?
+        /** the session, for asking for a key frame from chiaki's thread */
+        var handle: OpaquePointer?
+        var lastIdr: TimeInterval = 0
         init(_ d: H264Decoder) { decoder = d }
+
+        /** A frame couldn't be decoded: ask the PS5 for a key frame (at most once a second). */
+        func needKeyFrame() {
+            let now = ProcessInfo.processInfo.systemUptime
+            guard now - lastIdr > 1, let h = handle else { return }
+            lastIdr = now
+            vit_ps_session_request_idr(h)
+        }
     }
 
     init(console: PsConsole, reader: Reader) {
@@ -37,6 +48,8 @@ final class PsStream {
         self.reader = reader
         let converter = self.converter
         box = Box(H264Decoder { [weak reader] buffer in
+            // (every frame to the preview, smooth; about 4 a second to the reading)
+            if Prefs.preview { VideoOut.shared.show(buffer) }
             reader?.offer(PixelBufferFrame(buffer: buffer, converter: converter))
         })
         box.stream = self
@@ -61,7 +74,9 @@ final class PsStream {
                 }, { buf, size, _, _, user in
                     guard let user, let buf else { return false }
                     let box = Unmanaged<PsStream.Box>.fromOpaque(user).takeUnretainedValue()
-                    return box.decoder.decode(UnsafeBufferPointer(start: buf, count: size))
+                    let ok = box.decoder.decode(UnsafeBufferPointer(start: buf, count: size))
+                    if !ok { box.needKeyFrame() }
+                    return ok
                 }, user)
             }
         }
@@ -70,6 +85,7 @@ final class PsStream {
             return
         }
         handle = h
+        box.handle = h
         onState?(.connecting, nil)
         let r = vit_ps_session_start(h)
         if r != 0 { onState?(.failed, String(cString: vit_ps_error_string(r))) }
@@ -90,6 +106,12 @@ final class PsStream {
         }
     }
 
+    /** Back on screen: a key frame, for the decoder iOS may have dropped while away. */
+    func refresh() {
+        box.lastIdr = 0
+        box.needKeyFrame()
+    }
+
     func setLoginPin(_ pin: String) {
         if let h = handle { vit_ps_session_set_login_pin(h, pin) }
     }
@@ -100,6 +122,8 @@ final class PsStream {
         handle = nil
         let box = self.box
         box.stream = nil
+        box.handle = nil
+        VideoOut.shared.stop()
         DispatchQueue.global(qos: .userInitiated).async {
             vit_ps_session_stop(h)
             vit_ps_session_free(h)

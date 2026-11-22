@@ -43,6 +43,21 @@ enum Snaps {
         }
     }
 
+    /** The last frame read, as the core read it (RGBA, after the PS5's levels), as a PNG file to share; nil without one. */
+    static func lastFrame(_ m: AppModel) -> URL? {
+        guard let last = m.reader?.last, let cg = Reader.cgImage(last.0, last.1, last.2),
+              let png = UIImage(cgImage: cg).pngData() else { return nil }
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("vi-translator-frame-\(f.string(from: Date()))-\(last.1)x\(last.2).png")
+        do {
+            try png.write(to: url)
+            return url
+        } catch {
+            return nil
+        }
+    }
+
     static func info(_ snap: NSDictionary) -> String {
         let blocks = (snap["blocks"] as? NSArray)?.count ?? 0
         let s = String(format: "%.1f", Cfg.d(snap, "ms") / 1000)

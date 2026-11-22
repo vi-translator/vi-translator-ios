@@ -34,6 +34,26 @@ enum Prefs {
         set { d.set(newValue, forKey: "mode") }
     }
 
+    // ---- the live translations full screen (LiveFull)
+
+    /** the translations' text size there, in points */
+    static var liveTextSize: Double {
+        get { d.object(forKey: "live_text_size") as? Double ?? 30 }
+        set { d.set(newValue, forKey: "live_text_size") }
+    }
+
+    /** the English line shown above each translation there */
+    static var liveEnglish: Bool {
+        get { d.object(forKey: "live_english") as? Bool ?? true }
+        set { d.set(newValue, forKey: "live_english") }
+    }
+
+    /** "auto" (turns with the phone), "portrait" or "landscape" */
+    static var liveRotation: String {
+        get { d.string(forKey: "live_rotation") ?? "auto" }
+        set { d.set(newValue, forKey: "live_rotation") }
+    }
+
     /** the PS5 stream's resolution: 720 (the default) or 1080 */
     static var psResolution: Int {
         get { d.object(forKey: "ps_resolution") as? Int ?? 720 }
