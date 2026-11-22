@@ -28,7 +28,8 @@ These steps need your Apple account; you do them yourself.
 ## 3. The API key the workflow signs and uploads with (once)
 
 1. App Store Connect › Users and Access › Integrations › App Store Connect API › Team Keys › ＋:
-   name *GitHub TestFlight*, access **App Manager**. Download the `.p8` file (only once!).
+   name *GitHub TestFlight*, access **Admin** (Xcode signs with Apple-managed certificates, which
+   only an Admin key may use). Download the `.p8` file (only once!).
 2. Note the key's **Key ID** and the **Issuer ID** shown above the list.
 3. Keep the `.p8` with the other keys in `C:\dev\vitranslator.app` (and add it to its README).
 4. In the repository on GitHub › Settings › Secrets and variables › Actions › New repository secret:

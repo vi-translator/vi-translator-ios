@@ -4,7 +4,7 @@
 #
 # Needs the Apple Developer Program and these repository secrets (docs/app-store.md):
 #   APPLE_TEAM_ID        the team's 10-character ID (developer.apple.com › Membership details)
-#   ASC_KEY_ID           an App Store Connect API key's ID (Users and Access › Integrations, role App Manager)
+#   ASC_KEY_ID           an App Store Connect API key's ID (Users and Access › Integrations, role Admin)
 #   ASC_ISSUER_ID        the keys' Issuer ID (same page)
 #   ASC_KEY_P8_B64       the key's .p8 file, base64
 name: TestFlight
