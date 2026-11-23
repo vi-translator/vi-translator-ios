@@ -125,6 +125,41 @@ final class Cfg {
     func style() -> NSMutableDictionary { child("style", NSMutableDictionary()) }
     func profileOpts() -> NSMutableDictionary { child("profile_opts", NSMutableDictionary()) }
 
+    static let cover = "translation_cover"
+
+    /** The look "Over the game's text" (a built-in profile's choice in Game profile; the desktop's AS.coverLook). */
+    func coverLook() -> Bool { Cfg.b(profileOpts()["more"] as? NSDictionary, Cfg.cover) }
+
+    func setCoverLook(_ on: Bool) {
+        let o = profileOpts()
+        let more = (o["more"] as? NSMutableDictionary) ?? { let d = NSMutableDictionary(); o["more"] = d; return d }()
+        more[Cfg.cover] = on
+        setShown(kind: "page", id: Cfg.cover, on: on)
+        touched("profile_opts")
+    }
+
+    /** How an area's translation comes on screen (the core's AreaFx; the desktop's AS.fxOf), kept by area id
+     *  for every profile, built-in ones too. */
+    func fxOf(_ id: String) -> NSMutableDictionary {
+        let f: NSMutableDictionary = ["cover_min": true, "cover_early": true, "fade_ms": 150]
+        if let o = (c["area_fx"] as? NSDictionary)?[id] as? [AnyHashable: Any] { f.addEntries(from: o) }
+        f["fade_ms"] = min(max(Int(Cfg.d(f, "fade_ms")), 0), 2000)
+        let isBool: (String) -> Bool = { k in (f[k] as? NSNumber).map { CFGetTypeID($0) == CFBooleanGetTypeID() } ?? false }
+        if !isBool("stack_up") { f["stack_up"] = id == "subtitles" }
+        if !isBool("ride") { f["ride"] = id == "subtitles" || id == "instructions" }
+        if !isBool("accent") { f["accent"] = id == "instructions" }
+        if !isBool("reviewed_only") { f["reviewed_only"] = id == "instructions" }
+        return f
+    }
+
+    func setFx(_ id: String, _ key: String, _ v: Any) {
+        let all = child("area_fx", NSMutableDictionary())
+        let f = fxOf(id)
+        f[key] = v
+        all[id] = f
+        touched("area_fx")
+    }
+
     func areaList() -> [NSMutableDictionary] { areas().compactMap { $0 as? NSMutableDictionary } }
 
     private func child<V: AnyObject>(_ k: String, _ make: @autoclosure () -> V) -> V {

@@ -46,6 +46,17 @@ struct ProfilePanel: View {
                     .confirmationDialog(L("Delete the profile “{name}”? This can't be undone.", ("name", Cfg.s(p, "name"))), isPresented: $askDelete, titleVisibility: .visible) {
                         Button(L("Delete"), role: .destructive) { cfg.deleteProfile(p) }
                     }
+                // how translations look (built-in profiles: a profile of your own places each area's translation itself)
+                if builtin {
+                    let cover = cfg.coverLook()
+                    H3(L("How translations look"))
+                    ForEach([(false, L("Above the game's text")), (true, L("Over the game's text, on a black box that hides it"))], id: \.0) { look in
+                        Card(pad: 12) {
+                            Check(label: look.1, on: cover == look.0) { v in cfg.setCoverLook(v ? look.0 : !look.0) }
+                        }
+                        .padding(.top, 8)
+                    }
+                }
             }
         }
     }
@@ -212,6 +223,32 @@ struct AreasPanel: View {
             .padding(.top, 8)
             .disabled(locked)
         }
+        fxForm(id)
+    }
+
+    /** How the area's translation comes on screen (the desktop's fxFields): the player's own, a built-in
+     *  profile's areas too. */
+    @ViewBuilder private func fxForm(_ id: String) -> some View {
+        let cfg = m.cfg
+        let fx = cfg.fxOf(id)
+        let cover = cfg.coverLook()
+        let set: (String, Any) -> Void = { key, v in cfg.setFx(id, key, v) }
+        LabelText(L("Showing the translation")).padding(.top, 14)
+        Group {
+            Check(label: L("Black box at least as big as the game's text"), on: Cfg.b(fx, "cover_min")) { set("cover_min", $0) }.disabled(!cover)
+            Check(label: L("Black box as soon as the text appears, before its translation"), on: Cfg.b(fx, "cover_early")) { set("cover_early", $0) }.disabled(!cover)
+            if !cover { Muted(L("The black box is for the look \"Over the game's text\" (Game profile)."), small: true) }
+            Check(label: L("Lines stack up from the bottom line: the lines above are read only when the bottom one is there"), on: Cfg.b(fx, "stack_up")) { set("stack_up", $0) }
+            Check(label: L("Right above the stacked lines, moving up with them (with the subtitles and the bottom instructions as one block)"), on: Cfg.b(fx, "ride")) { set("ride", $0) }.disabled(cover)
+            if cover { Muted(L("Moving above the lines is for the look \"Above the game's text\" (Game profile)."), small: true) }
+        }
+        Group {
+            Check(label: L("A border in Vice City colours, to tell it apart"), on: Cfg.b(fx, "accent")) { set("accent", $0) }
+            Check(label: L("Only reviewed translations: a reading that matches none isn't shown"), on: Cfg.b(fx, "reviewed_only")) { set("reviewed_only", $0) }
+            Field(label: L("Fade in")) {
+                Select(options: [0, 100, 150, 250, 400, 600].map { ("\($0)", $0 == 0 ? L("Off") : "\($0) ms") }, value: "\(Int(Cfg.d(fx, "fade_ms")))") { set("fade_ms", Int($0) ?? 0) }
+            }
+        }
     }
 
     /** The desktop's STYLE_FIELDS for one area: its own style from its first change on. */
@@ -229,15 +266,15 @@ struct AreasPanel: View {
         }
         Check(label: L("Bold"), on: Cfg.b(s, "bold")) { set("bold", $0) }
         Field(label: L("Line spacing")) { KSlider(range: 1...2.2, step: 0.05, value: Cfg.d(s, "line_height", 1.5), format: two) { set("line_height", ($0 * 100).rounded() / 100) } }
-        Field(label: L("Text colour")) { ColorPick(value: Cfg.s(s, "text_color", "#ffffff")) { set("text_color", $0) } }
-        Check(label: L("Colour highlighted words like the game does"), on: Cfg.b(s, "keep_colors", true)) { set("keep_colors", $0) }
-        Field(label: L("Box colour")) { ColorPick(value: Cfg.s(s, "bg_color", "#000000")) { set("bg_color", $0) } }
+        Field(label: L("Text color")) { ColorPick(value: Cfg.s(s, "text_color", "#ffffff")) { set("text_color", $0) } }
+        Check(label: L("Color highlighted words like the game does"), on: Cfg.b(s, "keep_colors", true)) { set("keep_colors", $0) }
+        Field(label: L("Box color")) { ColorPick(value: Cfg.s(s, "bg_color", "#000000")) { set("bg_color", $0) } }
         }
         Group {
         Field(label: L("Box opacity")) { KSlider(range: 0...1, step: 0.05, value: Cfg.d(s, "bg_opacity", 0.65), format: two) { set("bg_opacity", ($0 * 100).rounded() / 100) } }
         Field(label: L("Box padding")) { KSlider(range: 0...30, step: 1, value: Cfg.d(s, "padding", 10), format: { String(Int($0)) }) { set("padding", Int($0)) } }
         Field(label: L("Box corner roundness")) { KSlider(range: 0...30, step: 1, value: Cfg.d(s, "radius", 10), format: { String(Int($0)) }) { set("radius", Int($0)) } }
-        Field(label: L("Text outline colour")) { ColorPick(value: Cfg.s(s, "outline_color", "#000000")) { set("outline_color", $0) } }
+        Field(label: L("Text outline color")) { ColorPick(value: Cfg.s(s, "outline_color", "#000000")) { set("outline_color", $0) } }
         Field(label: L("Text outline width")) { KSlider(range: 0...6, step: 0.5, value: Cfg.d(s, "outline_width", 0), format: two) { set("outline_width", $0) } }
         Check(label: L("Text shadow"), on: Cfg.b(s, "shadow")) { set("shadow", $0) }
         }

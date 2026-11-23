@@ -177,7 +177,6 @@ struct RootView: View {
     @ViewBuilder private func tabButtons(vertical: Bool) -> some View {
         ForEach(Self.tabs, id: \.0) { (id, label, icon) in
             let on = id == m.tab
-            let lock = (id == "areas" || id == "pages") && m.cfg.locked()
             Button {
                 m.tab = id
             } label: {
@@ -185,14 +184,14 @@ struct RootView: View {
                     if vertical {
                         HStack(spacing: 10) {
                             Image(systemName: icon).font(.system(size: 17, weight: .semibold)).frame(width: 24)
-                            Text(L(label) + (lock ? " 🔒" : "")).font(k.font(k.base - 0.5, .bold))
+                            Text(L(label)).font(k.font(k.base - 0.5, .bold))
                             Spacer(minLength: 0)
                         }
                         .padding(.horizontal, 12).padding(.vertical, 11)
                     } else {
                         VStack(spacing: 4) {
                             Image(systemName: icon).font(.system(size: 19, weight: .semibold))
-                            Text(L(label) + (lock ? " 🔒" : "")).font(k.font(k.base - 2, .bold)).lineLimit(1)
+                            Text(L(label)).font(k.font(k.base - 2, .bold)).lineLimit(1)
                         }
                         .padding(.horizontal, 12).padding(.vertical, 9)
                         .frame(minWidth: 72)

@@ -323,7 +323,7 @@ struct SnapshotPanel: View {
           }
           Group {
             Field(label: L("Behind the translation")) {
-                Select(options: [("blur", L("The picture, blurred")), ("solid", L("A solid colour"))], value: cfg.str("snap_style") == "solid" ? "solid" : "blur") { cfg.put("snap_style", $0) }
+                Select(options: [("blur", L("The picture, blurred")), ("solid", L("A solid color"))], value: cfg.str("snap_style") == "solid" ? "solid" : "blur") { cfg.put("snap_style", $0) }
             }
             Check(label: L("Keep every snapshot in Photos"), on: cfg.bool("snap_save", true)) { cfg.put("snap_save", $0) }
             Check(label: L("Allow snapshots from the home-network page"), on: cfg.bool("snap_lan", true)) { cfg.put("snap_lan", $0) }
