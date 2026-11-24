@@ -141,8 +141,14 @@ final class Cfg {
     /** How an area's translation comes on screen (the core's AreaFx; the desktop's AS.fxOf), kept by area id
      *  for every profile, built-in ones too. */
     func fxOf(_ id: String) -> NSMutableDictionary {
-        let f: NSMutableDictionary = ["cover_min": true, "cover_early": true, "fade_ms": 150]
-        if let o = (c["area_fx"] as? NSDictionary)?[id] as? [AnyHashable: Any] { f.addEntries(from: o) }
+        // (as they apply — the core's fx_view: the player's own, else the game's default from the server; the
+        // fade-in off unless one sets it — then the player's own, changed here since)
+        let f: NSMutableDictionary = ["cover_min": true, "cover_early": true, "fade_ms": 0]
+        for key in ["fx_view", "area_fx"] {
+            if let o = (c[key] as? NSDictionary)?[id] as? [AnyHashable: Any] {
+                for (k, v) in o where !(v is NSNull) { f[k] = v }
+            }
+        }
         f["fade_ms"] = min(max(Int(Cfg.d(f, "fade_ms")), 0), 2000)
         let isBool: (String) -> Bool = { k in (f[k] as? NSNumber).map { CFGetTypeID($0) == CFBooleanGetTypeID() } ?? false }
         if !isBool("stack_up") { f["stack_up"] = id == "subtitles" }
@@ -153,8 +159,9 @@ final class Cfg {
     }
 
     func setFx(_ id: String, _ key: String, _ v: Any) {
+        // (only what the player changed is theirs: the fade-in they never touched follows the game's default)
         let all = child("area_fx", NSMutableDictionary())
-        let f = fxOf(id)
+        let f = ((all[id] as? NSDictionary)?.mutableCopy() as? NSMutableDictionary) ?? NSMutableDictionary()
         f[key] = v
         all[id] = f
         touched("area_fx")
