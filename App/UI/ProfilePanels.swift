@@ -375,6 +375,15 @@ struct PagesPanel: View {
             LockNote()
             H3(L("Game pages"))
             Muted(L("The game's own pages that get a hand-made translation, in the game's look."))
+            // (GTA VI's phone in the hand — its WhatUp chats translated on a second phone beside it: shown or not, the
+            // player's, whatever the profile)
+            if game == "gta6" {
+                Card(pad: 12) {
+                    Check(label: L("Phone translations"), on: cfg.bool("phone_text", true)) { cfg.put("phone_text", $0) }
+                    Muted(L("The phone's WhatUp chats, translated on a second phone beside it."), small: true)
+                }
+                .padding(.top, 12)
+            }
             if loaded {
                 let pages = script?["pages"] as? NSArray
                 if script == nil || (pages?.count ?? 0) == 0 {
