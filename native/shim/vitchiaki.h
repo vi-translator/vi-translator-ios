@@ -30,6 +30,11 @@ enum {
 	VIT_PS_EVENT_LOGIN_PIN = 2,
 	/** the session ended; value: chiaki's quit reason, text: its words (may be NULL) */
 	VIT_PS_EVENT_QUIT = 3,
+	/**
+	 * the PS5 can't stream what it shows (a screen or game that blocks Remote Play); value: 1 when
+	 * it can't, 0 when it can again. The stream stays up meanwhile.
+	 */
+	VIT_PS_EVENT_CANT_DISPLAY = 4,
 };
 
 /** On chiaki's threads. */

@@ -164,6 +164,16 @@ static void session_event_cb(ChiakiEvent *event, void *user)
 	}
 }
 
+// (chiaki calls the display sink's callback with no NULL check, from ctrl_connect when the PS5
+// answers "RP-Prohibit: 1" and from the ctrl thread when it says it can or can't show the screen:
+// without one set, the app jumped to address 0 and crashed — TestFlight builds 109–112)
+static void session_cantdisplay_cb(void *user, bool cant_display)
+{
+	VitPsSession *s = user;
+	CHIAKI_LOGI(&s->log, "The PS5 %s", cant_display ? "can't stream what it shows" : "can stream again");
+	s->on_event(VIT_PS_EVENT_CANT_DISPLAY, cant_display ? 1 : 0, NULL, s->user);
+}
+
 static bool session_video_cb(uint8_t *buf, size_t buf_size, int32_t frames_lost, bool frame_recovered, void *user)
 {
 	VitPsSession *s = user;
@@ -210,6 +220,11 @@ int vit_ps_session_new(VitPsSession **out, const char *host, const uint8_t regis
 	}
 	chiaki_session_set_event_cb(&s->session, session_event_cb, s);
 	chiaki_session_set_video_sample_cb(&s->session, session_video_cb, s);
+	ChiakiCtrlDisplaySink display_sink;
+	memset(&display_sink, 0, sizeof(display_sink));
+	display_sink.user = s;
+	display_sink.cantdisplay_cb = session_cantdisplay_cb;
+	chiaki_session_ctrl_set_display_sink(&s->session, &display_sink);
 	*out = s;
 	return CHIAKI_ERR_SUCCESS;
 }

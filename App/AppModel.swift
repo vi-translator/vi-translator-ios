@@ -45,6 +45,8 @@ final class AppModel: ObservableObject {
     @Published var savedLabel = ""
     /** the PS5 asks for the account's passcode (true: the last one was wrong) */
     @Published var askPin: Bool?
+    /** the PS5 says it can't stream what it shows now (a screen or game that blocks Remote Play) */
+    @Published var psCantDisplay = false
     /** the Xbox player, open to play and translate, or only to sign in (Setup) */
     @Published var xbox: XboxMode?
     @Published var dark = Prefs.dark
@@ -201,7 +203,9 @@ final class AppModel: ObservableObject {
         case .idle: return coreStatus ?? (core == nil ? L("Stopped: {reason}", ("reason", coreError ?? "")) : L("Ready"))
         case .starting: return L("Starting…")
         case .connecting: return L("Connecting to the PS5…")
-        case .reading: return coreStatus ?? L("Translating")
+        case .reading:
+            if psCantDisplay { return L("The PS5 is showing something Remote Play can't stream") }
+            return coreStatus ?? L("Translating")
         case .ended: return L("Stopped") + (detail.map { " (\($0))" } ?? "")
         case .failed: return L("Stopped: {reason}", ("reason", detail ?? ""))
         }
@@ -316,6 +320,10 @@ final class AppModel: ObservableObject {
             }
         }
         st.onLoginPin = { [weak self] incorrect in self?.askPin = incorrect }
+        st.onCantDisplay = { [weak self] cant in
+            guard let self, self.stream === st else { return }
+            self.psCantDisplay = cant
+        }
         stream = st
         st.start(height: Prefs.psResolution, sound: Prefs.screenOff)
     }
@@ -393,6 +401,7 @@ final class AppModel: ObservableObject {
         reader = nil
         source = nil
         picture.stats = ""
+        psCantDisplay = false
         set(s, d)
     }
 
