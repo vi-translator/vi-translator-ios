@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Xbox 遠端遊玩：手機串流 Xbox 的畫面來讀取（無聲音）。手機螢幕關閉也能運作。",
  "Xbox player": "Xbox 播放器",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "你會取得一個簡短代碼，在 microsoft.com/link 輸入，可在這支手機或任何其他裝置上操作。不需要在此應用程式中輸入密碼。",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "應用程式內的 xbox.com 內建播放器：在其中登入並選擇主機。手機螢幕保持開啟。"
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "應用程式內的 xbox.com 內建播放器：在其中登入並選擇主機。手機螢幕保持開啟。",
+ "Overlays on this phone": "這支手機上的疊加層",
+ "Show the overlays on this phone": "在這支手機上顯示疊加層",
+ "The PS5 is showing something Remote Play can't stream": "PS5 正在顯示遠端遊玩無法串流的內容"
 }

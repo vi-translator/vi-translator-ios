@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Xbox 리모트 플레이: 휴대폰이 Xbox 화면을 스트리밍해 읽습니다(소리 없음). 휴대폰 화면이 꺼져 있어도 작동합니다.",
  "Xbox player": "Xbox 플레이어",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "microsoft.com/link에 입력할 짧은 코드를 받게 됩니다. 이 휴대폰이나 다른 기기에서 입력하면 됩니다. 이 앱에서는 비밀번호를 입력하지 않습니다.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "앱 안에서 여는 xbox.com 자체 플레이어: 그곳에서 로그인하고 콘솔을 선택합니다. 휴대폰 화면이 켜진 상태로 유지됩니다."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "앱 안에서 여는 xbox.com 자체 플레이어: 그곳에서 로그인하고 콘솔을 선택합니다. 휴대폰 화면이 켜진 상태로 유지됩니다.",
+ "Overlays on this phone": "이 휴대폰의 오버레이",
+ "Show the overlays on this phone": "이 휴대폰에 오버레이 표시",
+ "The PS5 is showing something Remote Play can't stream": "PS5에 리모트 플레이로 스트리밍할 수 없는 화면이 표시되고 있습니다"
 }

@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Xbox రిమోట్ ప్లే: Xbox చిత్రాన్ని చదవడానికి ఫోన్ దాన్ని స్ట్రీమ్ చేస్తుంది (సౌండ్ లేదు). ఫోన్ స్క్రీన్ ఆఫ్‌లో ఉన్నా పని చేస్తుంది.",
  "Xbox player": "Xbox ప్లేయర్",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "microsoft.com/linkలో నమోదు చేయడానికి మీకు ఒక చిన్న కోడ్ వస్తుంది, ఈ ఫోన్‌లో గానీ వేరే ఏ పరికరంలో గానీ. ఈ యాప్‌లో ఏ పాస్‌వర్డ్‌నూ టైప్ చేయనవసరం లేదు.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "యాప్‌లోనే xbox.com సొంత ప్లేయర్: అక్కడే సైన్ ఇన్ చేసి కన్సోల్‌ను ఎంచుకోండి. ఫోన్ స్క్రీన్ ఆన్‌లోనే ఉంటుంది."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "యాప్‌లోనే xbox.com సొంత ప్లేయర్: అక్కడే సైన్ ఇన్ చేసి కన్సోల్‌ను ఎంచుకోండి. ఫోన్ స్క్రీన్ ఆన్‌లోనే ఉంటుంది.",
+ "Overlays on this phone": "ఈ ఫోన్‌లో ఓవర్‌లేలు",
+ "Show the overlays on this phone": "ఈ ఫోన్‌లో ఓవర్‌లేలను చూపండి",
+ "The PS5 is showing something Remote Play can't stream": "Remote Play స్ట్రీమ్ చేయలేనిదాన్ని PS5 చూపుతోంది"
 }

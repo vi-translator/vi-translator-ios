@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Xbox रिमोट प्ले: फोन Xbox चे चित्र वाचण्यासाठी ते स्ट्रीम करतो (आवाज नाही). फोनची स्क्रीन बंद असतानाही चालते.",
  "Xbox player": "Xbox प्लेअर",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "microsoft.com/link वर टाकण्यासाठी तुम्हाला एक छोटा कोड मिळेल, या फोनवर किंवा इतर कोणत्याही डिव्हाइसवर. या ॲपमध्ये कोणताही पासवर्ड टाइप केला जात नाही.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "ॲपमधला xbox.com चा स्वतःचा प्लेअर: तिथेच साइन इन करा आणि कन्सोल निवडा. फोनची स्क्रीन चालू राहते."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "ॲपमधला xbox.com चा स्वतःचा प्लेअर: तिथेच साइन इन करा आणि कन्सोल निवडा. फोनची स्क्रीन चालू राहते.",
+ "Overlays on this phone": "या फोनवर ओव्हरले",
+ "Show the overlays on this phone": "या फोनवर ओव्हरले दाखवा",
+ "The PS5 is showing something Remote Play can't stream": "PS5 असे काहीतरी दाखवत आहे जे Remote Play स्ट्रीम करू शकत नाही"
 }

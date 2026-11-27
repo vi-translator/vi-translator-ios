@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Xbox Remote Play: ini-stream ng telepono ang larawan ng Xbox para basahin ito (walang tunog). Gumagana kahit naka-off ang screen ng telepono.",
  "Xbox player": "Xbox player",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "Makakakuha ka ng maikling code na ilalagay sa microsoft.com/link, sa teleponong ito o sa ibang device. Walang password na tina-type sa app na ito.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Ang sariling player ng xbox.com sa loob ng app: doon mag-sign in at pumili ng console. Mananatiling naka-on ang screen ng telepono."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Ang sariling player ng xbox.com sa loob ng app: doon mag-sign in at pumili ng console. Mananatiling naka-on ang screen ng telepono.",
+ "Overlays on this phone": "Overlay sa phone na ito",
+ "Show the overlays on this phone": "Ipakita ang overlay sa phone na ito",
+ "The PS5 is showing something Remote Play can't stream": "May ipinapakita ang PS5 na hindi kayang i-stream ng Remote Play"
 }

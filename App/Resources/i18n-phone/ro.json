@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Joc la distanță Xbox: telefonul primește în flux imaginea de pe Xbox pentru a o citi (fără sunet). Funcționează cu ecranul telefonului stins.",
  "Xbox player": "Playerul Xbox",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "Veți primi un cod scurt de introdus pe microsoft.com/link, pe acest telefon sau pe orice alt dispozitiv. În această aplicație nu se introduce nicio parolă.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Playerul propriu al xbox.com, în aplicație: conectați-vă și alegeți consola acolo. Ecranul telefonului rămâne aprins."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Playerul propriu al xbox.com, în aplicație: conectați-vă și alegeți consola acolo. Ecranul telefonului rămâne aprins.",
+ "Overlays on this phone": "Traducere pe acest telefon",
+ "Show the overlays on this phone": "Afișează traducerea pe acest telefon",
+ "The PS5 is showing something Remote Play can't stream": "PS5 afișează ceva ce Remote Play nu poate transmite"
 }

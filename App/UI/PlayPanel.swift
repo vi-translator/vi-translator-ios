@@ -17,6 +17,9 @@ struct PlayPanel: View {
     @State private var liveFull = false
     @State private var snap: SnapResult?
     @State private var snapError: String?
+    /** the connected TVs, for Show on (asked again every few seconds: their online dots) */
+    @State private var tvs: [TvInfo] = []
+    private let tvTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
 
     var body: some View {
         ScrollView {
@@ -131,8 +134,60 @@ struct PlayPanel: View {
             glanceCard(Icon.source, L("Picture source"), source, sourceNote) { m.go("source") }
             glanceCard(Icon.translator, L("Language"), lang.map { $0.native.isEmpty ? $0.name : $0.native } ?? langCode, engine) { m.go("translator") }
             glanceCard(Icon.areas, L("Read areas"), names.isEmpty ? "—" : names, m.cfg.activeProfile().map { Cfg.s($0, "name") } ?? "") { m.go("areas") }
+            outputsCard
         }
         .padding(.top, 10)
+        .onAppear(perform: listTvs)
+        .onReceive(tvTimer) { _ in listTvs() }
+    }
+
+    // ---- Show on: this phone's overlay and each connected TV, each on or off at once while translating
+    // (the desktop's Play "Show on" card; the header's Overlays switch stays over them all)
+
+    private var outputsCard: some View {
+        let allOff = !m.cfg.bool("overlays_enabled", true)
+        return HStack(alignment: .top, spacing: 12) {
+            IconTile(name: Icon.show)
+            VStack(alignment: .leading, spacing: 2) {
+                LabelText(L("Show on"))
+                Check(label: L("Overlays on this phone"), on: m.cfg.bool("device_overlays", true), small: true) {
+                    m.cfg.put("device_overlays", $0, now: true)
+                }
+                ForEach(tvs, id: \.id) { tv in
+                    Check(label: "📺 " + tv.name + (tv.online ? "  ●" : ""), on: tv.on, small: true) { on in
+                        setTv(tv.id, on)
+                    }
+                }
+                if allOff {
+                    Text(L("Overlays are off for everything: turn on Overlays at the top.")).font(k.font(k.base - 2)).foregroundColor(k.warn)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    Muted(L("Turn each one on or off at any time, even while translating."), small: true)
+                }
+            }
+            Spacer(minLength: 0)
+            Button { m.go("show") } label: {
+                Text(L("Change")).font(k.font(k.base - 1, .bold)).foregroundColor(k.accentUi)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(12)
+        .background(RoundedRectangle(cornerRadius: 14).fill(k.panel))
+        .overlay(RoundedRectangle(cornerRadius: 14).stroke(k.line, lineWidth: 1))
+    }
+
+    private func listTvs() {
+        guard let core = m.core else { return }
+        m.io.async {
+            let list = core.pairedTvs()
+            DispatchQueue.main.async { tvs = list }
+        }
+    }
+
+    private func setTv(_ id: String, _ on: Bool) {
+        tvs = tvs.map { var t = $0; if t.id == id { t.on = on }; return t }
+        guard let core = m.core else { return }
+        m.io.async { core.setTvOn(id, on) }
     }
 
     private func glanceCard(_ icon: String, _ key: String, _ value: String, _ note: String, change: @escaping () -> Void) -> some View {
@@ -221,7 +276,7 @@ struct Stage: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            PreviewRepresentable(image: feed.image, lines: m.lines, drawText: overlayUrl == nil, showAreas: false, rev: m.rev)
+            PreviewRepresentable(image: feed.image, lines: m.lines, drawText: overlayUrl == nil && m.cfg.bool("device_overlays", true), showAreas: false, rev: m.rev)
                 .aspectRatio(16 / 9, contentMode: .fit)
             if let u = overlayUrl {
                 TvPageView(url: u).allowsHitTesting(false)

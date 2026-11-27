@@ -160,6 +160,9 @@ final class CoreHost: @unchecked Sendable {
 
     func forgetTv(_ id: String) { _ = engine.removeTv(id: id) }
 
+    /** A connected TV's translations on or off at once, while translating (it stays connected; blank while off). */
+    func setTvOn(_ id: String, _ on: Bool) { _ = engine.setTvOn(id: id, on: on) }
+
     /** The name the TVs show for this phone ("iPhone", "iPad": iOS gives apps no more). Set on the main thread at start. */
     static var device = "iPhone"
 

@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "การเล่นระยะไกลของ Xbox: โทรศัพท์สตรีมภาพของ Xbox เพื่ออ่าน (ไม่มีเสียง) ใช้งานได้แม้ปิดหน้าจอโทรศัพท์",
  "Xbox player": "เครื่องเล่น Xbox",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "คุณจะได้รับรหัสสั้น ๆ เพื่อป้อนที่ microsoft.com/link บนโทรศัพท์นี้หรืออุปกรณ์อื่นก็ได้ ไม่ต้องพิมพ์รหัสผ่านในแอปนี้",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "เครื่องเล่นของ xbox.com เองภายในแอป: ลงชื่อเข้าใช้และเลือกคอนโซลที่นั่น หน้าจอโทรศัพท์จะเปิดค้างไว้"
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "เครื่องเล่นของ xbox.com เองภายในแอป: ลงชื่อเข้าใช้และเลือกคอนโซลที่นั่น หน้าจอโทรศัพท์จะเปิดค้างไว้",
+ "Overlays on this phone": "โอเวอร์เลย์บนโทรศัพท์เครื่องนี้",
+ "Show the overlays on this phone": "แสดงโอเวอร์เลย์บนโทรศัพท์เครื่องนี้",
+ "The PS5 is showing something Remote Play can't stream": "PS5 กำลังแสดงสิ่งที่ Remote Play สตรีมไม่ได้"
 }

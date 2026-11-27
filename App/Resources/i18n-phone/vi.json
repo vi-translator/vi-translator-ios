@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Chơi từ xa Xbox: điện thoại nhận luồng hình của Xbox để đọc (không có âm thanh). Hoạt động cả khi tắt màn hình điện thoại.",
  "Xbox player": "Trình phát Xbox",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "Bạn sẽ nhận một mã ngắn để nhập tại microsoft.com/link, trên điện thoại này hoặc bất kỳ thiết bị nào khác. Không cần nhập mật khẩu trong ứng dụng này.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Trình phát riêng của xbox.com ngay trong ứng dụng: đăng nhập và chọn máy ở đó. Màn hình điện thoại luôn bật."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Trình phát riêng của xbox.com ngay trong ứng dụng: đăng nhập và chọn máy ở đó. Màn hình điện thoại luôn bật.",
+ "Overlays on this phone": "Lớp phủ trên điện thoại này",
+ "Show the overlays on this phone": "Hiển thị lớp phủ trên điện thoại này",
+ "The PS5 is showing something Remote Play can't stream": "PS5 đang hiển thị nội dung mà Remote Play không thể phát trực tuyến"
 }

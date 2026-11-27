@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Віддалена гра Xbox: телефон отримує зображення з Xbox, щоб читати його (без звуку). Працює з вимкненим екраном телефона.",
  "Xbox player": "Програвач Xbox",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "Ви отримаєте короткий код, який треба ввести на microsoft.com/link, на цьому телефоні чи будь-якому іншому пристрої. У цьому застосунку пароль не вводиться.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Власний програвач xbox.com у застосунку: увійдіть і виберіть консоль там. Екран телефона залишається ввімкненим."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Власний програвач xbox.com у застосунку: увійдіть і виберіть консоль там. Екран телефона залишається ввімкненим.",
+ "Overlays on this phone": "Переклад поверх гри на цьому телефоні",
+ "Show the overlays on this phone": "Показувати переклад поверх гри на цьому телефоні",
+ "The PS5 is showing something Remote Play can't stream": "PS5 показує те, що Remote Play не може транслювати"
 }
