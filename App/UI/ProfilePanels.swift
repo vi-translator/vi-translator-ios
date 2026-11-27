@@ -397,8 +397,7 @@ struct PagesPanel: View {
                     ForEach(Array(((script?["options"] as? NSArray) ?? []).enumerated()), id: \.offset) { _, x in
                         if let opt = x as? NSDictionary, !covered.contains(Cfg.s(opt, "id")) {
                             let id = Cfg.s(opt, "id")
-                            let more = (o["more"] as? NSMutableDictionary)
-                            let on = more?[id] != nil ? Cfg.b(more, id) : Cfg.b(opt, "on")
+                            let on = optionOn(id)
                             Card(pad: 12) {
                                 Check(label: { let n = text(opt["name"]); return n.isEmpty ? id : n }(), on: on) { v in
                                     let mo = (o["more"] as? NSMutableDictionary) ?? { let d = NSMutableDictionary(); o["more"] = d; return d }()
@@ -429,22 +428,45 @@ struct PagesPanel: View {
     }
 
     /**
-     * What's translated: the name and the note of each switch the core lists for a game (page_options "groups";
-     * GTA VI's: the phone, the pause menu, the help and notices).
+     * What's translated (as the desktop's Game pages): the core lists the game's switches (page_options "groups"),
+     * each one thing — a read area, a switch of the game's pages, or a setting such as the phone's — under a
+     * heading ("group"). Their names and notes, and the headings', here (GTA VI's).
      */
+    private static let contentGroups: [(String, String)] = [
+        ("phone", "Phone translations"),
+        ("menus", "Pause menu and map"),
+        ("notices", "Help, instructions and notices"),
+        ("screens", "Other screens"),
+    ]
+
     private static let contentText: [String: (String, String)] = [
-        "phone": ("Phone translations", "The phone's WhatUp chats, translated on a second phone beside it."),
-        "menus": ("Pause menu and map", "The pause menu: the map and its index, lists, help pages, settings and buttons."),
-        "notices": ("Help, instructions and notices", "The help box at the top left, the instructions under the subtitles, and the game's notices like “Controller disconnected”."),
+        "phone_text": ("WhatUp chats", "The phone's chats, translated on a second phone beside it."),
+        "phone_bubble": ("Message bubble", "A new message's bubble at the bottom right, translated above it."),
+        "pause_home": ("First page and Game page", "The menu's first page (Map, Game, Store, Help…), saving and loading, and their questions."),
+        "pause_map": ("Map", "The map's buttons and the objective card at the top left."),
+        "pause_brief": ("Brief", "The Brief tab: what was said, help texts and objectives so far."),
+        "pause_jason_lucia": ("Jason & Lucia", "The Jason & Lucia tab."),
+        "pause_progress": ("Progress and stats", "The Progress tab's cards and the stats pages."),
+        "pause_help": ("Help pages", "The Help menu's pages: Basics, Inventory, Vehicles and the rest."),
+        "pause_settings": ("Settings pages", "The settings: controls, display, audio and the rest."),
+        "pause_tabs": ("Tab names and buttons", "The row of tabs at the top and the buttons at the bottom right of every page."),
+        "help": ("Help box", "The help box at the top left."),
+        "instructions": ("Instructions", "The instructions under the subtitles."),
+        "game_notices": ("Game notices", "The game's notices, like “Controller disconnected”."),
+        "wasted": ("Wasted and Busted", "The big “wasted” when you die and “busted” when you're arrested."),
+        "mission_failed": ("Mission failed", "The “failed” page when a mission is lost: its reason and buttons."),
+        "weapon_wheel": ("Weapon wheel", "The weapon and item wheel: its tabs, the selected item and its stats."),
     ]
 
     private static func strings(_ g: NSDictionary, _ key: String) -> [String] {
         ((g[key] as? NSArray) ?? []).compactMap { $0 as? String }
     }
 
-    /** the game's What's-translated switches the core lists (none with a core from before them) */
+    /** the game's What's-translated switches the core lists, those this app knows (none with a core from before them) */
     private var groups: [NSDictionary] {
-        ((script?["groups"] as? NSArray) ?? []).compactMap { $0 as? NSDictionary }.filter { Self.contentText[Cfg.s($0, "id")] != nil }
+        let headings = Set(Self.contentGroups.map { $0.0 })
+        return ((script?["groups"] as? NSArray) ?? []).compactMap { $0 as? NSDictionary }
+            .filter { Self.contentText[Cfg.s($0, "id")] != nil && headings.contains(Cfg.s($0, "group")) }
     }
 
     private var options: [NSDictionary] {
@@ -456,25 +478,39 @@ struct PagesPanel: View {
         return (o["more"] as? NSMutableDictionary) ?? { let d = NSMutableDictionary(); o["more"] = d; return d }()
     }
 
-    /** on when any of what it stands for is on (the phone, a read area, a page switch of the game) */
-    private func groupOn(_ g: NSDictionary) -> Bool {
-        let cfg = m.cfg
+    /**
+     * A page switch as the profile has it: as set; else, one split from an older switch ("inherits"), as that one
+     * is set; else the script's default (the core's pagescript::option_on).
+     */
+    private func optionOn(_ id: String) -> Bool {
         let more = moreOpts()
-        let opts = options
-        let pageOn = { (id: String) -> Bool in
-            if more[id] != nil { return Cfg.b(more, id) }
-            return opts.first(where: { Cfg.s($0, "id") == id }).map { Cfg.b($0, "on") } ?? false
+        if more[id] != nil { return Cfg.b(more, id) }
+        guard let opt = options.first(where: { Cfg.s($0, "id") == id }) else { return false }
+        let old = Cfg.s(opt, "inherits")
+        if !old.isEmpty && old != id {
+            if more[old] != nil { return Cfg.b(more, old) }
+            if let o = options.first(where: { Cfg.s($0, "id") == old }) { return Cfg.b(o, "on") }
         }
-        let areas = Self.strings(g, "areas")
-        return (Cfg.b(g, "phone") && cfg.bool("phone_text", true))
-            || cfg.areaList().contains(where: { areas.contains(Cfg.s($0, "id")) && Cfg.b($0, "enabled", true) })
-            || Self.strings(g, "pages").contains(where: pageOn)
+        return Cfg.b(opt, "on")
     }
 
-    /** all of what it stands for on or off */
+    /** on as the one thing it stands for is (a setting, read areas, or pages of the game) */
+    private func groupOn(_ g: NSDictionary) -> Bool {
+        let cfg = m.cfg
+        let setting = Cfg.s(g, "setting")
+        // (the message bubble: as the phone in settings from before its own switch)
+        if setting == "phone_bubble" { return cfg.bool("phone_bubble", cfg.bool("phone_text", true)) }
+        if !setting.isEmpty { return cfg.bool(setting, true) }
+        let areas = Self.strings(g, "areas")
+        if !areas.isEmpty { return cfg.areaList().contains(where: { areas.contains(Cfg.s($0, "id")) && Cfg.b($0, "enabled", true) }) }
+        return Self.strings(g, "pages").contains(where: optionOn)
+    }
+
+    /** what it stands for on or off */
     private func setGroup(_ g: NSDictionary, _ on: Bool) {
         let cfg = m.cfg
-        if Cfg.b(g, "phone") { cfg.put("phone_text", on) }
+        let setting = Cfg.s(g, "setting")
+        if !setting.isEmpty { cfg.put(setting, on) }
         let areas = Self.strings(g, "areas")
         for a in cfg.areaList() where areas.contains(Cfg.s(a, "id")) {
             a["enabled"] = on
@@ -488,22 +524,31 @@ struct PagesPanel: View {
         cfg.touched("areas", "profile_opts")
     }
 
+    /** the headings that have switches, in their order */
+    private func headings(_ gs: [NSDictionary]) -> [(String, String)] {
+        Self.contentGroups.filter { h in gs.contains { Cfg.s($0, "group") == h.0 } }
+    }
+
     /**
-     * What's translated: the dialogue always; each of the game's switches stands for read areas, pages of the
-     * game and the phone; "Dialogue only" turns them and the game's other page switches off.
+     * What's translated: the dialogue always; then the game's switches under their headings; "Dialogue only" turns
+     * them and the game's other page switches off.
      */
     private var contentCard: some View {
-        Card(pad: 12) {
+        let gs = groups
+        return Card(pad: 12) {
             Text(L("What's translated")).font(k.font(k.base, .bold)).foregroundColor(k.text)
             Check(label: L("Dialogue and subtitles"), on: true) { _ in }.disabled(true)
             Muted(L("Always translated."), small: true)
-            ForEach(Array(groups.enumerated()), id: \.offset) { _, g in
-                let text = Self.contentText[Cfg.s(g, "id")] ?? ("", "")
-                Check(label: L(text.0), on: groupOn(g)) { setGroup(g, $0) }
-                Muted(L(text.1), small: true)
+            ForEach(headings(gs), id: \.0) { h in
+                Text(L(h.1)).font(k.font(k.base, .bold)).foregroundColor(k.text).padding(.top, 14)
+                ForEach(Array(gs.filter { Cfg.s($0, "group") == h.0 }.enumerated()), id: \.offset) { _, g in
+                    let text = Self.contentText[Cfg.s(g, "id")] ?? ("", "")
+                    Check(label: L(text.0), on: groupOn(g)) { setGroup(g, $0) }
+                    Muted(L(text.1), small: true)
+                }
             }
             KButton(L("Dialogue only"), full: false) {
-                for g in groups { setGroup(g, false) }
+                for g in gs { setGroup(g, false) }
                 let more = moreOpts()
                 for opt in options {
                     let id = Cfg.s(opt, "id")

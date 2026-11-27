@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Xbox Uzaktan Oynatma: telefon, okumak için Xbox'ın görüntüsünü akış olarak alır (ses yok). Telefonun ekranı kapalıyken de çalışır.",
  "Xbox player": "Xbox oynatıcısı",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "Bu telefonda veya başka bir cihazda microsoft.com/link adresine gireceğin kısa bir kod alacaksın. Bu uygulamada hiçbir parola yazılmaz.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "xbox.com'un uygulama içindeki kendi oynatıcısı: oturumu orada aç ve konsolu orada seç. Telefonun ekranı açık kalır."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "xbox.com'un uygulama içindeki kendi oynatıcısı: oturumu orada aç ve konsolu orada seç. Telefonun ekranı açık kalır.",
+ "Overlays on this phone": "Bu telefonda çeviri katmanı",
+ "Show the overlays on this phone": "Çeviri katmanını bu telefonda göster",
+ "The PS5 is showing something Remote Play can't stream": "PS5, Remote Play'in yayınlayamadığı bir şey gösteriyor"
 }

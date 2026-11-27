@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Xbox リモートプレイ：スマホが Xbox の映像をストリーミングして読み取ります（音声なし）。スマホの画面がオフでも動作します。",
  "Xbox player": "Xbox プレーヤー",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "microsoft.com/link で入力する短いコードが表示されます。このスマホでも他のデバイスでもかまいません。このアプリでパスワードを入力することはありません。",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "アプリ内で開く xbox.com のプレーヤー：そこでサインインしてゲーム機を選びます。スマホの画面はオンのままになります。"
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "アプリ内で開く xbox.com のプレーヤー：そこでサインインしてゲーム機を選びます。スマホの画面はオンのままになります。",
+ "Overlays on this phone": "このスマホのオーバーレイ",
+ "Show the overlays on this phone": "このスマホにオーバーレイを表示",
+ "The PS5 is showing something Remote Play can't stream": "PS5 にリモートプレイで配信できない画面が表示されています"
 }

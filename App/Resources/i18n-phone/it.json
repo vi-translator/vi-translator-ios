@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Riproduzione remota Xbox: il telefono riceve in streaming l'immagine della Xbox per leggerla (senza audio). Funziona anche con lo schermo del telefono spento.",
  "Xbox player": "Player Xbox",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "Riceverai un codice breve da inserire su microsoft.com/link, su questo telefono o su qualsiasi altro dispositivo. In questa app non si digita nessuna password.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Il player di xbox.com, nell'app: accedi e scegli la console lì. Lo schermo del telefono resta acceso."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Il player di xbox.com, nell'app: accedi e scegli la console lì. Lo schermo del telefono resta acceso.",
+ "Overlays on this phone": "Overlay su questo telefono",
+ "Show the overlays on this phone": "Mostra l'overlay su questo telefono",
+ "The PS5 is showing something Remote Play can't stream": "La PS5 mostra qualcosa che Remote Play non può trasmettere"
 }

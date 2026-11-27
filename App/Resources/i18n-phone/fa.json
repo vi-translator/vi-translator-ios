@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "بازی از راه دور Xbox: گوشی تصویر Xbox را برای خواندن پخش می‌کند (بدون صدا). با صفحهٔ خاموش گوشی هم کار می‌کند.",
  "Xbox player": "پخش‌کنندهٔ Xbox",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "یک کد کوتاه می‌گیرید تا در microsoft.com/link وارد کنید، روی همین گوشی یا هر دستگاه دیگری. هیچ رمز عبوری در این برنامه تایپ نمی‌شود.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "پخش‌کنندهٔ خود xbox.com درون برنامه: همان‌جا وارد شوید و کنسول را انتخاب کنید. صفحهٔ گوشی روشن می‌ماند."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "پخش‌کنندهٔ خود xbox.com درون برنامه: همان‌جا وارد شوید و کنسول را انتخاب کنید. صفحهٔ گوشی روشن می‌ماند.",
+ "Overlays on this phone": "اورلی روی این گوشی",
+ "Show the overlays on this phone": "نمایش اورلی روی این گوشی",
+ "The PS5 is showing something Remote Play can't stream": "PS5 چیزی را نشان می‌دهد که Remote Play نمی‌تواند پخش کند"
 }

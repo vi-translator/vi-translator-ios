@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Απομακρυσμένο παιχνίδι Xbox: το τηλέφωνο λαμβάνει ροή της εικόνας του Xbox για να τη διαβάσει (χωρίς ήχο). Λειτουργεί και με σβηστή την οθόνη του τηλεφώνου.",
  "Xbox player": "Xbox player",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "Θα λάβετε έναν σύντομο κωδικό για να τον εισαγάγετε στο microsoft.com/link, σε αυτό το τηλέφωνο ή σε οποιαδήποτε άλλη συσκευή. Σε αυτή την εφαρμογή δεν πληκτρολογείται κανένας κωδικός πρόσβασης.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Το ίδιο το player του xbox.com μέσα στην εφαρμογή: συνδεθείτε και επιλέξτε την κονσόλα εκεί. Η οθόνη του τηλεφώνου μένει αναμμένη."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Το ίδιο το player του xbox.com μέσα στην εφαρμογή: συνδεθείτε και επιλέξτε την κονσόλα εκεί. Η οθόνη του τηλεφώνου μένει αναμμένη.",
+ "Overlays on this phone": "Επικαλύψεις σε αυτό το τηλέφωνο",
+ "Show the overlays on this phone": "Εμφάνιση των επικαλύψεων σε αυτό το τηλέφωνο",
+ "The PS5 is showing something Remote Play can't stream": "Το PS5 δείχνει κάτι που το Remote Play δεν μπορεί να μεταδώσει"
 }

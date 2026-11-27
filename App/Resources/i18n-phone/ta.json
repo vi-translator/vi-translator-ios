@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Xbox ரிமோட் பிளே: Xbox-இன் படத்தைப் படிக்கப் போன் அதை ஸ்ட்ரீம் செய்கிறது (ஒலி இல்லை). போனின் திரை அணைந்திருந்தாலும் வேலை செய்யும்.",
  "Xbox player": "Xbox பிளேயர்",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "microsoft.com/link-இல் உள்ளிட ஒரு சிறிய குறியீடு கிடைக்கும்; இந்த போனிலோ வேறு எந்தச் சாதனத்திலோ உள்ளிடலாம். இந்தச் செயலியில் எந்தக் கடவுச்சொல்லும் தட்டச்சு செய்யப்படாது.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "செயலிக்குள்ளேயே xbox.com-இன் சொந்த பிளேயர்: அங்கேயே உள்நுழைந்து கன்சோலைத் தேர்ந்தெடுக்கவும். போனின் திரை இயக்கத்திலேயே இருக்கும்."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "செயலிக்குள்ளேயே xbox.com-இன் சொந்த பிளேயர்: அங்கேயே உள்நுழைந்து கன்சோலைத் தேர்ந்தெடுக்கவும். போனின் திரை இயக்கத்திலேயே இருக்கும்.",
+ "Overlays on this phone": "இந்த ஃபோனில் ஓவர்லே",
+ "Show the overlays on this phone": "இந்த ஃபோனில் ஓவர்லேயைக் காட்டு",
+ "The PS5 is showing something Remote Play can't stream": "Remote Play ஸ்ட்ரீம் செய்ய முடியாத ஒன்றை PS5 காட்டுகிறது"
 }

@@ -27,6 +27,11 @@ struct ShowPanel: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
           Group {
+            // (the desktop's "Overlays on this PC": here, the translations drawn over the picture in this app)
+            H3(L("Overlays on this phone"))
+            Check(label: L("Show the overlays on this phone"), on: m.cfg.bool("device_overlays", true)) { m.cfg.put("device_overlays", $0, now: true) }
+          }
+          Group {
             H3(L("Show on a TV"))
             Muted(L("The translations over the game on a Google TV, Android TV, LG or Samsung TV, with the VI Translator app. Open the app on the TV, then connect it here with the code it shows."))
             KButton(L("Connect a TV"), icon: Icon.tv, primary: true) { findTvs() }.padding(.top, 12)
@@ -60,6 +65,10 @@ struct ShowPanel: View {
                             Muted(tv.online ? L("Showing the translations") : L("Not connected now (the TV is off, or VI Translator isn't open on it)"), small: true)
                         }
                         Spacer()
+                        // (its translations on or off at once, while translating: it stays connected)
+                        Toggle("", isOn: Binding(get: { tv.on }, set: { on in setTv(tv.id, on) }))
+                            .labelsHidden().tint(k.accentUi)
+                            .accessibilityLabel(L("Show the translations on this TV"))
                         KLink(L("Remove")) { forgetting = tv }
                     }
                     .padding(.horizontal, 12).padding(.vertical, 6)
@@ -151,6 +160,12 @@ struct ShowPanel: View {
                 m.tvCount = tvs.count
             }
         }
+    }
+
+    private func setTv(_ id: String, _ on: Bool) {
+        connected = connected.map { var t = $0; if t.id == id { t.on = on }; return t }
+        guard let core = m.core else { return }
+        m.io.async { core.setTvOn(id, on) }
     }
 
     private func findTvs() {

@@ -140,5 +140,8 @@
  "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Works with the phone's screen off.": "Kucheza kwa Mbali kwa Xbox: simu inatiririsha picha ya Xbox ili kuisoma (bila sauti). Inafanya kazi hata skrini ya simu ikiwa imezimwa.",
  "Xbox player": "Kicheza Xbox",
  "You'll get a short code to enter at microsoft.com/link, on this phone or any other device. No password is typed in this app.": "Utapata msimbo mfupi wa kuweka kwenye microsoft.com/link, kwenye simu hii au kifaa kingine chochote. Hakuna nenosiri linaloandikwa kwenye programu hii.",
- "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Kicheza cha xbox.com chenyewe ndani ya programu: ingia na uchague koni hapo. Skrini ya simu inabaki imewashwa."
+ "xbox.com's own player in the app: sign in and choose the console there. The phone's screen stays on.": "Kicheza cha xbox.com chenyewe ndani ya programu: ingia na uchague koni hapo. Skrini ya simu inabaki imewashwa.",
+ "Overlays on this phone": "Tafsiri juu ya mchezo kwenye simu hii",
+ "Show the overlays on this phone": "Onyesha tafsiri juu ya mchezo kwenye simu hii",
+ "The PS5 is showing something Remote Play can't stream": "PS5 inaonyesha kitu ambacho Remote Play haiwezi kutiririsha"
 }
