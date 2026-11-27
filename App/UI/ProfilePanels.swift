@@ -376,8 +376,8 @@ struct PagesPanel: View {
             H3(L("Game pages"))
             Muted(L("The game's own pages that get a hand-made translation, in the game's look."))
             // (GTA VI's phone in the hand — its WhatUp chats translated on a second phone beside it: shown or not, the
-            // player's, whatever the profile)
-            if game == "gta6" {
+            // player's, whatever the profile; with a core that lists What's translated, it's one of those switches)
+            if game == "gta6" && groups.isEmpty {
                 Card(pad: 12) {
                     Check(label: L("Phone translations"), on: cfg.bool("phone_text", true)) { cfg.put("phone_text", $0) }
                     Muted(L("The phone's WhatUp chats, translated on a second phone beside it."), small: true)
@@ -392,8 +392,10 @@ struct PagesPanel: View {
                         .padding(.top, 12)
                 } else {
                     let o = cfg.profileOpts()
+                    if !groups.isEmpty { contentCard }
+                    let covered = Set(groups.flatMap { Self.strings($0, "pages") })
                     ForEach(Array(((script?["options"] as? NSArray) ?? []).enumerated()), id: \.offset) { _, x in
-                        if let opt = x as? NSDictionary {
+                        if let opt = x as? NSDictionary, !covered.contains(Cfg.s(opt, "id")) {
                             let id = Cfg.s(opt, "id")
                             let more = (o["more"] as? NSMutableDictionary)
                             let on = more?[id] != nil ? Cfg.b(more, id) : Cfg.b(opt, "on")
@@ -424,6 +426,96 @@ struct PagesPanel: View {
             script = d.count == 0 ? nil : d
             loaded = true
         }
+    }
+
+    /**
+     * What's translated: the name and the note of each switch the core lists for a game (page_options "groups";
+     * GTA VI's: the phone, the pause menu, the help and notices).
+     */
+    private static let contentText: [String: (String, String)] = [
+        "phone": ("Phone translations", "The phone's WhatUp chats, translated on a second phone beside it."),
+        "menus": ("Pause menu and map", "The pause menu: the map and its index, lists, help pages, settings and buttons."),
+        "notices": ("Help, instructions and notices", "The help box at the top left, the instructions under the subtitles, and the game's notices like “Controller disconnected”."),
+    ]
+
+    private static func strings(_ g: NSDictionary, _ key: String) -> [String] {
+        ((g[key] as? NSArray) ?? []).compactMap { $0 as? String }
+    }
+
+    /** the game's What's-translated switches the core lists (none with a core from before them) */
+    private var groups: [NSDictionary] {
+        ((script?["groups"] as? NSArray) ?? []).compactMap { $0 as? NSDictionary }.filter { Self.contentText[Cfg.s($0, "id")] != nil }
+    }
+
+    private var options: [NSDictionary] {
+        ((script?["options"] as? NSArray) ?? []).compactMap { $0 as? NSDictionary }
+    }
+
+    private func moreOpts() -> NSMutableDictionary {
+        let o = m.cfg.profileOpts()
+        return (o["more"] as? NSMutableDictionary) ?? { let d = NSMutableDictionary(); o["more"] = d; return d }()
+    }
+
+    /** on when any of what it stands for is on (the phone, a read area, a page switch of the game) */
+    private func groupOn(_ g: NSDictionary) -> Bool {
+        let cfg = m.cfg
+        let more = moreOpts()
+        let opts = options
+        let pageOn = { (id: String) -> Bool in
+            if more[id] != nil { return Cfg.b(more, id) }
+            return opts.first(where: { Cfg.s($0, "id") == id }).map { Cfg.b($0, "on") } ?? false
+        }
+        let areas = Self.strings(g, "areas")
+        return (Cfg.b(g, "phone") && cfg.bool("phone_text", true))
+            || cfg.areaList().contains(where: { areas.contains(Cfg.s($0, "id")) && Cfg.b($0, "enabled", true) })
+            || Self.strings(g, "pages").contains(where: pageOn)
+    }
+
+    /** all of what it stands for on or off */
+    private func setGroup(_ g: NSDictionary, _ on: Bool) {
+        let cfg = m.cfg
+        if Cfg.b(g, "phone") { cfg.put("phone_text", on) }
+        let areas = Self.strings(g, "areas")
+        for a in cfg.areaList() where areas.contains(Cfg.s(a, "id")) {
+            a["enabled"] = on
+            cfg.setShown(kind: "area", id: Cfg.s(a, "id"), on: on)
+        }
+        let more = moreOpts()
+        for id in Self.strings(g, "pages") {
+            more[id] = on
+            cfg.setShown(kind: "page", id: id, on: on)
+        }
+        cfg.touched("areas", "profile_opts")
+    }
+
+    /**
+     * What's translated: the dialogue always; each of the game's switches stands for read areas, pages of the
+     * game and the phone; "Dialogue only" turns them and the game's other page switches off.
+     */
+    private var contentCard: some View {
+        Card(pad: 12) {
+            Text(L("What's translated")).font(k.font(k.base, .bold)).foregroundColor(k.text)
+            Check(label: L("Dialogue and subtitles"), on: true) { _ in }.disabled(true)
+            Muted(L("Always translated."), small: true)
+            ForEach(Array(groups.enumerated()), id: \.offset) { _, g in
+                let text = Self.contentText[Cfg.s(g, "id")] ?? ("", "")
+                Check(label: L(text.0), on: groupOn(g)) { setGroup(g, $0) }
+                Muted(L(text.1), small: true)
+            }
+            KButton(L("Dialogue only"), full: false) {
+                for g in groups { setGroup(g, false) }
+                let more = moreOpts()
+                for opt in options {
+                    let id = Cfg.s(opt, "id")
+                    more[id] = false
+                    m.cfg.setShown(kind: "page", id: id, on: false)
+                }
+                m.cfg.touched("profile_opts")
+            }
+            .padding(.top, 12)
+            Muted(L("Turns off everything here except the dialogue and subtitles."), small: true).padding(.top, 6)
+        }
+        .padding(.top, 12)
     }
 
     /** a script's words: plain, or one per interface language */
