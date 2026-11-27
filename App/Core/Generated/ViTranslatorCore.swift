@@ -758,6 +758,12 @@ public protocol EngineProtocol: AnyObject, Sendable {
     func setTargetLang(code: String) throws 
     
     /**
+     * Switch a connected TV's translations on or off at once, while translating (kept with the
+     * TV). False when there's no such TV.
+     */
+    func setTvOn(id: String, on: Bool)  -> Bool
+    
+    /**
      * Keep the reviewed translations and layouts for the game and language in use up to date
      * (from https://vitranslator.app, in the background; what was downloaded before is used at once).
      */
@@ -1166,6 +1172,21 @@ open func setTargetLang(code: String)throws   {try rustCallWithError(FfiConverte
         FfiConverterString.lower(code),uniffiCallStatus
     )
 }
+}
+    
+    /**
+     * Switch a connected TV's translations on or off at once, while translating (kept with the
+     * TV). False when there's no such TV.
+     */
+open func setTvOn(id: String, on: Bool) -> Bool  {
+    return try!  FfiConverterBool.lift(try! rustCall() {
+        uniffiCallStatus in
+    uniffi_vi_translator_ffi_fn_method_engine_set_tv_on(
+            self.uniffiCloneHandle(),
+        FfiConverterString.lower(id),
+        FfiConverterBool.lower(on),uniffiCallStatus
+    )
+})
 }
     
     /**
@@ -2621,16 +2642,24 @@ public struct TvInfo: Equatable, Hashable {
      * its page asked for the overlays in the last few seconds
      */
     public var online: Bool
+    /**
+     * shows the translations (`set_tv_on`); off, it stays connected and shows nothing
+     */
+    public var on: Bool
 
     // Default memberwise initializers are never public by default, so we
     // declare one manually.
     public init(id: String, name: String, 
         /**
          * its page asked for the overlays in the last few seconds
-         */online: Bool) {
+         */online: Bool, 
+        /**
+         * shows the translations (`set_tv_on`); off, it stays connected and shows nothing
+         */on: Bool) {
         self.id = id
         self.name = name
         self.online = online
+        self.on = on
     }
 
     
@@ -2651,7 +2680,8 @@ public struct FfiConverterTypeTvInfo: FfiConverterRustBuffer {
             try TvInfo(
                 id: FfiConverterString.read(from: &buf), 
                 name: FfiConverterString.read(from: &buf), 
-                online: FfiConverterBool.read(from: &buf)
+                online: FfiConverterBool.read(from: &buf), 
+                on: FfiConverterBool.read(from: &buf)
         )
     }
 
@@ -2659,6 +2689,7 @@ public struct FfiConverterTypeTvInfo: FfiConverterRustBuffer {
         FfiConverterString.write(value.id, into: &buf)
         FfiConverterString.write(value.name, into: &buf)
         FfiConverterBool.write(value.online, into: &buf)
+        FfiConverterBool.write(value.on, into: &buf)
     }
 }
 
@@ -3244,6 +3275,9 @@ private let initializationResult: InitializationResult = {
         return InitializationResult.apiChecksumMismatch
     }
     if (uniffi_vi_translator_ffi_checksum_method_engine_set_target_lang() != 11847) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_vi_translator_ffi_checksum_method_engine_set_tv_on() != 64024) {
         return InitializationResult.apiChecksumMismatch
     }
     if (uniffi_vi_translator_ffi_checksum_method_engine_start_sync() != 60348) {

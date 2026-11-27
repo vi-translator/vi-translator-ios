@@ -98,7 +98,8 @@ final class Reader: @unchecked Sendable {
                 let wait = try core.processFrame(rgba, width: snap.width, height: snap.height)
                 lastMs = Int((ProcessInfo.processInfo.systemUptime - start) * 1000)
                 lock.lock()
-                nextAt = start + Double(min(wait, 2000)) / 1000
+                // (a hot phone reads less often: see heatFactor)
+                nextAt = start + min(Double(min(wait, 2000)) * Reader.heatFactor(), 4000) / 1000
                 read += 1
                 lock.unlock()
             } catch {
@@ -110,6 +111,19 @@ final class Reader: @unchecked Sendable {
             done(gen)
         }
         return true
+    }
+
+    /**
+     How much longer to wait between readings while the phone is hot: 1 when cool, 2 when iOS says
+     the heat is serious, 4 when critical. Reading slower lets it cool down instead of iOS slowing
+     everything (the stream too).
+     */
+    static func heatFactor() -> Double {
+        switch ProcessInfo.processInfo.thermalState {
+        case .critical: return 4
+        case .serious: return 2
+        default: return 1
+        }
     }
 
     /** A reading ended (unless it was given up already). */
