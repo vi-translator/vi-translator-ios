@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "ゲーム機の HDMI をボードの HDMI 入力へ、ボードの HDMI 出力をテレビへ。",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "ボードの USB を iPad の USB-C ポートへ（USB-A のボードは USB-C アダプターやハブ経由で）。専用ドライバーが必要なボードは使えません：UVC（プラグアンドプレイ）対応のボードが必要です。",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "プレイ › 翻訳を開始：iPadOS から一度だけ、VI Translator がボードを（カメラとして）使う許可を求められます。",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5 で HDCP をオフにしてください（設定 › システム › HDMI）。オフにしないとボードに映像が届きません。"
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5 で HDCP をオフにしてください（設定 › システム › HDMI）。オフにしないとボードに映像が届きません。",
+ "Connecting to the Xbox…": "Xbox に接続しています…",
+ "Game sound on the phone: no sound from the Xbox yet": "スマホでのゲーム音声：Xbox からの音声はまだありません",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox リモートプレイ：スマホが Xbox の映像を受信して読み取ります（音声なし）。プレイ中はスマホで VI Translator を開いたままにしてください。",
+ "Sign in with a code and choose the console once.": "コードでサインインし、ゲーム機を一度選ぶだけ。",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "スマホは Xbox の映像を読み取るためにストリーミングします（コントローラーなし：プレイは Xbox につないだコントローラーで続けてください）。"
 }

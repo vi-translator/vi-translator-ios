@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "HDMI của console vào cổng HDMI in của card; HDMI out của card vào TV.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "Cắm USB của card vào cổng USB-C của iPad (card USB-A thì qua bộ chuyển đổi hoặc hub USB-C). Card cần driver riêng sẽ không hoạt động: phải là card UVC (cắm là chạy).",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Chơi › Bắt đầu dịch: iPadOS sẽ hỏi một lần để cho phép VI Translator dùng card (như camera).",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Trên PS5, hãy tắt HDCP (Cài đặt › Hệ thống › HDMI), nếu không card sẽ không nhận được hình."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Trên PS5, hãy tắt HDCP (Cài đặt › Hệ thống › HDMI), nếu không card sẽ không nhận được hình.",
+ "Connecting to the Xbox…": "Đang kết nối với Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Âm thanh game trên điện thoại: chưa có âm thanh từ Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: điện thoại nhận luồng hình của Xbox để đọc (không có âm thanh). Giữ điện thoại ở VI Translator khi chơi.",
+ "Sign in with a code and choose the console once.": "Đăng nhập bằng mã và chỉ cần chọn máy một lần.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Điện thoại nhận luồng hình của Xbox để đọc (không có tay cầm: hãy tiếp tục chơi bằng tay cầm trên Xbox)."
 }

@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "కన్సోల్ HDMIని కార్డ్ HDMI ఇన్‌లోకి; కార్డ్ HDMI అవుట్‌ను టీవీలోకి.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "కార్డ్ USBని iPad USB-C పోర్ట్‌లోకి (USB-A కార్డ్ అయితే USB-C అడాప్టర్ లేదా హబ్ ద్వారా). సొంత డ్రైవర్ అవసరమైన కార్డ్ పనిచేయదు: అది UVC (ప్లగ్-అండ్-ప్లే) కార్డ్ అయి ఉండాలి.",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "ఆడండి › అనువాదం ప్రారంభించండి: కార్డ్‌ను (కెమెరాగా) ఉపయోగించడానికి VI Translatorను అనుమతించమని iPadOS ఒక్కసారి అడుగుతుంది.",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5లో HDCPని ఆఫ్ చేయండి (సెట్టింగ్‌లు › సిస్టమ్ › HDMI), లేకపోతే కార్డ్‌కు చిత్రం అందదు."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5లో HDCPని ఆఫ్ చేయండి (సెట్టింగ్‌లు › సిస్టమ్ › HDMI), లేకపోతే కార్డ్‌కు చిత్రం అందదు.",
+ "Connecting to the Xbox…": "Xboxకి కనెక్ట్ అవుతోంది…",
+ "Game sound on the phone: no sound from the Xbox yet": "ఫోన్‌లో గేమ్ సౌండ్: Xbox నుండి ఇంకా సౌండ్ రాలేదు",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox రిమోట్ ప్లే: చదవడానికి ఫోన్ Xbox చిత్రాన్ని స్ట్రీమ్ చేస్తుంది (సౌండ్ లేకుండా). ఆడుతున్నప్పుడు ఫోన్‌ను VI Translatorలోనే ఉంచండి.",
+ "Sign in with a code and choose the console once.": "కోడ్‌తో సైన్ ఇన్ చేసి, కన్సోల్‌ను ఒక్కసారే ఎంచుకోండి.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "ఫోన్ Xbox చిత్రాన్ని చదవడానికి స్ట్రీమ్ చేస్తుంది (కంట్రోలర్ లేదు: Xboxలో మీ కంట్రోలర్‌తోనే ఆడుతూ ఉండండి)."
 }

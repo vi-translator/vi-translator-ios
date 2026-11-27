@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "HDMI konzole do vstupu HDMI karty; výstup HDMI karty do televize.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "USB karty do portu USB-C iPadu (karta s USB-A přes redukci nebo hub USB-C). Karta, která potřebuje vlastní ovladač, nefunguje: musí to být karta UVC (plug-and-play).",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Hra › Začít překládat: iPadOS se jednou zeptá, zda VI Translator smí používat kartu (jako kameru).",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Na PS5 vypněte HDCP (Nastavení › Systém › HDMI), jinak karta nedostane obraz."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Na PS5 vypněte HDCP (Nastavení › Systém › HDMI), jinak karta nedostane obraz.",
+ "Connecting to the Xbox…": "Připojování k Xboxu…",
+ "Game sound on the phone: no sound from the Xbox yet": "Zvuk hry v telefonu: z Xboxu zatím nejde žádný zvuk",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefon přijímá obraz z Xboxu, aby ho četl (bez zvuku). Během hraní mějte v telefonu otevřený VI Translator.",
+ "Sign in with a code and choose the console once.": "Přihlaste se kódem a konzoli vyberte jen jednou.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefon streamuje obraz z Xboxu, aby ho četl (bez ovladače: hrajte dál s ovladačem na Xboxu)."
 }

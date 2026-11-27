@@ -4,15 +4,14 @@ import SwiftUI
 /**
  * Source: where the picture comes from, as in the Android app. The desktop picks a window, a capture
  * card or OBS; the phone reads the console itself: a PS5 (PS Remote Play, set up once: sign in to PSN
- * for the account ID, find it, the PIN it shows) or an Xbox (Microsoft's web player); an iPad with
+ * for the account ID, find it, the PIN it shows) or an Xbox (the app's own Remote Play client, signed in
+ * with a code, the console chosen once; or Microsoft's web player: XboxLinkView); an iPad with
  * USB-C also reads a capture card (CaptureCard). Then Timing.
  */
 struct SourcePanel: View {
     @EnvironmentObject var m: AppModel
     @Environment(\.kit) var k
     @State private var console = Prefs.console
-    @State private var xboxSigned: Bool?
-    @State private var askSignOut = false
     @State private var cards: [CaptureCard.Card] = []
     @State private var cardId = Prefs.captureCard
     @State private var camera = AVCaptureDevice.authorizationStatus(for: .video)
@@ -23,7 +22,8 @@ struct SourcePanel: View {
             Muted(L("The phone reads the game from your console over the home network; the TV keeps showing the console as usual. Only the translations go to the TV."))
             consoleChoice("ps5", "PlayStation 5", L("PS Remote Play: the phone streams the PS5's picture to read it (no sound). Keep the phone on VI Translator while playing."))
                 .padding(.top, 10)
-            consoleChoice("xbox", "Xbox", L("Microsoft's Remote Play player, in the app. Keep the phone's screen on while playing."))
+            consoleChoice("xbox", "Xbox", Prefs.xboxWebPlayer ? L("Microsoft's Remote Play player, in the app. Keep the phone's screen on while playing.")
+                : L("Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing."))
                 .padding(.top, 8)
             if CaptureCard.supported {
                 consoleChoice("capture", L("Capture card"), L("A USB capture card in the iPad's USB-C port, with the console's HDMI in it. Use a card with HDMI out (pass-through) so the TV keeps showing the game."))
@@ -32,7 +32,7 @@ struct SourcePanel: View {
                 Muted(L("Capture cards work on an iPad with USB-C (iPadOS 17 or newer)."), small: true).padding(.top, 8)
             }
             if console == "ps5" { Ps5LinkView() }
-            if console == "xbox" { xboxSetup }
+            if console == "xbox" { XboxLinkView() }
             if console == "capture" && CaptureCard.supported { captureSetup }
             H3(L("Timing"))
             TimingForm()
@@ -114,37 +114,6 @@ struct SourcePanel: View {
         DispatchQueue.main.async {
             cards = CaptureCard.cards()
             camera = AVCaptureDevice.authorizationStatus(for: .video)
-        }
-    }
-
-    /**
-     * The Xbox: nothing to link in the app. Microsoft's player (in the app) signs in with the
-     * Microsoft account and connects to the console itself; the console only needs its remote
-     * features on. Signing in here first makes Start go straight to the game.
-     */
-    private var xboxSetup: some View {
-        let signed = xboxSigned ?? false
-        return VStack(alignment: .leading, spacing: 4) {
-            Callout(signed ? L("Signed in to Microsoft in the Xbox player.") : L("Not signed in to the Xbox player yet."), signed ? k.ok : nil)
-                .padding(.top, 12)
-            LabelText(L("On the Xbox, once")).padding(.top, 14)
-            Muted("1. " + L("Settings › Devices & connections › Remote features: turn on Enable remote features."))
-            Muted("2. " + L("Settings › General › Power options: choose Sleep, so the player can wake the console."))
-            Muted("3. " + L("Sign in on the Xbox with the same Microsoft account as in the player."))
-            LabelText(L("In the app")).padding(.top, 14)
-            Muted(L("Open the player, sign in with your Microsoft account and choose your Xbox under Remote play. The sign-in stays in the app: next time, Start translating goes straight to the game."))
-            KButton(L("Open the Xbox player"), icon: Icon.tv, primary: true) { m.xbox = .setup }.padding(.top, 12)
-            if signed { KLink(L("Sign out of Microsoft")) { askSignOut = true } }
-            Callout(L("While translating, the app copies the player's picture to read it. If the copies come out black, the player offers to record the screen instead (iOS asks you to allow it).")).padding(.top, 12)
-        }
-        .task(id: m.xbox == nil) { xboxSigned = await XboxPlayer.signedIn() }
-        .confirmationDialog(L("Sign out of Microsoft in the Xbox player?"), isPresented: $askSignOut, titleVisibility: .visible) {
-            Button(L("Sign out"), role: .destructive) {
-                Task {
-                    await XboxPlayer.signOut()
-                    xboxSigned = await XboxPlayer.signedIn()
-                }
-            }
         }
     }
 }

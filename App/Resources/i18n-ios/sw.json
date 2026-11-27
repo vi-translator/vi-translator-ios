@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "HDMI ya konsoli kwenye HDMI in ya kadi; HDMI out ya kadi kwenye TV.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "USB ya kadi kwenye mlango wa USB-C wa iPad (kadi ya USB-A kupitia adapta au hub ya USB-C). Kadi inayohitaji kiendeshi chake yenyewe haifanyi kazi: lazima iwe kadi ya UVC (chomeka-ucheze).",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Cheza › Anza kutafsiri: iPadOS huuliza mara moja kuruhusu VI Translator kutumia kadi (kama kamera).",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Kwenye PS5, zima HDCP (Settings › System › HDMI), la sivyo kadi haitapata picha."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Kwenye PS5, zima HDCP (Settings › System › HDMI), la sivyo kadi haitapata picha.",
+ "Connecting to the Xbox…": "Inaunganisha kwenye Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Sauti ya mchezo kwenye simu: bado hakuna sauti kutoka Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: simu hupokea mtiririko wa picha ya Xbox ili kuisoma (bila sauti). Acha simu kwenye VI Translator unapocheza.",
+ "Sign in with a code and choose the console once.": "Ingia kwa msimbo na uchague koni mara moja tu.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Simu inatiririsha picha ya Xbox ili kuisoma (bila kidhibiti: endelea kucheza kwa kidhibiti chako kwenye Xbox)."
 }

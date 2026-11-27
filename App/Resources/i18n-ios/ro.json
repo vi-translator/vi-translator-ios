@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "HDMI-ul consolei în intrarea HDMI a plăcii; ieșirea HDMI a plăcii în televizor.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "USB-ul plăcii în portul USB-C al iPad-ului (o placă USB-A printr-un adaptor sau hub USB-C). O placă ce necesită propriul driver nu funcționează: trebuie să fie o placă UVC (plug-and-play).",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Joc › Începe traducerea: iPadOS cere o singură dată permisiunea ca VI Translator să folosească placa (drept cameră).",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Pe PS5, dezactivați HDCP (Setări › Sistem › HDMI), altfel placa nu primește imagine."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Pe PS5, dezactivați HDCP (Setări › Sistem › HDMI), altfel placa nu primește imagine.",
+ "Connecting to the Xbox…": "Se conectează la Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Sunetul jocului pe telefon: încă niciun sunet de la Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefonul preia imaginea Xbox în flux ca s-o citească (fără sunet). Țineți telefonul pe VI Translator în timp ce jucați.",
+ "Sign in with a code and choose the console once.": "Conectați-vă cu un cod și alegeți consola o singură dată.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefonul primește în flux imaginea de pe Xbox pentru a o citi (fără controller: continuați să jucați cu controllerul pe Xbox)."
 }

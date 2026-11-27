@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "HDMI ของคอนโซลเข้า HDMI in ของการ์ด และ HDMI out ของการ์ดเข้าทีวี",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "เสียบ USB ของการ์ดเข้าช่อง USB-C ของ iPad (การ์ด USB-A ให้ต่อผ่านอะแดปเตอร์หรือฮับ USB-C) การ์ดที่ต้องใช้ไดรเวอร์เฉพาะจะใช้ไม่ได้: ต้องเป็นการ์ด UVC (เสียบแล้วใช้ได้ทันที)",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "เล่น › เริ่มแปล: iPadOS จะถามหนึ่งครั้งเพื่ออนุญาตให้ VI Translator ใช้การ์ด (เป็นกล้อง)",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "บน PS5 ให้ปิด HDCP (การตั้งค่า › ระบบ › HDMI) มิฉะนั้นการ์ดจะไม่ได้รับภาพ"
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "บน PS5 ให้ปิด HDCP (การตั้งค่า › ระบบ › HDMI) มิฉะนั้นการ์ดจะไม่ได้รับภาพ",
+ "Connecting to the Xbox…": "กำลังเชื่อมต่อกับ Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "เสียงเกมบนโทรศัพท์: ยังไม่มีเสียงจาก Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: โทรศัพท์สตรีมภาพของ Xbox มาเพื่ออ่าน (ไม่มีเสียง) เปิด VI Translator ค้างไว้บนโทรศัพท์ขณะเล่น",
+ "Sign in with a code and choose the console once.": "ลงชื่อเข้าใช้ด้วยรหัสและเลือกคอนโซลครั้งเดียว",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "โทรศัพท์สตรีมภาพของ Xbox เพื่ออ่าน (ไม่มีคอนโทรลเลอร์: เล่นต่อด้วยคอนโทรลเลอร์ของคุณบน Xbox)"
 }

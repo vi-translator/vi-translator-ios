@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "কনসোলের HDMI কার্ডের HDMI ইন-এ; কার্ডের HDMI আউট টিভিতে।",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "কার্ডের USB iPad-এর USB-C পোর্টে (USB-A কার্ড হলে USB-C অ্যাডাপ্টার বা হাব দিয়ে)। নিজস্ব ড্রাইভার লাগে এমন কার্ড কাজ করে না: এটি UVC (প্লাগ-অ্যান্ড-প্লে) কার্ড হতে হবে।",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "খেলা › অনুবাদ শুরু করুন: iPadOS একবার জিজ্ঞেস করে VI Translator-কে কার্ডটি (ক্যামেরা হিসেবে) ব্যবহার করতে দেবে কি না।",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5-এ HDCP বন্ধ করুন (Settings › System › HDMI), নইলে কার্ড কোনো ছবি পাবে না।"
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5-এ HDCP বন্ধ করুন (Settings › System › HDMI), নইলে কার্ড কোনো ছবি পাবে না।",
+ "Connecting to the Xbox…": "Xbox-এ সংযোগ হচ্ছে…",
+ "Game sound on the phone: no sound from the Xbox yet": "ফোনে গেমের শব্দ: Xbox থেকে এখনো কোনো শব্দ নেই",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: ফোন Xbox-এর ছবি স্ট্রিম করে তা পড়ে (শব্দ ছাড়া)। খেলার সময় ফোনে VI Translator খোলা রাখুন।",
+ "Sign in with a code and choose the console once.": "কোড দিয়ে সাইন ইন করুন এবং কনসোল একবারই বেছে নিন।",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "ফোন Xbox-এর ছবি পড়ার জন্য স্ট্রিম করে (কন্ট্রোলার নেই: Xbox-এ আপনার কন্ট্রোলার দিয়ে খেলতে থাকুন)।"
 }

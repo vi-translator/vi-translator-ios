@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "HDMI konsoli do wejścia HDMI karty; wyjście HDMI karty do telewizora.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "USB karty do portu USB-C iPada (karta z USB-A przez przejściówkę lub hub USB-C). Karta wymagająca własnego sterownika nie zadziała: musi to być karta UVC (plug-and-play).",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Graj › Zacznij tłumaczyć: iPadOS raz zapyta o zgodę na używanie karty przez VI Translator (jako kamery).",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Na PS5 wyłącz HDCP (Ustawienia › System › HDMI), inaczej karta nie dostanie obrazu."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Na PS5 wyłącz HDCP (Ustawienia › System › HDMI), inaczej karta nie dostanie obrazu.",
+ "Connecting to the Xbox…": "Łączenie z Xboxem…",
+ "Game sound on the phone: no sound from the Xbox yet": "Dźwięk gry na telefonie: brak dźwięku z Xboxa",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefon odbiera obraz z Xboxa, aby go odczytywać (bez dźwięku). Podczas gry trzymaj na telefonie otwartą VI Translator.",
+ "Sign in with a code and choose the console once.": "Zaloguj się kodem i wybierz konsolę tylko raz.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefon przesyła obraz z Xboxa, by go odczytać (bez kontrolera: graj dalej kontrolerem na Xboxie)."
 }

@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "கன்சோலின் HDMI-ஐ கார்டின் HDMI உள்ளீட்டில்; கார்டின் HDMI வெளியீட்டை டிவியில்.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "கார்டின் USB-ஐ iPad-இன் USB-C போர்ட்டில் (USB-A கார்டு என்றால் USB-C அடாப்டர் அல்லது ஹப் வழியாக). சொந்த டிரைவர் தேவைப்படும் கார்டு வேலை செய்யாது: அது UVC (பிளக்-அண்ட்-பிளே) கார்டாக இருக்க வேண்டும்.",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "விளையாடு › மொழிபெயர்க்கத் தொடங்கு: கார்டை (கேமராவாக) பயன்படுத்த VI Translator-ஐ அனுமதிக்குமாறு iPadOS ஒருமுறை கேட்கும்.",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5-இல் HDCP-ஐ அணைக்கவும் (அமைப்புகள் › சிஸ்டம் › HDMI), இல்லையெனில் கார்டுக்குப் படம் கிடைக்காது."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5-இல் HDCP-ஐ அணைக்கவும் (அமைப்புகள் › சிஸ்டம் › HDMI), இல்லையெனில் கார்டுக்குப் படம் கிடைக்காது.",
+ "Connecting to the Xbox…": "Xbox உடன் இணைக்கிறது…",
+ "Game sound on the phone: no sound from the Xbox yet": "போனில் கேம் ஒலி: Xbox-இலிருந்து இன்னும் ஒலி வரவில்லை",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox ரிமோட் பிளே: Xbox-இன் படத்தைப் படிப்பதற்காக போன் அதை ஸ்ட்ரீம் செய்கிறது (ஒலி இல்லை). விளையாடும்போது போனை VI Translator-இலேயே வைத்திருக்கவும்.",
+ "Sign in with a code and choose the console once.": "குறியீட்டைக் கொண்டு உள்நுழைந்து கன்சோலை ஒருமுறை மட்டும் தேர்ந்தெடுக்கவும்.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Xbox-இன் படத்தைப் படிப்பதற்காக போன் அதை ஸ்ட்ரீம் செய்கிறது (கன்ட்ரோலர் இல்லை: Xbox-இல் உங்கள் கன்ட்ரோலரைக் கொண்டே தொடர்ந்து விளையாடுங்கள்)."
 }

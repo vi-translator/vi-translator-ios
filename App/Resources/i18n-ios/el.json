@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "Το HDMI της κονσόλας στην είσοδο HDMI της κάρτας· την έξοδο HDMI της κάρτας στην τηλεόραση.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "Το USB της κάρτας στη θύρα USB-C του iPad (μια κάρτα USB-A μέσω προσαρμογέα ή hub USB-C). Μια κάρτα που χρειάζεται δικό της πρόγραμμα οδήγησης δεν λειτουργεί: πρέπει να είναι κάρτα UVC (plug-and-play).",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Παιχνίδι › Έναρξη μετάφρασης: το iPadOS ζητά μία φορά να επιτρέψετε στο VI Translator να χρησιμοποιεί την κάρτα (ως κάμερα).",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Στο PS5, απενεργοποιήστε το HDCP (Ρυθμίσεις › Σύστημα › HDMI), αλλιώς η κάρτα δεν λαμβάνει εικόνα."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Στο PS5, απενεργοποιήστε το HDCP (Ρυθμίσεις › Σύστημα › HDMI), αλλιώς η κάρτα δεν λαμβάνει εικόνα.",
+ "Connecting to the Xbox…": "Σύνδεση στο Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Ήχος παιχνιδιού στο τηλέφωνο: δεν υπάρχει ακόμα ήχος από το Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: το τηλέφωνο λαμβάνει ροή της εικόνας του Xbox για να τη διαβάσει (χωρίς ήχο). Κρατήστε το τηλέφωνο στο VI Translator ενώ παίζετε.",
+ "Sign in with a code and choose the console once.": "Συνδεθείτε με κωδικό και επιλέξτε την κονσόλα μία φορά.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Το τηλέφωνο λαμβάνει ροή της εικόνας του Xbox για να τη διαβάσει (χωρίς χειριστήριο: συνεχίστε να παίζετε με το χειριστήριό σας στο Xbox)."
 }

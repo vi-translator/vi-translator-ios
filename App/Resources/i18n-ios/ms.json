@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "HDMI konsol ke HDMI masuk kad; HDMI keluar kad ke TV.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "USB kad ke port USB-C iPad (kad USB-A melalui penyesuai atau hab USB-C). Kad yang memerlukan pemacunya sendiri tidak berfungsi: ia mesti kad UVC (pasang dan main).",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Main › Mula menterjemah: iPadOS meminta sekali untuk membenarkan VI Translator menggunakan kad (sebagai kamera).",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Pada PS5, matikan HDCP (Tetapan › Sistem › HDMI), jika tidak kad tidak mendapat gambar."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Pada PS5, matikan HDCP (Tetapan › Sistem › HDMI), jika tidak kad tidak mendapat gambar.",
+ "Connecting to the Xbox…": "Menyambung ke Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Bunyi permainan pada telefon: belum ada bunyi daripada Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefon menstrim gambar Xbox untuk membacanya (tanpa bunyi). Biarkan telefon pada VI Translator semasa bermain.",
+ "Sign in with a code and choose the console once.": "Log masuk dengan kod dan pilih konsol sekali sahaja.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefon menstrim gambar Xbox untuk membacanya (tanpa pengawal: teruskan bermain dengan pengawal anda pada Xbox)."
 }

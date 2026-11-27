@@ -89,13 +89,14 @@ Notes for App Review:
 > <link>. Without a console, the app's settings, languages and translation services can be seen in
 > Setup, and *Show on › Share on my home network* shows the live page other devices can open.
 > 1. Setup › Source: PlayStation 5 (sign in to PSN, find the PS5, type the PIN it shows under
->    Settings › System › Remote Play › Link Device), or Xbox (sign in to Microsoft's own Remote
->    Play player, shown in the app).
+>    Settings › System › Remote Play › Link Device), or Xbox (sign in to Microsoft with a code
+>    typed at microsoft.com/link, then choose the console; or Microsoft's own Remote Play web
+>    player, shown in the app).
 > 2. Setup › Show on › Connect a TV: open VI Translator on the TV and type the 6-digit code it shows.
 > 3. Play › Start translating: the translations show on the TV and on the phone.
 > Background audio: with Setup › Source › "Keep translating with the screen off" (off by default),
-> the app plays the game's own sound, received from the console with the picture, so translating
-> goes on with the screen locked; the sound is the user's game audio.
+> the app plays the game's own sound, received from the console (PS5 or Xbox) with the picture, so
+> translating goes on with the screen locked; the sound is the user's game audio.
 > Capture card (iPad with USB-C only): the camera permission is asked for to read a USB capture
 > card's picture (the console's HDMI), which iPadOS treats as an external camera; the app never uses
 > the iPad's own cameras.

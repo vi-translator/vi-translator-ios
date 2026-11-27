@@ -1,12 +1,18 @@
 # The Xcode project, made by XcodeGen (brew install xcodegen; then `xcodegen`): one universal app
 # for iPhone and iPad, and its unit tests. The two libraries it links are built first by
-# native/build-core.sh (the shared core) and native/build-chiaki.sh (PS Remote Play).
+# native/build-core.sh (the shared core) and native/build-chiaki.sh (PS Remote Play); WebRTC (the
+# Xbox's Remote Play) comes as a Swift package.
 name: VITranslator
 options:
   bundleIdPrefix: app.vitranslator
   deploymentTarget:
     iOS: "16.0"
   createIntermediateGroups: true
+# WebRTC for the Xbox's Remote Play stream (App/Xbox): Google's library, built for iOS by stasel/WebRTC
+packages:
+  WebRTC:
+    url: https://github.com/stasel/WebRTC
+    exactVersion: 157.0.0
 settings:
   base:
     SWIFT_VERSION: "5.0"
@@ -44,6 +50,7 @@ targets:
         embed: false
       - framework: Frameworks/VitChiaki.xcframework
         embed: false
+      - package: WebRTC
       - sdk: VideoToolbox.framework
       - sdk: CoreMedia.framework
       - sdk: CoreVideo.framework

@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "HDMI ng console sa HDMI in ng card; HDMI out ng card sa TV.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "Ang USB ng card sa USB-C port ng iPad (USB-A na card sa pamamagitan ng USB-C adapter o hub). Hindi gumagana ang card na nangangailangan ng sariling driver: dapat itong UVC (plug-and-play) na card.",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Laro › Simulan ang pagsasalin: isang beses magtatanong ang iPadOS kung papayagan ang VI Translator na gamitin ang card (bilang camera).",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Sa PS5, i-off ang HDCP (Settings › System › HDMI), kung hindi ay walang larawang makukuha ang card."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "Sa PS5, i-off ang HDCP (Settings › System › HDMI), kung hindi ay walang larawang makukuha ang card.",
+ "Connecting to the Xbox…": "Kumokonekta sa Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Tunog ng laro sa phone: wala pang tunog mula sa Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: ini-stream ng phone ang larawan ng Xbox para basahin ito (walang tunog). Panatilihin ang phone sa VI Translator habang naglalaro.",
+ "Sign in with a code and choose the console once.": "Mag-sign in gamit ang code at piliin ang console nang isang beses lang.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Ini-stream ng telepono ang larawan ng Xbox para basahin ito (walang controller: patuloy na maglaro gamit ang controller mo sa Xbox)."
 }

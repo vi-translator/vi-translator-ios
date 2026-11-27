@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "Konsolun HDMI'ı kartın HDMI girişine; kartın HDMI çıkışı televizyona.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "Kartın USB'si iPad'in USB-C bağlantı noktasına (USB-A kart, USB-C adaptör veya hub üzerinden). Kendi sürücüsünü gerektiren kart çalışmaz: UVC (tak-çalıştır) bir kart olmalı.",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "Oyna › Çevirmeye başla: iPadOS, VI Translator'ın kartı (kamera olarak) kullanmasına izin vermen için bir kez sorar.",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5'te HDCP'yi kapat (Ayarlar › Sistem › HDMI), yoksa kart görüntü alamaz."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5'te HDCP'yi kapat (Ayarlar › Sistem › HDMI), yoksa kart görüntü alamaz.",
+ "Connecting to the Xbox…": "Xbox'a bağlanılıyor…",
+ "Game sound on the phone: no sound from the Xbox yet": "Telefonda oyun sesi: Xbox'tan henüz ses yok",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefon, okumak için Xbox'ın görüntüsünü akış olarak alır (ses yok). Oynarken telefonu VI Translator'da tut.",
+ "Sign in with a code and choose the console once.": "Bir kodla oturum aç ve konsolu bir kez seç.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefon, Xbox'ın görüntüsünü okumak için akış olarak alır (kumanda yok: Xbox'ta kumandanla oynamaya devam et)."
 }

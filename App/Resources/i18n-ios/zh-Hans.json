@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "主机的 HDMI 接到采集卡的 HDMI 输入；采集卡的 HDMI 输出接到电视。",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "将采集卡的 USB 插入 iPad 的 USB-C 接口（USB-A 采集卡需通过 USB-C 转接头或扩展坞）。需要专用驱动的采集卡无法使用：必须是 UVC（即插即用）采集卡。",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "游戏 › 开始翻译：iPadOS 会询问一次是否允许 VI Translator 使用采集卡（作为摄像头）。",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "请在 PS5 上关闭 HDCP（设置 › 系统 › HDMI），否则采集卡收不到画面。"
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "请在 PS5 上关闭 HDCP（设置 › 系统 › HDMI），否则采集卡收不到画面。",
+ "Connecting to the Xbox…": "正在连接 Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "手机播放游戏声音：尚未收到 Xbox 的声音",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox 远程游玩：手机串流 Xbox 的画面以进行读取（无声音）。游戏时请让手机保持在 VI Translator 中。",
+ "Sign in with a code and choose the console once.": "用代码登录，只需选择一次主机。",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "手机串流 Xbox 的画面用于读取（无手柄：请继续用 Xbox 上的手柄游玩）。"
 }

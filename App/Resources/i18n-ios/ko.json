@@ -33,5 +33,10 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "콘솔의 HDMI를 카드의 HDMI 입력에, 카드의 HDMI 출력을 TV에 연결합니다.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "카드의 USB를 iPad의 USB-C 포트에 연결합니다(USB-A 카드는 USB-C 어댑터나 허브를 통해). 전용 드라이버가 필요한 카드는 작동하지 않습니다: UVC(플러그 앤 플레이) 카드여야 합니다.",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "플레이 › 번역 시작: iPadOS가 VI Translator의 카드 사용(카메라로) 허용 여부를 한 번 묻습니다.",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5에서 HDCP를 끄세요(설정 › 시스템 › HDMI). 그렇지 않으면 카드에 화면이 들어오지 않습니다."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5에서 HDCP를 끄세요(설정 › 시스템 › HDMI). 그렇지 않으면 카드에 화면이 들어오지 않습니다.",
+ "Connecting to the Xbox…": "Xbox에 연결하는 중…",
+ "Game sound on the phone: no sound from the Xbox yet": "휴대폰에서 게임 소리: 아직 Xbox에서 소리가 오지 않음",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox 리모트 플레이: 휴대폰이 Xbox 화면을 스트리밍해 읽습니다(소리 없음). 플레이 중에는 휴대폰에서 VI Translator를 열어 두세요.",
+ "Sign in with a code and choose the console once.": "코드로 로그인하고 콘솔은 한 번만 선택하면 됩니다.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "휴대폰은 Xbox 화면을 읽기 위해 스트리밍합니다(컨트롤러 없음: Xbox에 연결된 컨트롤러로 계속 플레이하세요)."
 }
