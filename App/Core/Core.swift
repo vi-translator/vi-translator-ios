@@ -81,8 +81,17 @@ final class CoreHost: @unchecked Sendable {
         }
     }
 
+    /** (a restart and a start one after the other: a start during a restart would find the port still taken) */
+    private let serverLock = NSLock()
+
     @discardableResult
     func startServer() throws -> UInt16 {
+        serverLock.lock()
+        defer { serverLock.unlock() }
+        return try startServerLocked()
+    }
+
+    private func startServerLocked() throws -> UInt16 {
         do {
             return try engine.startTvServer(port: Self.port)
         } catch let e as CoreError {
@@ -91,6 +100,42 @@ final class CoreHost: @unchecked Sendable {
     }
 
     func stopServer() { engine.stopTvServer() }
+
+    /**
+     * Whether the TV page answers on this phone (blocks up to [timeout]). While iOS suspends the app,
+     * it may take back the page's listening socket: the page then never answers again, though it
+     * looks started (the core keeps it as it is), and the TVs can't come back.
+     */
+    func serverAnswers(timeout: TimeInterval = 2) -> Bool {
+        guard let url = URL(string: "http://127.0.0.1:\(Self.port)/common.js") else { return false }
+        final class Answer: @unchecked Sendable { var ok = false }
+        let answer = Answer()
+        let done = DispatchSemaphore(value: 0)
+        let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeout)
+        URLSession.shared.dataTask(with: req) { _, resp, _ in
+            answer.ok = (resp as? HTTPURLResponse)?.statusCode == 200
+            done.signal()
+        }.resume()
+        _ = done.wait(timeout: .now() + timeout + 1)
+        return answer.ok
+    }
+
+    /** The TV page stopped and started again (a new listening socket); the connected TVs stay connected. */
+    func restartServer() {
+        serverLock.lock()
+        defer { serverLock.unlock() }
+        stopServer()
+        // (the old page lets the port go within a moment: its thread looks at its stop flag every 60 ms)
+        for i in 0..<10 {
+            Thread.sleep(forTimeInterval: i == 0 ? 0.15 : 0.3)
+            do {
+                try startServerLocked()
+                return
+            } catch {
+                NSLog("the TV page didn't start again yet: \(error)")
+            }
+        }
+    }
 
     /** TVs waiting to be connected on the home network (a few seconds). */
     func findTvs() -> [FoundTv] { engine.findTvs().filter { !$0.connected } }

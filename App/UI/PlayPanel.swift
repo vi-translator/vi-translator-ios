@@ -79,6 +79,17 @@ struct PlayPanel: View {
             .buttonStyle(.plain)
             .accessibilityIdentifier("start")
             Muted(startNote, small: true).padding(.top, 6)
+            if m.tvLost {
+                Callout(L("The TV stopped getting translations while VI Translator was in the background.") + " "
+                    + L("Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background."), k.warn)
+                    .padding(.top, 8)
+                Muted(L("You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background."), small: true)
+                    .padding(.top, 6)
+                KLink(L("OK")) { m.tvLost = false }
+            } else if m.tvCount > 0 {
+                Muted(L("Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background."), small: true)
+                    .padding(.top, 4)
+            }
             SoundLine(feed: m.picture)
         }
     }

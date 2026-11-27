@@ -193,9 +193,13 @@ struct Ps5LinkView: View {
                     KInput(value: typedAddress, placeholder: "192.168.1.20", ltr: true) { typedAddress = $0 }
                 }
                 KButton(L("Use this address")) {
-                    let a = typedAddress.trimmingCharacters(in: .whitespaces)
+                    let a = Ps5.asciiDigits(typedAddress).trimmingCharacters(in: .whitespaces)
+                    if Ps5.looksLikePin(a) {
+                        toast = L("That looks like the 8-digit PIN: it goes in step 3. Here, type the PS5's IP address (like 192.168.1.20) or its host name.")
+                        return
+                    }
                     guard Ps5.validAddress(a) else {
-                        toast = L("That isn't an address like 192.168.1.20.")
+                        toast = L("That isn't an IP address (like 192.168.1.20) or a host name.")
                         return
                     }
                     setAddress(a, hosts.first { $0.addr == a }?.name ?? "")
@@ -242,7 +246,10 @@ struct Ps5LinkView: View {
     private var pinStep: some View {
         VStack(alignment: .leading, spacing: 0) {
             Muted(L("On the PS5: Settings › System › Remote Play › Link Device. It shows an 8-digit PIN, for about 5 minutes."), small: true)
-            TextField("0000 0000", text: Binding(get: { pin }, set: { pin = String($0.filter(\.isNumber).prefix(8)) }))
+            Muted(L("Digits only. Not the TV's 6-digit code, and not the PS5's address. A new PIN shows each time Link Device is opened: type the one on the screen now."), small: true)
+                .padding(.top, 4)
+            // (digits only, any script's typed as 0-9: Arabic-Indic digits from an Arabic keyboard too)
+            TextField("0000 0000", text: Binding(get: { pin }, set: { pin = String(Ps5.digitsOnly($0).prefix(8)) }))
                 .keyboardType(.numberPad)
                 .font(.system(size: k.base + 12, weight: .bold, design: .monospaced))
                 .multilineTextAlignment(.center)
@@ -262,32 +269,63 @@ struct Ps5LinkView: View {
 
     private func link() {
         guard !linking else { return }
-        guard pin.count == 8, let p = UInt32(pin) else {
-            linkMsg = L("The PIN has 8 digits.")
-            linkErr = true
+        guard Ps5.validAccount(account) else {
+            fail(L("Sign in to PSN first (step 1): the account ID isn't set."))
+            return
+        }
+        guard Ps5.validAddress(address) else {
+            fail(L("That isn't an IP address (like 192.168.1.20) or a host name."))
+            return
+        }
+        let digits = Ps5.digitsOnly(pin)
+        guard digits.count == 8, let p = UInt32(digits) else {
+            fail(L("The PIN has 8 digits."))
             return
         }
         linking = true
         linkMsg = L("Linking…")
         linkErr = false
         regist?.stop()
-        regist = PsRegist(host: address, accountIdB64: account, pin: p) { console in
+        let host = address
+        regist = PsRegist(host: host, accountIdB64: account, pin: p) { r in
             linking = false
             regist?.stop()
             regist = nil
-            if let console {
+            switch r {
+            case let .success(console):
                 Ps5.saved = console
                 saved = console
+                pin = ""
+                linkMsg = ""
                 m.rev += 1
-            } else {
-                linkMsg = L("The PS5 refused: check the PIN (it changes every few minutes) and that Remote Play is on.")
-                linkErr = true
+            case let .failure(f):
+                fail(message(f, host))
             }
         }
         if regist == nil {
             linking = false
-            linkMsg = L("The PS5 refused: check the PIN (it changes every few minutes) and that Remote Play is on.")
-            linkErr = true
+            fail(L("The PS5 refused: check the PIN (it changes every few minutes) and that Remote Play is on."))
+        }
+    }
+
+    private func fail(_ msg: String) {
+        linkMsg = msg
+        linkErr = true
+    }
+
+    /** What to do about a refused link, by what the PS5 said. */
+    private func message(_ f: PsLinkFailure, _ host: String) -> String {
+        switch f {
+        case .wrongPin:
+            return L("The PS5 didn't accept this PIN. A new PIN shows each time Link Device is opened: type the one on the PS5's screen now.")
+        case .notLinking:
+            return L("The PS5 isn't showing Link Device any more, so the PIN has expired. Open Settings › System › Remote Play › Link Device on the PS5 again and type the new PIN.")
+        case .notFound:
+            return L("No PS5 answered at {address}. Is it on, on the same network as this phone, and is the address right?", ("address", host))
+        case .badAccount:
+            return L("The PS5 refused the PSN account ID. Sign in to PSN again (step 1), then link with a new PIN.")
+        case .other:
+            return L("The PS5 refused: check the PIN (it changes every few minutes) and that Remote Play is on.")
         }
     }
 

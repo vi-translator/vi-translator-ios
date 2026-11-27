@@ -410,7 +410,38 @@ struct VitPsRegist
 	VitPsRegistCb cb;
 	void *user;
 	char *host;
+	/** why it failed, from chiaki's log lines (0: not known) */
+	int reason;
 };
+
+// chiaki-ng tells only "failed" when registering doesn't work; why is in its log lines (regist.c of
+// the pinned v1.10.1, on the registering thread, before its callback): they are read here to tell
+// the user what to do. Lines not recognised leave VIT_PS_REGIST_FAILED.
+static void regist_log_cb(ChiakiLogLevel level, const char *msg, void *user)
+{
+	VitPsRegist *r = user;
+	if(r && msg && level == CHIAKI_LOG_ERROR)
+	{
+		if(strstr(msg, "Reported Application Reason:"))
+		{
+			// CHIAKI_RP_APPLICATION_REASON_REGIST_FAILED ("probably invalid PIN") and _INVALID_PSN_ID
+			if(strstr(msg, "0x80108b09"))
+				r->reason = VIT_PS_REGIST_WRONG_PIN;
+			else if(strstr(msg, "0x80108b02"))
+				r->reason = VIT_PS_REGIST_BAD_ACCOUNT;
+			else
+				r->reason = VIT_PS_REGIST_FAILED;
+		}
+		else if(strstr(msg, "Regist received HTTP code"))
+			r->reason = VIT_PS_REGIST_WRONG_PIN; // (the reason line, if any, follows)
+		else if(strstr(msg, "refused the registration search"))
+			r->reason = VIT_PS_REGIST_NOT_LINKING;
+		else if(!r->reason && (strstr(msg, "getaddrinfo") || strstr(msg, "timed out waiting for search response")
+				|| strstr(msg, "failed to connect for search") || strstr(msg, "Regist connect failed")))
+			r->reason = VIT_PS_REGIST_NOT_FOUND;
+	}
+	log_cb(level, msg, NULL);
+}
 
 static void regist_cb(ChiakiRegistEvent *event, void *user)
 {
@@ -432,7 +463,7 @@ static void regist_cb(ChiakiRegistEvent *event, void *user)
 			break;
 		}
 		case CHIAKI_REGIST_EVENT_TYPE_FINISHED_FAILED:
-			r->cb(VIT_PS_REGIST_FAILED, NULL, r->user);
+			r->cb(r->reason ? r->reason : VIT_PS_REGIST_FAILED, NULL, r->user);
 			break;
 		case CHIAKI_REGIST_EVENT_TYPE_FINISHED_CANCELED:
 			r->cb(VIT_PS_REGIST_CANCELED, NULL, r->user);
@@ -446,10 +477,15 @@ int vit_ps_regist_start(VitPsRegist **out, const char *host, const uint8_t accou
 	VitPsRegist *r = calloc(1, sizeof(VitPsRegist));
 	if(!r)
 		return CHIAKI_ERR_MEMORY;
-	log_init(&r->log);
+	chiaki_log_init(&r->log, CHIAKI_LOG_ALL & ~CHIAKI_LOG_VERBOSE, regist_log_cb, r);
 	r->cb = cb;
 	r->user = user;
 	r->host = strdup(host);
+	if(!r->host)
+	{
+		free(r);
+		return CHIAKI_ERR_MEMORY;
+	}
 
 	ChiakiRegistInfo info;
 	memset(&info, 0, sizeof(info));

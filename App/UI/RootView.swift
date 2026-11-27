@@ -238,7 +238,11 @@ struct PinSheet: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L(incorrect ? "Wrong passcode: try again" : "The PS5 asks for the account's passcode")).font(k.font(k.base + 0.5, .bold)).foregroundColor(k.text)
             KInput(value: pin, placeholder: L("Passcode"), secure: true, ltr: true, number: true) { pin = $0 }
-            KButton(L("OK"), primary: true) { m.pin(pin) }
+            KButton(L("OK"), primary: true) {
+                // (digits only: an Arabic keyboard's digits as 0-9, as the PS5 wants them)
+                let d = Ps5.digitsOnly(pin)
+                if !d.isEmpty { m.pin(d) }
+            }
             Spacer()
         }
         .sheetCard(k)
