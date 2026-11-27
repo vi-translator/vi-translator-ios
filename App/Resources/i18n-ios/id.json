@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "TV berhenti menerima terjemahan saat VI Translator berada di latar belakang.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Biarkan VI Translator terbuka di ponsel ini saat bermain: TV mendapat terjemahan darinya, dan iOS menjeda aplikasi di latar belakang.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Anda tidak perlu aplikasi PS Remote Play: VI Translator terhubung sendiri ke PS5 (PS5 hanya men-stream ke satu aplikasi dalam satu waktu). Di iPad, Split View menjaga aplikasi lain tetap di sampingnya. Dengan PS5, “Tetap menerjemahkan saat layar mati” (Sumber) membuatnya tetap berjalan di latar belakang.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Kode TV terdiri dari 6 digit. PIN 8 digit adalah milik PS5: dimasukkan di Sumber › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Kode TV terdiri dari 6 digit. PIN 8 digit adalah milik PS5: dimasukkan di Sumber › PlayStation 5.",
+ "Connecting to the Xbox…": "Menghubungkan ke Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Suara game di ponsel: belum ada suara dari Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: ponsel men-stream gambar Xbox untuk membacanya (tanpa suara). Biarkan ponsel tetap di VI Translator saat bermain.",
+ "Sign in with a code and choose the console once.": "Masuk dengan kode dan pilih konsol sekali saja.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Ponsel men-stream gambar Xbox untuk membacanya (tanpa kontroler: tetap bermain dengan kontroler Anda di Xbox)."
 }

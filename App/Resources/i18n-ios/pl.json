@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "Telewizor przestał otrzymywać tłumaczenia, gdy VI Translator działała w tle.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Podczas gry trzymaj VI Translator otwartą na tym telefonie: telewizor dostaje z niej tłumaczenia, a iOS wstrzymuje aplikacje w tle.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Nie potrzebujesz aplikacji PS Remote Play: VI Translator sama łączy się z PS5 (PS5 przesyła obraz tylko do jednej aplikacji naraz). Na iPadzie Split View pozwala trzymać obok inną aplikację. Przy PS5 opcja „Tłumacz dalej przy wyłączonym ekranie” (Źródło) pozwala działać dalej w tle.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Kod telewizora ma 6 cyfr. 8-cyfrowy PIN jest z PS5: wpisuje się go w Źródło › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Kod telewizora ma 6 cyfr. 8-cyfrowy PIN jest z PS5: wpisuje się go w Źródło › PlayStation 5.",
+ "Connecting to the Xbox…": "Łączenie z Xboxem…",
+ "Game sound on the phone: no sound from the Xbox yet": "Dźwięk gry na telefonie: brak dźwięku z Xboxa",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefon odbiera obraz z Xboxa, aby go odczytywać (bez dźwięku). Podczas gry trzymaj na telefonie otwartą VI Translator.",
+ "Sign in with a code and choose the console once.": "Zaloguj się kodem i wybierz konsolę tylko raz.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefon przesyła obraz z Xboxa, by go odczytać (bez kontrolera: graj dalej kontrolerem na Xboxie)."
 }

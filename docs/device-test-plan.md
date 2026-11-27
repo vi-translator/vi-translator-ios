@@ -80,7 +80,27 @@ Container) if something fails.
 Needs: the Xbox with remote features on (Settings › Devices & connections › Remote features), Sleep
 power mode, and your Microsoft account.
 
-- [ ] Source › Xbox › Open the Xbox player: Microsoft's player loads (not a "get the app" page);
+### VI Translator's player (the default)
+
+- [ ] Source › Xbox: "VI Translator's player (recommended)" is chosen. Get a sign-in code: a code
+      shows; Open microsoft.com/link opens Safari (the code is copied); enter it there and sign in.
+      Back in the app, step 1 turns ✓ "Signed in to Microsoft." within a few seconds.
+- [ ] Step 2 lists the account's consoles (one: chosen by itself). Use this one; Change works.
+- [ ] Play › Start translating, the Xbox on: "Connecting to the Xbox…", then reading within ~20 s;
+      the preview shows the game; the TV shows the translations. Try 1080p and 720p (Stream quality).
+- [ ] The Xbox asleep (Sleep power mode): Start translating wakes it and streams.
+- [ ] No controller popup on the Xbox's screen, and the controller keeps working on the console
+      (the client registers a virtual pad 0 as xbox.com's player does: note anything odd).
+- [ ] Screen-off option on: the game's sound plays on the phone; lock the phone for 2 minutes:
+      the TV keeps getting translations; unlock: the preview comes back. Option off: leave the app
+      for over 25 s: "iOS paused the app in the background", and it starts again on return.
+- [ ] Stop, then Start again at once: the console accepts the new session.
+- [ ] Sign out: step 1 asks for a new code, the console is forgotten.
+- [ ] Wi-Fi with a strict NAT / mobile hotspot: a clear "Couldn't reach the Xbox over the network" error.
+
+### Microsoft's web player (the other choice)
+
+- [ ] Source › Xbox › Microsoft's web player › Open the Xbox player: Microsoft's player loads (not a "get the app" page);
       sign in; choose the console under Remote play. Close: "Signed in to Microsoft in the Xbox player."
 - [ ] Play › Start translating: the player opens and streams; the bar under it counts frames read.
 - [ ] Text in the game is read and the TV shows the translations.

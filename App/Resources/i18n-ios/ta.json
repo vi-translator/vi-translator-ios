@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "VI Translator பின்னணியில் இருந்தபோது டிவிக்கு மொழிபெயர்ப்புகள் வருவது நின்றுவிட்டது.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "விளையாடும்போது இந்த போனில் VI Translator-ஐத் திறந்தே வைக்கவும்: டிவி அதிலிருந்துதான் மொழிபெயர்ப்புகளைப் பெறுகிறது, மேலும் பின்னணியில் உள்ள செயலிகளை iOS இடைநிறுத்தும்.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "PS Remote Play செயலி தேவையில்லை: VI Translator தானே PS5-உடன் இணைகிறது (PS5 ஒரே நேரத்தில் ஒரு செயலிக்கு மட்டுமே ஸ்ட்ரீம் செய்யும்). iPad-இல் Split View மூலம் மற்றொரு செயலியை அருகில் வைத்திருக்கலாம். PS5 உடன், “திரை அணைந்திருக்கும்போதும் மொழிபெயர்ப்பைத் தொடர்” (மூலம்) பின்னணியிலும் அதைத் தொடர விடுகிறது.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "டிவியின் குறியீட்டில் 6 இலக்கங்கள் உள்ளன. 8 இலக்க PIN PS5-க்குரியது: அது மூலம் › PlayStation 5-இல் உள்ளிடப்பட வேண்டும்."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "டிவியின் குறியீட்டில் 6 இலக்கங்கள் உள்ளன. 8 இலக்க PIN PS5-க்குரியது: அது மூலம் › PlayStation 5-இல் உள்ளிடப்பட வேண்டும்.",
+ "Connecting to the Xbox…": "Xbox உடன் இணைக்கிறது…",
+ "Game sound on the phone: no sound from the Xbox yet": "போனில் கேம் ஒலி: Xbox-இலிருந்து இன்னும் ஒலி வரவில்லை",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox ரிமோட் பிளே: Xbox-இன் படத்தைப் படிப்பதற்காக போன் அதை ஸ்ட்ரீம் செய்கிறது (ஒலி இல்லை). விளையாடும்போது போனை VI Translator-இலேயே வைத்திருக்கவும்.",
+ "Sign in with a code and choose the console once.": "குறியீட்டைக் கொண்டு உள்நுழைந்து கன்சோலை ஒருமுறை மட்டும் தேர்ந்தெடுக்கவும்.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Xbox-இன் படத்தைப் படிப்பதற்காக போன் அதை ஸ்ட்ரீம் செய்கிறது (கன்ட்ரோலர் இல்லை: Xbox-இல் உங்கள் கன்ட்ரோலரைக் கொண்டே தொடர்ந்து விளையாடுங்கள்)."
 }

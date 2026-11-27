@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "De tv kreeg geen vertalingen meer terwijl VI Translator op de achtergrond stond.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Houd VI Translator open op deze telefoon tijdens het spelen: de tv krijgt de vertalingen daarvandaan, en iOS pauzeert apps op de achtergrond.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Je hebt de PS Remote Play-app niet nodig: VI Translator maakt zelf verbinding met de PS5 (de PS5 streamt naar één app tegelijk). Op een iPad houdt Split View een andere app ernaast. Met een PS5 laat ‘Blijven vertalen met het scherm uit’ (Bron) het op de achtergrond doorgaan.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "De code van de tv heeft 6 cijfers. De pincode van 8 cijfers is van de PS5: die hoort bij Bron › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "De code van de tv heeft 6 cijfers. De pincode van 8 cijfers is van de PS5: die hoort bij Bron › PlayStation 5.",
+ "Connecting to the Xbox…": "Verbinden met de Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Gamegeluid op de telefoon: nog geen geluid van de Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: de telefoon streamt het beeld van de Xbox om het te lezen (zonder geluid). Houd VI Translator open op de telefoon tijdens het spelen.",
+ "Sign in with a code and choose the console once.": "Meld je aan met een code en kies de console één keer.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "De telefoon streamt het beeld van de Xbox om het te lezen (geen controller: speel gewoon verder met je controller op de Xbox)."
 }

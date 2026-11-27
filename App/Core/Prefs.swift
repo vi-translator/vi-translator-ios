@@ -55,7 +55,7 @@ enum Prefs {
     }
 
     /**
-     * Keep translating with the screen off (PS5): the game's sound plays on the phone, so iOS keeps
+     * Keep translating with the screen off (PS5, and the Xbox with the app's own player): the game's sound plays on the phone, so iOS keeps
      * the app running in the background. Off by default.
      */
     static var screenOff: Bool {
@@ -79,6 +79,18 @@ enum Prefs {
     static var captureCard: String {
         get { d.string(forKey: "capture_card") ?? "" }
         set { d.set(newValue, forKey: "capture_card") }
+    }
+
+    /** the Xbox stream's resolution: 720 or 1080 (the default; Microsoft picks it by the client's system) */
+    static var xboxResolution: Int {
+        get { d.object(forKey: "xbox_resolution") as? Int ?? 1080 }
+        set { d.set(newValue, forKey: "xbox_resolution") }
+    }
+
+    /** the Xbox through Microsoft's web player in the app (the old way: the screen stays on) instead of the app's own stream */
+    static var xboxWebPlayer: Bool {
+        get { d.object(forKey: "xbox_web_player") as? Bool ?? false }
+        set { d.set(newValue, forKey: "xbox_web_player") }
     }
 
     /** the PS5 stream's resolution: 720 (the default) or 1080 */

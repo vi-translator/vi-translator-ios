@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "La TV dejó de recibir traducciones mientras VI Translator estaba en segundo plano.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Mantén VI Translator abierta en este celular mientras juegas: la TV recibe las traducciones de ella, e iOS pausa las apps en segundo plano.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "No necesitas la app PS Remote Play: VI Translator se conecta a la PS5 por sí misma (la PS5 transmite a una sola app a la vez). En un iPad, Split View mantiene otra app a su lado. Con una PS5, “Seguir traduciendo con la pantalla apagada” (Origen) permite que siga en segundo plano.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "El código de la TV tiene 6 dígitos. El PIN de 8 dígitos es el de la PS5: va en Origen › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "El código de la TV tiene 6 dígitos. El PIN de 8 dígitos es el de la PS5: va en Origen › PlayStation 5.",
+ "Connecting to the Xbox…": "Conectando con la Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Sonido del juego en el celular: aún no llega sonido de la Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: el celular recibe la imagen de la Xbox para leerla (sin sonido). Mantén el celular en VI Translator mientras juegas.",
+ "Sign in with a code and choose the console once.": "Inicia sesión con un código y elige la consola una sola vez.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "El celular transmite la imagen de la Xbox para leerla (sin control: sigue jugando con tu control en la Xbox)."
 }

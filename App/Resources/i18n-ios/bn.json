@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "VI Translator ব্যাকগ্রাউন্ডে থাকার সময় টিভি অনুবাদ পাওয়া বন্ধ করে দিয়েছিল।",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "খেলার সময় এই ফোনে VI Translator খোলা রাখুন: টিভি এটি থেকেই অনুবাদ পায়, আর iOS ব্যাকগ্রাউন্ডের অ্যাপ থামিয়ে দেয়।",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "আপনার PS Remote Play অ্যাপের দরকার নেই: VI Translator নিজেই PS5-এর সাথে সংযোগ করে (PS5 একবারে একটি অ্যাপেই স্ট্রিম করে)। iPad-এ Split View দিয়ে পাশে আরেকটি অ্যাপ রাখা যায়। PS5-এর ক্ষেত্রে, “স্ক্রিন বন্ধ থাকলেও অনুবাদ চালু রাখুন” (উৎস) দিয়ে এটি ব্যাকগ্রাউন্ডেও চলতে থাকে।",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "টিভির কোডে 6টি অঙ্ক থাকে। 8 অঙ্কের PIN হলো PS5-এর: এটি উৎস › PlayStation 5-এ দিতে হয়।"
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "টিভির কোডে 6টি অঙ্ক থাকে। 8 অঙ্কের PIN হলো PS5-এর: এটি উৎস › PlayStation 5-এ দিতে হয়।",
+ "Connecting to the Xbox…": "Xbox-এ সংযোগ হচ্ছে…",
+ "Game sound on the phone: no sound from the Xbox yet": "ফোনে গেমের শব্দ: Xbox থেকে এখনো কোনো শব্দ নেই",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: ফোন Xbox-এর ছবি স্ট্রিম করে তা পড়ে (শব্দ ছাড়া)। খেলার সময় ফোনে VI Translator খোলা রাখুন।",
+ "Sign in with a code and choose the console once.": "কোড দিয়ে সাইন ইন করুন এবং কনসোল একবারই বেছে নিন।",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "ফোন Xbox-এর ছবি পড়ার জন্য স্ট্রিম করে (কন্ট্রোলার নেই: Xbox-এ আপনার কন্ট্রোলার দিয়ে খেলতে থাকুন)।"
 }

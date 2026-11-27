@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "VI Translator बॅकग्राउंडमध्ये असताना टीव्हीला भाषांतरे मिळणे बंद झाले.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "खेळताना या फोनवर VI Translator उघडे ठेवा: टीव्हीला भाषांतरे त्यातूनच मिळतात, आणि iOS बॅकग्राउंडमधील ॲप्स थांबवते.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "तुम्हाला PS Remote Play ॲपची गरज नाही: VI Translator स्वतःच PS5 शी जोडले जाते (PS5 एका वेळी एकाच ॲपला स्ट्रीम करतो). iPad वर Split View मुळे दुसरे ॲप त्याच्या शेजारी ठेवता येते. PS5 सोबत, “स्क्रीन बंद असतानाही भाषांतर चालू ठेवा” (स्रोत) मुळे ते बॅकग्राउंडमध्येही चालू राहते.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "टीव्हीच्या कोडमध्ये 6 अंक असतात. 8 अंकी PIN PS5 चा आहे: तो स्रोत › PlayStation 5 मध्ये टाकायचा असतो."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "टीव्हीच्या कोडमध्ये 6 अंक असतात. 8 अंकी PIN PS5 चा आहे: तो स्रोत › PlayStation 5 मध्ये टाकायचा असतो.",
+ "Connecting to the Xbox…": "Xbox शी कनेक्ट होत आहे…",
+ "Game sound on the phone: no sound from the Xbox yet": "फोनवर गेमचा आवाज: Xbox कडून अजून आवाज नाही",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: फोन Xbox चे चित्र स्ट्रीम करून ते वाचतो (आवाजाशिवाय). खेळताना फोनवर VI Translator उघडे ठेवा.",
+ "Sign in with a code and choose the console once.": "कोडने साइन इन करा आणि कन्सोल एकदाच निवडा.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "फोन Xbox चे चित्र वाचण्यासाठी स्ट्रीम करतो (कंट्रोलर नाही: Xbox वर तुमच्या कंट्रोलरने खेळत राहा)."
 }

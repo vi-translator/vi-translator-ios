@@ -96,7 +96,9 @@ struct PlayPanel: View {
 
     private var startNote: String {
         switch Prefs.console {
-        case "xbox": return L("Xbox: Microsoft's Remote Play player opens; keep the phone's screen on while playing.")
+        case "xbox":
+            return Prefs.xboxWebPlayer ? L("Xbox: Microsoft's Remote Play player opens; keep the phone's screen on while playing.")
+                : L("Keep VI Translator open on the screen while playing: iOS pauses apps in the background.")
         case "ps5": return L("Keep VI Translator open on the screen while playing: iOS pauses apps in the background.")
         case "capture": return L("Keep VI Translator open on the screen while playing: iPadOS stops the capture card for apps in the background.")
         default: return L("Choose your console in Source first.")
@@ -111,7 +113,12 @@ struct PlayPanel: View {
         let source: String
         switch console {
         case "ps5": source = ps.map { "PlayStation 5 · \($0.nickname.isEmpty ? $0.host : $0.nickname)" } ?? L("PlayStation 5 (not linked yet)")
-        case "xbox": source = "Xbox"
+        case "xbox":
+            if Prefs.xboxWebPlayer {
+                source = "Xbox"
+            } else {
+                source = XboxConsole.saved.map { "Xbox · \($0.title)" } ?? L("Sign in to Microsoft and choose your Xbox in Setup first.")
+            }
         case "capture": source = L("Capture card") + (CaptureCard.chosen().map { " · \($0.name)" } ?? "")
         default: source = L("Not chosen yet")
         }

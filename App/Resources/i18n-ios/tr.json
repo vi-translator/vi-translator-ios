@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "VI Translator arka plandayken televizyon çeviri almayı bıraktı.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Oynarken VI Translator'ı bu telefonda açık tut: televizyon çevirileri ondan alır ve iOS arka plandaki uygulamaları duraklatır.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "PS Remote Play uygulamasına ihtiyacın yok: VI Translator PS5'e kendisi bağlanır (PS5 aynı anda yalnızca bir uygulamaya yayın yapar). iPad'de Split View, yanında başka bir uygulamayı açık tutar. PS5 ile “Ekran kapalıyken çeviriye devam et” (Kaynak), arka planda devam etmesini sağlar.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Televizyonun kodu 6 hanelidir. 8 haneli PIN PS5'indir: Kaynak › PlayStation 5'e girilir."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Televizyonun kodu 6 hanelidir. 8 haneli PIN PS5'indir: Kaynak › PlayStation 5'e girilir.",
+ "Connecting to the Xbox…": "Xbox'a bağlanılıyor…",
+ "Game sound on the phone: no sound from the Xbox yet": "Telefonda oyun sesi: Xbox'tan henüz ses yok",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefon, okumak için Xbox'ın görüntüsünü akış olarak alır (ses yok). Oynarken telefonu VI Translator'da tut.",
+ "Sign in with a code and choose the console once.": "Bir kodla oturum aç ve konsolu bir kez seç.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefon, Xbox'ın görüntüsünü okumak için akış olarak alır (kumanda yok: Xbox'ta kumandanla oynamaya devam et)."
 }

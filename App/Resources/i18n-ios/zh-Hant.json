@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "VI Translator 在背景期間，電視沒有再收到譯文。",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "遊玩時請在這支手機上保持開啟 VI Translator：電視從它取得譯文，而 iOS 會暫停背景中的應用程式。",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "你不需要 PS Remote Play 應用程式：VI Translator 會自行連線至 PS5（PS5 一次只能串流到一個應用程式）。在 iPad 上，可用「分割畫面」讓另一個應用程式留在旁邊。使用 PS5 時，「關閉螢幕後繼續翻譯」（來源）可讓它在背景繼續運作。",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "電視的代碼為 6 位數字。8 位數 PIN 屬於 PS5：應在「來源 › PlayStation 5」中輸入。"
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "電視的代碼為 6 位數字。8 位數 PIN 屬於 PS5：應在「來源 › PlayStation 5」中輸入。",
+ "Connecting to the Xbox…": "正在連線到 Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "手機播放遊戲聲音：尚未收到 Xbox 的聲音",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox 遙控遊玩：手機串流 Xbox 的畫面以進行讀取（無聲音）。遊玩時請讓手機保持在 VI Translator 中。",
+ "Sign in with a code and choose the console once.": "用代碼登入，只需選擇一次主機。",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "手機串流 Xbox 的畫面用於讀取（無控制器：請繼續用 Xbox 上的控制器遊玩）。"
 }

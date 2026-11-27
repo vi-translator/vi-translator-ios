@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "وقتی VI Translator در پس‌زمینه بود، تلویزیون دیگر ترجمه‌ها را دریافت نکرد.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "هنگام بازی، VI Translator را روی این گوشی باز نگه دارید: تلویزیون ترجمه‌ها را از آن می‌گیرد و iOS برنامه‌های پس‌زمینه را متوقف می‌کند.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "به برنامهٔ PS Remote Play نیازی ندارید: VI Translator خودش به PS5 وصل می‌شود (PS5 در هر لحظه فقط به یک برنامه استریم می‌کند). در iPad، Split View یک برنامهٔ دیگر را کنار آن نگه می‌دارد. با PS5، گزینهٔ «ادامهٔ ترجمه با صفحهٔ خاموش» (منبع) باعث می‌شود در پس‌زمینه ادامه دهد.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "کد تلویزیون 6 رقم دارد. PIN با 8 رقم مال PS5 است: جای آن در منبع › PlayStation 5 است."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "کد تلویزیون 6 رقم دارد. PIN با 8 رقم مال PS5 است: جای آن در منبع › PlayStation 5 است.",
+ "Connecting to the Xbox…": "در حال اتصال به Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "صدای بازی روی گوشی: هنوز صدایی از Xbox نرسیده است",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "بازی از راه دور Xbox: گوشی تصویر Xbox را برای خواندن دریافت می‌کند (بدون صدا). هنگام بازی، گوشی را روی VI Translator نگه دارید.",
+ "Sign in with a code and choose the console once.": "با یک کد وارد شوید و کنسول را یک بار انتخاب کنید.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "گوشی تصویر Xbox را برای خواندن پخش می‌کند (بدون دسته: با دستهٔ خود روی Xbox به بازی ادامه دهید)."
 }

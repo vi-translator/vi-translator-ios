@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "جب VI Translator بیک گراؤنڈ میں تھا تو ٹی وی کو ترجمے ملنا بند ہو گئے۔",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "کھیلتے وقت اس فون پر VI Translator کھلا رکھیں: ٹی وی ترجمے اسی سے لیتا ہے، اور iOS بیک گراؤنڈ میں ایپس کو روک دیتا ہے۔",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "آپ کو PS Remote Play ایپ کی ضرورت نہیں: VI Translator خود PS5 سے جڑتا ہے (PS5 ایک وقت میں ایک ہی ایپ کو اسٹریم کرتا ہے)۔ iPad پر Split View کے ذریعے دوسری ایپ اس کے ساتھ رکھی جا سکتی ہے۔ PS5 کے ساتھ، “اسکرین بند ہونے پر بھی ترجمہ جاری رکھیں” (سورس) سے یہ بیک گراؤنڈ میں بھی چلتا رہتا ہے۔",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "ٹی وی کے کوڈ میں 6 ہندسے ہوتے ہیں۔ 8 ہندسوں کا PIN PS5 کا ہے: یہ سورس › PlayStation 5 میں ڈالا جاتا ہے۔"
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "ٹی وی کے کوڈ میں 6 ہندسے ہوتے ہیں۔ 8 ہندسوں کا PIN PS5 کا ہے: یہ سورس › PlayStation 5 میں ڈالا جاتا ہے۔",
+ "Connecting to the Xbox…": "Xbox سے کنیکٹ ہو رہا ہے…",
+ "Game sound on the phone: no sound from the Xbox yet": "فون پر گیم کی آواز: Xbox سے ابھی کوئی آواز نہیں",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: فون Xbox کی تصویر اسٹریم کر کے اسے پڑھتا ہے (آواز کے بغیر)۔ کھیلتے وقت فون پر VI Translator کھلا رکھیں۔",
+ "Sign in with a code and choose the console once.": "کوڈ سے سائن ان کریں اور کنسول ایک بار منتخب کریں۔",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "فون Xbox کی تصویر پڑھنے کے لیے اسٹریم کرتا ہے (کنٹرولر نہیں: Xbox پر اپنے کنٹرولر سے کھیلتے رہیں)۔"
 }

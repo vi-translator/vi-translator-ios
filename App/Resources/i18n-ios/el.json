@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "Η τηλεόραση σταμάτησε να λαμβάνει μεταφράσεις όσο το VI Translator ήταν στο παρασκήνιο.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Κρατήστε το VI Translator ανοιχτό σε αυτό το τηλέφωνο ενώ παίζετε: η τηλεόραση παίρνει τις μεταφράσεις από αυτό και το iOS θέτει σε παύση τις εφαρμογές στο παρασκήνιο.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Δεν χρειάζεστε την εφαρμογή PS Remote Play: το VI Translator συνδέεται απευθείας στο PS5 (το PS5 στέλνει ροή σε μία μόνο εφαρμογή κάθε φορά). Σε iPad, το Split View κρατά μια άλλη εφαρμογή δίπλα του. Με PS5, η επιλογή «Συνέχιση της μετάφρασης με σβηστή οθόνη» (Πηγή) το αφήνει να συνεχίζει στο παρασκήνιο.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Ο κωδικός της τηλεόρασης έχει 6 ψηφία. Το PIN 8 ψηφίων είναι του PS5: μπαίνει στο Πηγή › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Ο κωδικός της τηλεόρασης έχει 6 ψηφία. Το PIN 8 ψηφίων είναι του PS5: μπαίνει στο Πηγή › PlayStation 5.",
+ "Connecting to the Xbox…": "Σύνδεση στο Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Ήχος παιχνιδιού στο τηλέφωνο: δεν υπάρχει ακόμα ήχος από το Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: το τηλέφωνο λαμβάνει ροή της εικόνας του Xbox για να τη διαβάσει (χωρίς ήχο). Κρατήστε το τηλέφωνο στο VI Translator ενώ παίζετε.",
+ "Sign in with a code and choose the console once.": "Συνδεθείτε με κωδικό και επιλέξτε την κονσόλα μία φορά.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Το τηλέφωνο λαμβάνει ροή της εικόνας του Xbox για να τη διαβάσει (χωρίς χειριστήριο: συνεχίστε να παίζετε με το χειριστήριό σας στο Xbox)."
 }

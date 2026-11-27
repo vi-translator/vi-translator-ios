@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "Televize přestala dostávat překlady, když byl VI Translator na pozadí.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Během hraní nechte VI Translator otevřený v tomto telefonu: televize z něj dostává překlady a iOS aplikace na pozadí pozastavuje.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Aplikaci PS Remote Play nepotřebujete: VI Translator se k PS5 připojuje sám (PS5 streamuje vždy jen do jedné aplikace). Na iPadu díky Split View můžete mít vedle něj jinou aplikaci. U PS5 umožní „Překládat i při vypnuté obrazovce“ (Zdroj) pokračovat na pozadí.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Kód z televize má 6 číslic. 8místný PIN patří k PS5: zadává se v části Zdroj › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Kód z televize má 6 číslic. 8místný PIN patří k PS5: zadává se v části Zdroj › PlayStation 5.",
+ "Connecting to the Xbox…": "Připojování k Xboxu…",
+ "Game sound on the phone: no sound from the Xbox yet": "Zvuk hry v telefonu: z Xboxu zatím nejde žádný zvuk",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefon přijímá obraz z Xboxu, aby ho četl (bez zvuku). Během hraní mějte v telefonu otevřený VI Translator.",
+ "Sign in with a code and choose the console once.": "Přihlaste se kódem a konzoli vyberte jen jednou.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefon streamuje obraz z Xboxu, aby ho četl (bez ovladače: hrajte dál s ovladačem na Xboxu)."
 }

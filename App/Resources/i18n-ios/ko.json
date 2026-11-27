@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "VI Translator가 백그라운드에 있는 동안 TV가 번역을 받지 못했습니다.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "플레이 중에는 이 휴대폰에서 VI Translator를 열어 두세요: TV는 여기에서 번역을 받고, iOS는 백그라운드 앱을 일시 중지합니다.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "PS Remote Play 앱은 필요 없습니다: VI Translator가 직접 PS5에 연결합니다(PS5는 한 번에 한 앱으로만 스트리밍합니다). iPad에서는 Split View로 다른 앱을 옆에 둘 수 있습니다. PS5에서는 “화면이 꺼져도 계속 번역”(소스)을 켜면 백그라운드에서도 계속됩니다.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "TV 코드는 6자리입니다. 8자리 PIN은 PS5용입니다: 소스 › PlayStation 5에서 입력합니다."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "TV 코드는 6자리입니다. 8자리 PIN은 PS5용입니다: 소스 › PlayStation 5에서 입력합니다.",
+ "Connecting to the Xbox…": "Xbox에 연결하는 중…",
+ "Game sound on the phone: no sound from the Xbox yet": "휴대폰에서 게임 소리: 아직 Xbox에서 소리가 오지 않음",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox 리모트 플레이: 휴대폰이 Xbox 화면을 스트리밍해 읽습니다(소리 없음). 플레이 중에는 휴대폰에서 VI Translator를 열어 두세요.",
+ "Sign in with a code and choose the console once.": "코드로 로그인하고 콘솔은 한 번만 선택하면 됩니다.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "휴대폰은 Xbox 화면을 읽기 위해 스트리밍합니다(컨트롤러 없음: Xbox에 연결된 컨트롤러로 계속 플레이하세요)."
 }

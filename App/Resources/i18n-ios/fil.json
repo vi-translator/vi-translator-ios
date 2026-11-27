@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "Huminto ang TV sa pagtanggap ng mga salin habang nasa background ang VI Translator.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Panatilihing bukas ang VI Translator sa phone na ito habang naglalaro: dito kinukuha ng TV ang mga salin, at pinapahinto ng iOS ang mga app na nasa background.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Hindi mo kailangan ang PS Remote Play app: ang VI Translator mismo ang kumokonekta sa PS5 (iisang app lang ang pinag-i-stream-an ng PS5 sa bawat pagkakataon). Sa iPad, napapanatili ng Split View ang isa pang app sa tabi nito. Sa PS5, ang “Ituloy ang pagsasalin kahit nakapatay ang screen” (Source) ang nagpapatuloy dito sa background.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "6 digit ang code ng TV. Sa PS5 ang 8-digit na PIN: sa Source › PlayStation 5 iyan inilalagay."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "6 digit ang code ng TV. Sa PS5 ang 8-digit na PIN: sa Source › PlayStation 5 iyan inilalagay.",
+ "Connecting to the Xbox…": "Kumokonekta sa Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Tunog ng laro sa phone: wala pang tunog mula sa Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: ini-stream ng phone ang larawan ng Xbox para basahin ito (walang tunog). Panatilihin ang phone sa VI Translator habang naglalaro.",
+ "Sign in with a code and choose the console once.": "Mag-sign in gamit ang code at piliin ang console nang isang beses lang.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Ini-stream ng telepono ang larawan ng Xbox para basahin ito (walang controller: patuloy na maglaro gamit ang controller mo sa Xbox)."
 }

@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "TV iliacha kupokea tafsiri wakati VI Translator ilikuwa chinichini.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Acha VI Translator ikiwa wazi kwenye simu hii unapocheza: TV hupata tafsiri kutoka kwayo, na iOS husitisha programu zilizo chinichini.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Huhitaji programu ya PS Remote Play: VI Translator yenyewe huunganisha kwenye PS5 (PS5 hutiririsha kwa programu moja tu kwa wakati mmoja). Kwenye iPad, Split View huweka programu nyingine kando yake. Ukiwa na PS5, “Endelea kutafsiri skrini ikiwa imezimwa” (Chanzo) huiruhusu iendelee chinichini.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Msimbo wa TV una tarakimu 6. PIN ya tarakimu 8 ni ya PS5: inaingizwa katika Chanzo › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Msimbo wa TV una tarakimu 6. PIN ya tarakimu 8 ni ya PS5: inaingizwa katika Chanzo › PlayStation 5.",
+ "Connecting to the Xbox…": "Inaunganisha kwenye Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Sauti ya mchezo kwenye simu: bado hakuna sauti kutoka Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: simu hupokea mtiririko wa picha ya Xbox ili kuisoma (bila sauti). Acha simu kwenye VI Translator unapocheza.",
+ "Sign in with a code and choose the console once.": "Ingia kwa msimbo na uchague koni mara moja tu.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Simu inatiririsha picha ya Xbox ili kuisoma (bila kidhibiti: endelea kucheza kwa kidhibiti chako kwenye Xbox)."
 }

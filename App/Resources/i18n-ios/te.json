@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "VI Translator బ్యాక్‌గ్రౌండ్‌లో ఉన్నప్పుడు టీవీకి అనువాదాలు రావడం ఆగిపోయింది.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "ఆడుతున్నప్పుడు ఈ ఫోన్‌లో VI Translatorను తెరిచే ఉంచండి: టీవీ దాని నుండే అనువాదాలను పొందుతుంది, మరియు బ్యాక్‌గ్రౌండ్‌లోని యాప్‌లను iOS పాజ్ చేస్తుంది.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "మీకు PS Remote Play యాప్ అవసరం లేదు: VI Translator నేరుగా PS5కి కనెక్ట్ అవుతుంది (PS5 ఒకేసారి ఒక యాప్‌కు మాత్రమే స్ట్రీమ్ చేస్తుంది). iPadలో Split Viewతో మరో యాప్‌ను దాని పక్కనే ఉంచవచ్చు. PS5తో, “స్క్రీన్ ఆఫ్‌లో ఉన్నా అనువదిస్తూనే ఉండు” (మూలం) దాన్ని బ్యాక్‌గ్రౌండ్‌లో కొనసాగనిస్తుంది.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "టీవీ కోడ్‌లో 6 అంకెలు ఉంటాయి. 8 అంకెల PIN PS5ది: దాన్ని మూలం › PlayStation 5లో ఇవ్వాలి."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "టీవీ కోడ్‌లో 6 అంకెలు ఉంటాయి. 8 అంకెల PIN PS5ది: దాన్ని మూలం › PlayStation 5లో ఇవ్వాలి.",
+ "Connecting to the Xbox…": "Xboxకి కనెక్ట్ అవుతోంది…",
+ "Game sound on the phone: no sound from the Xbox yet": "ఫోన్‌లో గేమ్ సౌండ్: Xbox నుండి ఇంకా సౌండ్ రాలేదు",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox రిమోట్ ప్లే: చదవడానికి ఫోన్ Xbox చిత్రాన్ని స్ట్రీమ్ చేస్తుంది (సౌండ్ లేకుండా). ఆడుతున్నప్పుడు ఫోన్‌ను VI Translatorలోనే ఉంచండి.",
+ "Sign in with a code and choose the console once.": "కోడ్‌తో సైన్ ఇన్ చేసి, కన్సోల్‌ను ఒక్కసారే ఎంచుకోండి.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "ఫోన్ Xbox చిత్రాన్ని చదవడానికి స్ట్రీమ్ చేస్తుంది (కంట్రోలర్ లేదు: Xboxలో మీ కంట్రోలర్‌తోనే ఆడుతూ ఉండండి)."
 }

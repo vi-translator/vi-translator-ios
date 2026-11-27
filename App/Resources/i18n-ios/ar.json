@@ -49,5 +49,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "توقفت الشاشة عن تلقي الترجمات بينما كان VI Translator في الخلفية.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "أبقِ VI Translator مفتوحًا على هذا الهاتف أثناء اللعب: فالشاشة تتلقى الترجمات منه، ونظام iOS يوقف التطبيقات في الخلفية.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "لا تحتاج إلى تطبيق PS Remote Play: يتصل VI Translator بجهاز PS5 بنفسه (يبث PS5 إلى تطبيق واحد فقط في كل مرة). على iPad، يتيح Split View إبقاء تطبيق آخر بجانبه. ومع PS5، يتيح خيار «متابعة الترجمة والشاشة مطفأة» (في «المصدر») استمرار الترجمة في الخلفية.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "رمز الشاشة من 6 أرقام. أما رمز PIN المكوّن من 8 أرقام فهو لجهاز PS5: مكانه في «المصدر» › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "رمز الشاشة من 6 أرقام. أما رمز PIN المكوّن من 8 أرقام فهو لجهاز PS5: مكانه في «المصدر» › PlayStation 5.",
+ "Connecting to the Xbox…": "جارٍ الاتصال بـ Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "صوت اللعبة على الهاتف: لم يصل صوت من Xbox بعد",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "التشغيل عن بُعد لـ Xbox: يستقبل الهاتف صورة Xbox ليقرأها (بلا صوت). أبقِ الهاتف على VI Translator أثناء اللعب.",
+ "Sign in with a code and choose the console once.": "سجّل الدخول برمز واختر الجهاز مرة واحدة.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "يبث الهاتف صورة Xbox ليقرأها (بلا يد تحكم: تابع اللعب بيد التحكم الموصولة بـ Xbox)."
 }

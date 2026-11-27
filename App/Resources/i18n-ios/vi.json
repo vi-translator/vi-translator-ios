@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "TV đã ngừng nhận bản dịch khi VI Translator chạy nền.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Giữ VI Translator mở trên điện thoại này khi chơi: TV nhận bản dịch từ ứng dụng này, và iOS tạm dừng các ứng dụng chạy nền.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Bạn không cần ứng dụng PS Remote Play: VI Translator tự kết nối với PS5 (PS5 chỉ truyền đến một ứng dụng mỗi lần). Trên iPad, Split View giữ một ứng dụng khác ở bên cạnh. Với PS5, “Tiếp tục dịch khi tắt màn hình” (Nguồn) giúp ứng dụng tiếp tục chạy nền.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Mã của TV có 6 chữ số. Mã PIN 8 chữ số là của PS5: mã này nhập ở Nguồn › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Mã của TV có 6 chữ số. Mã PIN 8 chữ số là của PS5: mã này nhập ở Nguồn › PlayStation 5.",
+ "Connecting to the Xbox…": "Đang kết nối với Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Âm thanh game trên điện thoại: chưa có âm thanh từ Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: điện thoại nhận luồng hình của Xbox để đọc (không có âm thanh). Giữ điện thoại ở VI Translator khi chơi.",
+ "Sign in with a code and choose the console once.": "Đăng nhập bằng mã và chỉ cần chọn máy một lần.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Điện thoại nhận luồng hình của Xbox để đọc (không có tay cầm: hãy tiếp tục chơi bằng tay cầm trên Xbox)."
 }

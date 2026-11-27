@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "ทีวีหยุดรับคำแปลขณะที่ VI Translator อยู่เบื้องหลัง",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "เปิด VI Translator ค้างไว้บนโทรศัพท์นี้ขณะเล่น: ทีวีรับคำแปลจากแอปนี้ และ iOS จะหยุดแอปที่อยู่เบื้องหลังชั่วคราว",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "คุณไม่ต้องใช้แอป PS Remote Play: VI Translator เชื่อมต่อกับ PS5 เอง (PS5 สตรีมไปยังแอปได้ทีละแอปเท่านั้น) บน iPad ใช้ Split View วางแอปอื่นไว้ข้างๆ ได้ สำหรับ PS5 “แปลต่อแม้ปิดหน้าจอ” (แหล่งภาพ) ช่วยให้ทำงานต่อในเบื้องหลังได้",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "รหัสของทีวีมี 6 หลัก ส่วน PIN 8 หลักเป็นของ PS5: ใส่ใน แหล่งภาพ › PlayStation 5"
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "รหัสของทีวีมี 6 หลัก ส่วน PIN 8 หลักเป็นของ PS5: ใส่ใน แหล่งภาพ › PlayStation 5",
+ "Connecting to the Xbox…": "กำลังเชื่อมต่อกับ Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "เสียงเกมบนโทรศัพท์: ยังไม่มีเสียงจาก Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: โทรศัพท์สตรีมภาพของ Xbox มาเพื่ออ่าน (ไม่มีเสียง) เปิด VI Translator ค้างไว้บนโทรศัพท์ขณะเล่น",
+ "Sign in with a code and choose the console once.": "ลงชื่อเข้าใช้ด้วยรหัสและเลือกคอนโซลครั้งเดียว",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "โทรศัพท์สตรีมภาพของ Xbox เพื่ออ่าน (ไม่มีคอนโทรลเลอร์: เล่นต่อด้วยคอนโทรลเลอร์ของคุณบน Xbox)"
 }

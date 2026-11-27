@@ -57,8 +57,11 @@ final class AppModel: ObservableObject {
     @Published var uiLang = "en"
     @Published var source: Source?
 
-    /** (demo: a picture drawn by the app, for the simulator and CI: -vitDemoText) */
-    enum Source { case ps5, xbox, capture, demo }
+    /**
+     * (xbox: Microsoft's web player; xboxStream: the app's own Xbox Remote Play client; demo: a
+     * picture drawn by the app, for the simulator and CI: -vitDemoText)
+     */
+    enum Source { case ps5, xbox, xboxStream, capture, demo }
     enum XboxMode: Identifiable {
         case play, setup
         var id: Int { self == .play ? 0 : 1 }
@@ -66,6 +69,11 @@ final class AppModel: ObservableObject {
 
     private(set) var reader: Reader?
     private var stream: PsStream?
+    private var xstream: XboxStream?
+    /** the console's stream running now (the PS5's or the Xbox's) */
+    private var live: GameStream? { stream ?? xstream }
+    /** the source started again on return from the background */
+    private var resumeSource: Source = .ps5
     private var card: CaptureCard?
     private var resumeOnActive = false
     private var tick: Timer?
@@ -223,9 +231,10 @@ final class AppModel: ObservableObject {
             picture.stats = ""
         }
         let s: String
-        if let snd = stream?.sound, state == .reading {
+        if let snd = live?.sound, state == .reading {
             s = !snd.running ? L("Game sound on the phone: not playing (iOS refused it)")
-                : snd.received > 0 ? L("Game sound on the phone: playing") : L("Game sound on the phone: no sound from the PS5 yet")
+                : snd.received > 0 ? L("Game sound on the phone: playing")
+                : xstream != nil ? L("Game sound on the phone: no sound from the Xbox yet") : L("Game sound on the phone: no sound from the PS5 yet")
         } else {
             s = ""
         }
@@ -238,7 +247,7 @@ final class AppModel: ObservableObject {
         switch state {
         case .idle: return coreStatus ?? (core == nil ? L("Stopped: {reason}", ("reason", coreError ?? "")) : L("Ready"))
         case .starting: return L("Starting…")
-        case .connecting: return L("Connecting to the PS5…")
+        case .connecting: return source == .xboxStream || (source == nil && Prefs.console == "xbox") ? L("Connecting to the Xbox…") : L("Connecting to the PS5…")
         case .reading:
             if psCantDisplay { return L("The PS5 is showing something Remote Play can't stream") }
             return coreStatus ?? L("Translating")
@@ -256,11 +265,12 @@ final class AppModel: ObservableObject {
 
     // ---- translating
 
-    /** Start translating from the console chosen in Source (the Xbox: its player opens). */
+    /** Start translating from the console chosen in Source (the Xbox: the app's own stream, or Microsoft's player opens). */
     func start() {
         switch Prefs.console {
         case "ps5": begin(.ps5)
-        case "xbox": xbox = .play
+        case "xbox":
+            if Prefs.xboxWebPlayer { xbox = .play } else { begin(.xboxStream) }
         case "capture": begin(.capture)
         default: go("source")
         }
@@ -317,6 +327,7 @@ final class AppModel: ObservableObject {
                 switch s {
                 case .ps5: startPs(r)
                 case .xbox: set(.reading, nil)
+                case .xboxStream: startXbox(r)
                 case .capture: startCapture(r)
                 case .demo: startDemo(r)
                 }
@@ -364,6 +375,35 @@ final class AppModel: ObservableObject {
         st.start(height: Prefs.psResolution, sound: Prefs.screenOff)
     }
 
+    /**
+     * The Xbox, with the app's own Remote Play client (XboxStream): the console chosen in Setup, with
+     * the Microsoft sign-in kept there. Its sound plays on the phone only with the screen-off option.
+     */
+    private func startXbox(_ r: Reader) {
+        guard XboxAuth.signedIn, let console = XboxConsole.saved else {
+            set(.failed, L("Sign in to Microsoft and choose your Xbox in Setup first."))
+            return
+        }
+        let st = XboxStream(console: console, resolution: Prefs.xboxResolution, reader: r, sound: Prefs.screenOff)
+        st.onState = { [weak self] s, d in
+            guard let self, self.xstream === st else { return }
+            switch s {
+            case .connecting: self.set(.connecting, nil)
+            case .streaming: self.set(.reading, nil)
+            case .ended, .failed:
+                if self.away {
+                    // (ended while away: started again on return)
+                    self.resumeOnActive = true
+                    self.end(.ended, L("iOS paused the app in the background"))
+                } else {
+                    self.end(s == .failed ? .failed : .ended, d)
+                }
+            }
+        }
+        xstream = st
+        st.start()
+    }
+
     /** The capture card (an iPad with USB-C): read as soon as it gives frames. */
     private func startCapture(_ r: Reader) {
         let c = CaptureCard(reader: r)
@@ -381,7 +421,7 @@ final class AppModel: ObservableObject {
 
     func setPhoneVolume(_ v: Double) {
         Prefs.phoneVolume = v
-        stream?.setVolume(v)
+        live?.setVolume(v)
     }
 
     func pin(_ p: String) {
@@ -431,6 +471,8 @@ final class AppModel: ObservableObject {
         demo = nil
         stream?.stop()
         stream = nil
+        xstream?.stop()
+        xstream = nil
         card?.stop()
         card = nil
         reader?.close()
@@ -445,7 +487,7 @@ final class AppModel: ObservableObject {
     func wirePreview() {
         guard let r = reader else { return }
         // (the PS5's and the capture card's pictures go to the preview straight from their frames: VideoOut)
-        if Prefs.preview && source != .ps5 && source != .capture {
+        if Prefs.preview && source != .ps5 && source != .xboxStream && source != .capture {
             let feed = picture
             r.preview = { img in DispatchQueue.main.async { feed.image = img } }
         } else {
@@ -472,8 +514,9 @@ final class AppModel: ObservableObject {
         case .background:
             cfg.flush()
             if leftAt == nil { leftAt = Date() }
-            guard state.running, source == .ps5, !away else { return }
-            if Prefs.screenOff, let st = stream {
+            guard state.running, let src = source, src == .ps5 || src == .xboxStream, !away else { return }
+            resumeSource = src
+            if Prefs.screenOff, let st = live {
                 // (the game's sound keeps the app running: the picture is read on the CPU while away.
                 // If the sound doesn't play after all, iOS would pause the app: then as without the option)
                 awayPlaying = true
@@ -482,7 +525,7 @@ final class AppModel: ObservableObject {
                 bgTask = UIApplication.shared.beginBackgroundTask(withName: "ps5-sound") { [weak self] in self?.endBackgroundTask() }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
                     guard let self, self.awayPlaying else { return }
-                    if self.stream?.sound?.running == true {
+                    if self.live?.sound?.running == true {
                         self.endBackgroundTask()
                     } else {
                         NSLog("the game's sound isn't playing: the stream stops while away")
@@ -506,14 +549,14 @@ final class AppModel: ObservableObject {
                 // (what happened while away, before it is reset below: translating paused by iOS, or
                 // running without the sound that keeps the app going, for longer than iOS allows)
                 leftAt = nil
-                let keptOn = awayPlaying && stream?.sound?.running == true
+                let keptOn = awayPlaying && live?.sound?.running == true
                 let long = Date().timeIntervalSince(t) > Self.awayGrace
                 checkTvPage(lost: resumeOnActive || (state.running && long && !keptOn))
             }
             if awayPlaying {
                 awayPlaying = false
                 VisionRecognizer.cpuOnly = false
-                stream?.background(false)
+                live?.background(false)
             }
             if away {
                 away = false
@@ -522,12 +565,12 @@ final class AppModel: ObservableObject {
                 endBackgroundTask()
                 reader?.paused = false
                 // (the decoder may have been dropped by iOS while away: the next key frame makes it again)
-                stream?.refresh()
+                live?.refresh()
             }
             if resumeOnActive {
                 resumeOnActive = false
-                retriesLeft = 4
-                begin(.ps5)
+                retriesLeft = resumeSource == .ps5 ? 4 : 0
+                begin(resumeSource)
             }
         default:
             break
@@ -549,7 +592,7 @@ final class AppModel: ObservableObject {
     private func awayTooLong() {
         awayTimer?.invalidate()
         awayTimer = nil
-        if away && source == .ps5 && state.running {
+        if away && (source == .ps5 || source == .xboxStream) && state.running {
             resumeOnActive = true
             end(.ended, L("iOS paused the app in the background"))
         }

@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "VI Translator के बैकग्राउंड में रहने के दौरान टीवी को अनुवाद मिलने बंद हो गए।",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "खेलते समय इस फ़ोन पर VI Translator खुला रखें: टीवी को अनुवाद इसी से मिलते हैं, और iOS बैकग्राउंड में ऐप्स को रोक देता है।",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "आपको PS Remote Play ऐप की ज़रूरत नहीं: VI Translator खुद PS5 से जुड़ता है (PS5 एक समय में एक ही ऐप पर स्ट्रीम करता है)। iPad पर Split View से दूसरा ऐप उसके बगल में रखा जा सकता है। PS5 के साथ, “स्क्रीन बंद होने पर भी अनुवाद जारी रखें” (स्रोत) से यह बैकग्राउंड में भी चलता रहता है।",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "टीवी के कोड में 6 अंक होते हैं। 8 अंकों का PIN PS5 का है: यह स्रोत › PlayStation 5 में डाला जाता है।"
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "टीवी के कोड में 6 अंक होते हैं। 8 अंकों का PIN PS5 का है: यह स्रोत › PlayStation 5 में डाला जाता है।",
+ "Connecting to the Xbox…": "Xbox से कनेक्ट हो रहा है…",
+ "Game sound on the phone: no sound from the Xbox yet": "फ़ोन पर गेम की आवाज़: Xbox से अभी कोई आवाज़ नहीं",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: फ़ोन Xbox की तस्वीर स्ट्रीम करके उसे पढ़ता है (आवाज़ के बिना)। खेलते समय फ़ोन पर VI Translator खुला रखें।",
+ "Sign in with a code and choose the console once.": "कोड से साइन इन करें और कंसोल एक ही बार चुनें।",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "फ़ोन Xbox की तस्वीर पढ़ने के लिए स्ट्रीम करता है (कंट्रोलर नहीं: Xbox पर अपने कंट्रोलर से खेलते रहें)।"
 }

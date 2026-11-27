@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "Телевізор перестав отримувати переклади, поки VI Translator був у фоні.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Тримайте VI Translator відкритим на цьому телефоні під час гри: телевізор отримує переклади від нього, а iOS призупиняє застосунки у фоні.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Застосунок PS Remote Play не потрібен: VI Translator сам підключається до PS5 (PS5 передає потік лише одному застосунку за раз). На iPad функція Split View тримає поруч інший застосунок. З PS5 «Продовжувати переклад із вимкненим екраном» (вкладка «Джерело») дає змогу працювати у фоні.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Код телевізора складається з 6 цифр. 8-значний PIN-код — від PS5: його вводять у розділі Джерело › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Код телевізора складається з 6 цифр. 8-значний PIN-код — від PS5: його вводять у розділі Джерело › PlayStation 5.",
+ "Connecting to the Xbox…": "Підключення до Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Звук гри на телефоні: звуку від Xbox поки немає",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: телефон отримує зображення Xbox, щоб читати його (без звуку). Під час гри тримайте на телефоні відкритим VI Translator.",
+ "Sign in with a code and choose the console once.": "Увійдіть за допомогою коду й виберіть консоль один раз.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Телефон отримує зображення з Xbox, щоб читати його (без геймпада: грайте далі геймпадом на Xbox)."
 }

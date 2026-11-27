@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "Телевизор перестал получать переводы, пока VI Translator был в фоне.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Не закрывайте VI Translator на этом телефоне во время игры: телевизор получает переводы от него, а iOS приостанавливает приложения в фоне.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Приложение PS Remote Play не нужно: VI Translator сам подключается к PS5 (PS5 передаёт поток только одному приложению за раз). На iPad функция Split View держит рядом другое приложение. С PS5 «Продолжать перевод при выключенном экране» (вкладка «Источник») позволяет работать в фоне.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Код телевизора состоит из 6 цифр. 8-значный PIN-код — от PS5: он вводится в разделе Источник › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Код телевизора состоит из 6 цифр. 8-значный PIN-код — от PS5: он вводится в разделе Источник › PlayStation 5.",
+ "Connecting to the Xbox…": "Подключение к Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Звук игры на телефоне: звука от Xbox пока нет",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: телефон получает изображение Xbox, чтобы читать его (без звука). Во время игры держите на телефоне открытым VI Translator.",
+ "Sign in with a code and choose the console once.": "Войдите с помощью кода и выберите консоль один раз.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Телефон получает изображение с Xbox, чтобы читать его (без геймпада: продолжайте играть геймпадом на Xbox)."
 }

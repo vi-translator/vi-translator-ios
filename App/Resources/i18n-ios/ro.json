@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "Televizorul nu a mai primit traduceri cât timp VI Translator a fost în fundal.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Țineți VI Translator deschis pe acest telefon în timp ce jucați: televizorul primește traducerile de la el, iar iOS pune pe pauză aplicațiile din fundal.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Nu aveți nevoie de aplicația PS Remote Play: VI Translator se conectează singur la PS5 (PS5 transmite către o singură aplicație odată). Pe iPad, Split View păstrează altă aplicație alături. Cu un PS5, „Continuă traducerea cu ecranul stins” (Sursă) îi permite să continue în fundal.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Codul televizorului are 6 cifre. PIN-ul de 8 cifre este al PS5: se introduce în Sursă › PlayStation 5."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Codul televizorului are 6 cifre. PIN-ul de 8 cifre este al PS5: se introduce în Sursă › PlayStation 5.",
+ "Connecting to the Xbox…": "Se conectează la Xbox…",
+ "Game sound on the phone: no sound from the Xbox yet": "Sunetul jocului pe telefon: încă niciun sunet de la Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: telefonul preia imaginea Xbox în flux ca s-o citească (fără sunet). Țineți telefonul pe VI Translator în timp ce jucați.",
+ "Sign in with a code and choose the console once.": "Conectați-vă cu un cod și alegeți consola o singură dată.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Telefonul primește în flux imaginea de pe Xbox pentru a o citi (fără controller: continuați să jucați cu controllerul pe Xbox)."
 }

@@ -45,5 +45,10 @@
  "The TV stopped getting translations while VI Translator was in the background.": "Der Fernseher hat keine Übersetzungen mehr bekommen, während VI Translator im Hintergrund war.",
  "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "Lassen Sie VI Translator beim Spielen auf diesem Handy geöffnet: Der Fernseher bekommt die Übersetzungen von dort, und iOS pausiert Apps im Hintergrund.",
  "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "Sie brauchen die App PS Remote Play nicht: VI Translator verbindet sich selbst mit der PS5 (die PS5 streamt jeweils nur an eine App). Auf einem iPad behält Split View eine andere App daneben. Mit einer PS5 läuft es dank „Bei ausgeschaltetem Bildschirm weiter übersetzen“ (Quelle) im Hintergrund weiter.",
- "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Der Code des Fernsehers hat 6 Ziffern. Die 8-stellige PIN gehört zur PS5: Sie wird unter Quelle › PlayStation 5 eingegeben."
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "Der Code des Fernsehers hat 6 Ziffern. Die 8-stellige PIN gehört zur PS5: Sie wird unter Quelle › PlayStation 5 eingegeben.",
+ "Connecting to the Xbox…": "Verbindung zur Xbox wird hergestellt…",
+ "Game sound on the phone: no sound from the Xbox yet": "Spielton auf dem Handy: noch kein Ton von der Xbox",
+ "Xbox Remote Play: the phone streams the Xbox's picture to read it (no sound). Keep the phone on VI Translator while playing.": "Xbox Remote Play: Das Handy streamt das Bild der Xbox, um es zu lesen (ohne Ton). Lassen Sie VI Translator beim Spielen auf dem Handy geöffnet.",
+ "Sign in with a code and choose the console once.": "Mit einem Code anmelden und die Konsole einmal wählen.",
+ "The phone streams the Xbox's picture to read it (no controller: keep playing with your controller on the Xbox).": "Das Handy streamt das Bild der Xbox, um es zu lesen (kein Controller: Spielen Sie mit Ihrem Controller an der Xbox weiter)."
 }
