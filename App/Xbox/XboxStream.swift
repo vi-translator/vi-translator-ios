@@ -118,7 +118,7 @@ final class XboxStream: NSObject, GameStream, @unchecked Sendable {
                 for c in chans { c.close() }
                 pc?.close()
                 _ = factory
-                _ = audio.terminate()
+                _ = audio.terminateDevice()
                 video.close()
             }
         }

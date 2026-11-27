@@ -74,9 +74,7 @@ final class XboxAudio: NSObject, RTCAudioDevice, @unchecked Sendable {
         return true
     }
 
-    // (Swift's name for -terminateDevice)
-    @objc(terminateDevice)
-    func terminate() -> Bool {
+    func terminateDevice() -> Bool {
         playing = false
         if plays { DispatchQueue.main.async { self.stopEngine() } }
         lock.lock()
