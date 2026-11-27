@@ -47,6 +47,10 @@ final class AppModel: ObservableObject {
     @Published var askPin: Bool?
     /** the Xbox player, open to play and translate, or only to sign in (Setup) */
     @Published var xbox: XboxMode?
+    /** the TVs connected to this phone (Show on): while there are any, the screens say to keep the app open */
+    @Published var tvCount = 0
+    /** back from the background, where the TVs lost the translations: Play says why, until dismissed */
+    @Published var tvLost = false
     @Published var dark = Prefs.dark
     @Published var uiLang = "en"
     @Published var source: Source?
@@ -121,6 +125,7 @@ final class AppModel: ObservableObject {
                 Prefs.dark = dark
                 loaded = true
                 refreshLines()
+                refreshTvs()
                 debugOptions()
                 tick = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
                     Task { @MainActor in self?.everySecond() }
@@ -174,6 +179,37 @@ final class AppModel: ObservableObject {
             DispatchQueue.main.async { [self] in
                 linesPending = false
                 lines = l
+            }
+        }
+    }
+
+    /** How many TVs are connected (tvCount). */
+    func refreshTvs() {
+        guard let core else { return }
+        io.async {
+            let n = core.pairedTvs().count
+            DispatchQueue.main.async { [self] in tvCount = n }
+        }
+    }
+
+    /**
+     * Back on the screen: the TV page must answer again. iOS suspends an app soon after it leaves
+     * the screen (unless it plays sound: the PS5's screen-off option), the TV page with it, and may
+     * take back its listening socket: then it is started again. With TVs connected, Play says why
+     * they lost the translations ([lost]: translating was paused while away).
+     */
+    private func checkTvPage(lost: Bool) {
+        guard let core else { return }
+        io.async {
+            let answers = core.serverAnswers()
+            if !answers {
+                NSLog("the TV page didn't answer after the background: started again")
+                core.restartServer()
+            }
+            let n = core.pairedTvs().count
+            DispatchQueue.main.async { [self] in
+                tvCount = n
+                if n > 0 && (lost || !answers) { tvLost = true }
             }
         }
     }
@@ -426,6 +462,7 @@ final class AppModel: ObservableObject {
         switch phase {
         case .background:
             cfg.flush()
+            if leftAt == nil { leftAt = Date() }
             guard state.running, source == .ps5, !away else { return }
             if Prefs.screenOff, let st = stream {
                 // (the game's sound keeps the app running: the picture is read on the CPU while away.
@@ -456,6 +493,14 @@ final class AppModel: ObservableObject {
                 Task { @MainActor in self?.awayTooLong() }
             }
         case .active:
+            if let t = leftAt {
+                // (what happened while away, before it is reset below: translating paused by iOS, or
+                // running without the sound that keeps the app going, for longer than iOS allows)
+                leftAt = nil
+                let keptOn = awayPlaying && stream?.sound?.running == true
+                let long = Date().timeIntervalSince(t) > Self.awayGrace
+                checkTvPage(lost: resumeOnActive || (state.running && long && !keptOn))
+            }
             if awayPlaying {
                 awayPlaying = false
                 VisionRecognizer.cpuOnly = false
@@ -483,6 +528,8 @@ final class AppModel: ObservableObject {
     /** how long the stream is kept while the app is away (iOS allows about 30 s) */
     static let awayGrace: TimeInterval = 25
     private var away = false
+    /** when the app last left the screen (nil: it is on it) */
+    private var leftAt: Date?
     /** away with the screen-off option: the stream and the reading go on, on the CPU */
     private var awayPlaying = false
     private var awayTimer: Timer?

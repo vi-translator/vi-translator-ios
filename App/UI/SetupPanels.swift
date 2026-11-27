@@ -67,6 +67,11 @@ struct ShowPanel: View {
                     .overlay(RoundedRectangle(cornerRadius: 12).stroke(k.line, lineWidth: 1))
                     .padding(.top, 8)
                 }
+                // (iOS pauses the app soon after it leaves the screen, and the TVs' page with it)
+                Callout(L("Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background."), k.warn)
+                    .padding(.top, 10)
+                Muted(L("You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background."), small: true)
+                    .padding(.top, 6)
             }
           }
           Group {
@@ -141,7 +146,10 @@ struct ShowPanel: View {
         guard let core = m.core else { return }
         m.io.async {
             let tvs = core.pairedTvs()
-            DispatchQueue.main.async { connected = tvs }
+            DispatchQueue.main.async {
+                connected = tvs
+                m.tvCount = tvs.count
+            }
         }
     }
 
