@@ -365,6 +365,20 @@ struct TranslatorPanel: View {
         let langs = m.core?.languages ?? []
         let engine = cfg.str("engine", "local")
         return VStack(alignment: .leading, spacing: 0) {
+            // VI Translator's ready translations first (on by default): turning them off asks first, as every line
+            // then waits for the translator (and with "Translation memory only", lines not in the player's own
+            // memory aren't translated at all)
+            Card(pad: 12) {
+                Check(label: L("Use VI Translator's ready translations first"), on: cfg.bool("shared_translations", true)) { v in
+                    if v { cfg.put("shared_translations", true) } else { askShared = true }
+                }
+                Muted(L("Most GTA VI lines are already translated and reviewed, and are shown instantly. Only lines not found there go to the translator chosen below. Keep this on: with it off, every line waits for the translator and translations come much slower."), small: true)
+            }
+            .confirmationDialog(L("Turn off VI Translator's ready translations? Every line will then wait for the translator chosen below, so translations will come much slower.")
+                                + (engine == "local" ? " " + L("With no translation service chosen, lines not in your own memory won't be translated at all.") : ""),
+                                isPresented: $askShared, titleVisibility: .visible) {
+                Button(L("Turn off"), role: .destructive) { cfg.put("shared_translations", false) }
+            }
             H3(L("Language"))
             Select(options: langs.map { ($0.code, $0.name.isEmpty || $0.name == $0.native ? $0.native : "\($0.name) — \($0.native)") },
                    value: cfg.str("target_lang", "ar")) { cfg.put("target_lang", $0, now: true) }
@@ -427,6 +441,7 @@ struct TranslatorPanel: View {
     }
 
     @State private var askClear = false
+    @State private var askShared = false
 
     /** the memory's numbers, every 2 s while shown (as the desktop) */
     private func stats() {
