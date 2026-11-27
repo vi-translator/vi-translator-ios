@@ -118,7 +118,7 @@ final class XboxStream: NSObject, GameStream, @unchecked Sendable {
                 for c in chans { c.close() }
                 pc?.close()
                 _ = factory
-                _ = audio.terminateDevice()
+                _ = audio.terminate()
                 video.close()
             }
         }
@@ -494,7 +494,7 @@ final class XboxVideo: @unchecked Sendable {
         let ds = decoders
         decoders = []
         lock.unlock()
-        for d in ds { _ = d.releaseDecoder() }
+        for d in ds { _ = d.release() }
     }
 }
 
@@ -568,7 +568,9 @@ final class XboxDecoder: NSObject, RTCVideoDecoder, @unchecked Sendable {
         }
     }
 
-    func releaseDecoder() -> Int {
+    // (Swift's name for -releaseDecoder)
+    @objc(releaseDecoder)
+    func release() -> Int {
         lock.lock()
         defer { lock.unlock() }
         gpu?.close()
