@@ -19,6 +19,8 @@ final class PsStream {
     var onState: ((State, String?) -> Void)?
     /** the PS5 asks for the account's login passcode (main thread) */
     var onLoginPin: ((Bool) -> Void)?
+    /** the PS5 can't stream what it shows (true), or can again (false) (main thread) */
+    var onCantDisplay: ((Bool) -> Void)?
 
     private let console: PsConsole
     private let reader: Reader
@@ -142,6 +144,8 @@ final class PsStream {
             onState?(.streaming, nil)
         case Int(VIT_PS_EVENT_LOGIN_PIN):
             onLoginPin?(value != 0)
+        case Int(VIT_PS_EVENT_CANT_DISPLAY):
+            onCantDisplay?(value != 0)
         case Int(VIT_PS_EVENT_QUIT):
             let reason = String(cString: vit_ps_quit_reason_string(Int32(value)))
             let detail = (text?.isEmpty == false) ? text! : reason
