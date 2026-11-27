@@ -33,5 +33,17 @@
  "The console's HDMI into the card's HDMI in; the card's HDMI out into the TV.": "콘솔의 HDMI를 카드의 HDMI 입력에, 카드의 HDMI 출력을 TV에 연결합니다.",
  "The card's USB into the iPad's USB-C port (a USB-A card through a USB-C adapter or hub). A card that needs its own driver doesn't work: it must be a UVC (plug-and-play) card.": "카드의 USB를 iPad의 USB-C 포트에 연결합니다(USB-A 카드는 USB-C 어댑터나 허브를 통해). 전용 드라이버가 필요한 카드는 작동하지 않습니다: UVC(플러그 앤 플레이) 카드여야 합니다.",
  "Play › Start translating: iPadOS asks once to let VI Translator use the card (as a camera).": "플레이 › 번역 시작: iPadOS가 VI Translator의 카드 사용(카메라로) 허용 여부를 한 번 묻습니다.",
- "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5에서 HDCP를 끄세요(설정 › 시스템 › HDMI). 그렇지 않으면 카드에 화면이 들어오지 않습니다."
+ "On the PS5, turn off HDCP (Settings › System › HDMI), or the card gets no picture.": "PS5에서 HDCP를 끄세요(설정 › 시스템 › HDMI). 그렇지 않으면 카드에 화면이 들어오지 않습니다.",
+ "That looks like the 8-digit PIN: it goes in step 3. Here, type the PS5's IP address (like 192.168.1.20) or its host name.": "8자리 PIN으로 보입니다: PIN은 3단계에서 입력합니다. 여기에는 PS5의 IP 주소(192.168.1.20 등)나 호스트 이름을 입력하세요.",
+ "That isn't an IP address (like 192.168.1.20) or a host name.": "IP 주소(192.168.1.20 등)나 호스트 이름이 아닙니다.",
+ "Digits only. Not the TV's 6-digit code, and not the PS5's address. A new PIN shows each time Link Device is opened: type the one on the screen now.": "숫자만 입력하세요. TV의 6자리 코드도, PS5의 주소도 아닙니다. “기기 등록”을 열 때마다 새 PIN이 표시됩니다: 지금 화면에 표시된 PIN을 입력하세요.",
+ "Sign in to PSN first (step 1): the account ID isn't set.": "먼저 PSN에 로그인하세요(1단계): 계정 ID가 설정되지 않았습니다.",
+ "The PS5 didn't accept this PIN. A new PIN shows each time Link Device is opened: type the one on the PS5's screen now.": "PS5가 이 PIN을 받아들이지 않았습니다. “기기 등록”을 열 때마다 새 PIN이 표시됩니다: 지금 PS5 화면에 표시된 PIN을 입력하세요.",
+ "The PS5 isn't showing Link Device any more, so the PIN has expired. Open Settings › System › Remote Play › Link Device on the PS5 again and type the new PIN.": "PS5에 더 이상 “기기 등록”이 표시되지 않으므로 PIN이 만료되었습니다. PS5에서 설정 › 시스템 › 리모트 플레이 › 기기 등록을 다시 열고 새 PIN을 입력하세요.",
+ "No PS5 answered at {address}. Is it on, on the same network as this phone, and is the address right?": "{address}에서 응답한 PS5가 없습니다. 전원이 켜져 있고, 이 휴대폰과 같은 네트워크에 있으며, 주소가 맞나요?",
+ "The PS5 refused the PSN account ID. Sign in to PSN again (step 1), then link with a new PIN.": "PS5가 PSN 계정 ID를 거부했습니다. PSN에 다시 로그인한 다음(1단계) 새 PIN으로 등록하세요.",
+ "The TV stopped getting translations while VI Translator was in the background.": "VI Translator가 백그라운드에 있는 동안 TV가 번역을 받지 못했습니다.",
+ "Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background.": "플레이 중에는 이 휴대폰에서 VI Translator를 열어 두세요: TV는 여기에서 번역을 받고, iOS는 백그라운드 앱을 일시 중지합니다.",
+ "You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background.": "PS Remote Play 앱은 필요 없습니다: VI Translator가 직접 PS5에 연결합니다(PS5는 한 번에 한 앱으로만 스트리밍합니다). iPad에서는 Split View로 다른 앱을 옆에 둘 수 있습니다. PS5에서는 “화면이 꺼져도 계속 번역”(소스)을 켜면 백그라운드에서도 계속됩니다.",
+ "The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.": "TV 코드는 6자리입니다. 8자리 PIN은 PS5용입니다: 소스 › PlayStation 5에서 입력합니다."
 }
