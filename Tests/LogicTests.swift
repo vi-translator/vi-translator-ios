@@ -30,7 +30,17 @@ final class LogicTests: XCTestCase {
         XCTAssertTrue(Ps5.validAddress(" 10.0.0.1 "))
         XCTAssertFalse(Ps5.validAddress("192.168.1.256"))
         XCTAssertFalse(Ps5.validAddress("192.168.1"))
-        XCTAssertFalse(Ps5.validAddress("a.b.c.d"))
+        XCTAssertFalse(Ps5.validAddress("12345678"))
+        XCTAssertFalse(Ps5.validAddress("1234 5678"))
+        XCTAssertFalse(Ps5.validAddress("ps5..local"))
+        XCTAssertFalse(Ps5.validAddress("-ps5.local"))
+        XCTAssertTrue(Ps5.validAddress("ps5.local"))
+        XCTAssertTrue(Ps5.validAddress("PS5-123"))
+        XCTAssertTrue(Ps5.looksLikePin("1234 5678"))
+        XCTAssertFalse(Ps5.looksLikePin("192.168.1.20"))
+        XCTAssertEqual(Ps5.digitsOnly("١٢٣٤ ٥٦٧٨"), "12345678")
+        XCTAssertEqual(Ps5.digitsOnly("۱۲۳۴-۵۶۷۸"), "12345678")
+        XCTAssertEqual(Ps5.asciiDigits("١٩٢.١٦٨.١.٢٠"), "192.168.1.20")
     }
 
     func testWakeCredentialIsTheRegistKeyInHex() {

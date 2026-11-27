@@ -127,8 +127,17 @@ typedef struct VitPsRegistered
 
 enum {
 	VIT_PS_REGIST_OK = 0,
+	/** failed for another reason (see chiaki's log) */
 	VIT_PS_REGIST_FAILED = 1,
 	VIT_PS_REGIST_CANCELED = 2,
+	/** nothing answered at that address (a wrong address, the PS5 off, or not on this network) */
+	VIT_PS_REGIST_NOT_FOUND = 3,
+	/** the PS5 answered but isn't linking: its Link Device screen was closed (the PIN expired) */
+	VIT_PS_REGIST_NOT_LINKING = 4,
+	/** the PS5 refused the PIN (a wrong PIN, or one from an earlier Link Device screen) */
+	VIT_PS_REGIST_WRONG_PIN = 5,
+	/** the PS5 refused the PSN account ID */
+	VIT_PS_REGIST_BAD_ACCOUNT = 6,
 };
 
 /** Once, on chiaki's thread; [host] is set when [result] is VIT_PS_REGIST_OK. */
