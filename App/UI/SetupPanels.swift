@@ -67,6 +67,11 @@ struct ShowPanel: View {
                     .overlay(RoundedRectangle(cornerRadius: 12).stroke(k.line, lineWidth: 1))
                     .padding(.top, 8)
                 }
+                // (iOS pauses the app soon after it leaves the screen, and the TVs' page with it)
+                Callout(L("Keep VI Translator open on this phone while playing: the TV gets the translations from it, and iOS pauses apps in the background."), k.warn)
+                    .padding(.top, 10)
+                Muted(L("You don't need the PS Remote Play app: VI Translator connects to the PS5 itself (the PS5 streams to one app at a time). On an iPad, Split View keeps another app beside it. With a PS5, “Keep translating with the screen off” (Source) lets it go on in the background."), small: true)
+                    .padding(.top, 6)
             }
           }
           Group {
@@ -141,7 +146,10 @@ struct ShowPanel: View {
         guard let core = m.core else { return }
         m.io.async {
             let tvs = core.pairedTvs()
-            DispatchQueue.main.async { connected = tvs }
+            DispatchQueue.main.async {
+                connected = tvs
+                m.tvCount = tvs.count
+            }
         }
     }
 
@@ -200,9 +208,10 @@ struct CodeSheet: View {
     }
 
     private func connect() {
-        let c = code.filter(\.isNumber)
+        let c = Ps5.digitsOnly(code)
         guard c.count == 6 else {
-            msg = L("The code has 6 digits.")
+            // (the PS5's 8-digit PIN goes in Source, not here)
+            msg = c.count == 8 ? L("The TV's code has 6 digits. The 8-digit PIN is the PS5's: it goes in Source › PlayStation 5.") : L("The code has 6 digits.")
             return
         }
         guard let core = m.core else { return }
@@ -228,14 +237,27 @@ struct AddressSheet: View {
     @Environment(\.kit) var k
     let next: (String) -> Void
     @State private var a = ""
+    @State private var msg = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(L("The TV's address")).font(k.font(k.base + 0.5, .bold)).foregroundColor(k.text)
             KInput(value: a, placeholder: "192.168.1.30", ltr: true) { a = $0 }
+            if !msg.isEmpty { Muted(msg, small: true) }
             KButton(L("Next"), primary: true) {
-                let t = a.trimmingCharacters(in: .whitespaces)
-                if !t.isEmpty { next(t) }
+                let t = Ps5.asciiDigits(a).trimmingCharacters(in: .whitespaces)
+                guard !t.isEmpty else { return }
+                // (an IP address or a host name, with the TV app's port or not: "192.168.1.30:8792")
+                var host = t
+                if let i = t.lastIndex(of: ":") {
+                    let port = t[t.index(after: i)...]
+                    if !port.isEmpty, port.count <= 5, port.allSatisfy({ $0.isASCII && $0.isNumber }) { host = String(t[..<i]) }
+                }
+                guard Ps5.validAddress(host), !Ps5.looksLikePin(t) else {
+                    msg = L("That isn't an IP address (like 192.168.1.20) or a host name.")
+                    return
+                }
+                next(t)
             }
             Spacer()
         }
